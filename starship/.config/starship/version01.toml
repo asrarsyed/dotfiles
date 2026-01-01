@@ -1,0 +1,541 @@
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#           Main Starship Configuration           ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Timeout for starship to scan files (in milliseconds).
+scan_timeout = 200
+
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 3600
+
+# Inserts blank line between shell prompts.
+add_newline = false
+
+# Follows symlinks to check if they're directories; used in modules such as git.
+follow_symlinks = false
+
+# 1: First Line: Left Formatting
+# 2: First Line: Right Formatting
+# 3: Second Line: Character
+format = """
+$directory$git_branch$git_commit$git_status$cmd_duration$all$fill\
+$git_state$status$jobs\
+$line_break$character\
+"""
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#            Configs for Custom Palettes          ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+# palette = 'custom_theme'
+# [palettes.custom_theme]
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#            Configs for Default Modules          ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[character]
+  disabled = false
+  success_symbol = '[](bold #a9a1e1) '
+  error_symbol = '[](bold #ff6c6b) '
+  vimcmd_symbol = '[](bold #98be65) '
+  # Below are only supported in fish due to issues in zsh.
+  # vimcmd_replace_one_symbol = '[](bold #b16286) '
+  # vimcmd_replace_symbol = '[](bold #b16286) '
+  # vimcmd_visual_symbol = '[](bold #d79921) '
+
+[cmd_duration]
+  disabled = false
+  min_time = 200
+  show_milliseconds = false
+  show_notifications = true
+  min_time_to_notify = 45000
+  style = 'fg:#282c34 bg:#a9a1e1'
+  format = '[](fg:#9088c8 bg:none)[ ](fg:#282c34 bg:#9088c8)[ ](fg:#9088c8 bg:#a9a1e1)[$duration]($style)[](fg:#a9a1e1 bg:none) '
+
+[directory]
+  disabled = false
+  truncation_length = 2
+  truncate_to_repo = false
+  truncation_symbol = "…/"
+  use_os_path_sep = true
+  use_logical_path = true
+  style = 'fg:#282c34 bg:#ECBE7B'
+  format = '[](fg:#da8548 bg:none)[ ](fg:#282c34 bg:#da8548)[ ](fg:#da8548 bg:#ECBE7B)[$path]($style)[](fg:#ECBE7B bg:none) '
+
+[fill]
+  disabled = false
+  symbol = ' '
+
+[jobs]
+  disabled = false
+  symbol_threshold = 1
+  number_threshold = 1
+  symbol = '✦ '
+  style = 'bold #a9a1e1'
+  format = '[$symbol$number]($style) '
+
+[line_break]
+  disabled = false
+
+[memory_usage]
+  disabled = false
+  symbol = '󰓅 '
+  threshold = 75
+  style = 'bold #d5c4a1'
+  format = '$symbol[${ram}(|${ram_pct})]($style) '
+
+[status]
+  disabled = false
+  symbol = '󰅙 '
+  success_symbol = '󰗠 SUCCESS'
+  not_executable_symbol = '󰀨 '
+  not_found_symbol = '󰋗 '
+  sigint_symbol = ' '
+  signal_symbol = '󱐋 '
+  success_style = 'bold fg:#66E33B'
+  failure_style = 'bold fg:#fb4934'
+  recognize_signal_code = true
+  map_symbol = true
+  pipestatus = true
+  pipestatus_separator = ''
+  pipestatus_format = '\[ $pipestatus\] ⇒ [$symbol$common_meaning$signal_name$maybe_int]($style)'
+  format = '([$symbol($common_meaning)($signal_name)($maybe_int)]($style) )'
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#        Config for Version Control Modules       ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[fossil_branch]
+  disabled = true
+  truncation_symbol = '…'
+  truncation_length = 48
+  style = 'fg:#282c34 bg:#98be65'
+  format = '[](fg:#7fa54c bg:none)[ ](fg:#282c34 bg:#7fa54c)[ ](fg:#7fa54c bg:#98be65)[$branch]($style)[](fg:#98be65 bg:none) '
+
+[fossil_metrics]
+  disabled = true
+  added_style = 'bold green'
+  deleted_style	= 'bold red'
+  only_nonzero_diffs = true
+  format = '[+$added]($added_style)[-$deleted]($deleted_style) '
+
+[git_branch]
+  disabled = false
+  truncation_symbol = '…'
+  truncation_length = 48
+  only_attached = false
+  ignore_bare_repo = false
+  always_show_remote = false
+  style = 'fg:#282c34 bg:#98be65'
+  format = '[](fg:#7fa54c bg:none)[ ](fg:#282c34 bg:#7fa54c)[ ](fg:#7fa54c bg:#98be65)[$branch]($style)[](fg:#98be65 bg:none) '
+
+[git_commit]
+  disabled = false
+  commit_hash_length = 7
+  only_detached = true
+  tag_disabled = false
+  tag_max_candidates = 0
+  tag_symbol = ' '
+  style = 'bold green'
+  format = "[\\($hash\\)]($style) "
+  # format = "[\\($hash\\)]($style) [\\($tag\\)]($style) " # No need for tag ->  (  v1.16+ )
+
+[git_state]
+  disabled = false
+  rebase = 'REBASING'
+  merge =	'MERGING'
+  revert = 'REVERTING'
+  cherry_pick = 'CHERRY-PICKING'
+  bisect = 'BISECTING'
+  am = 'AM'
+  am_or_rebase = 'AM/REBASE'
+  style =	'bold yellow'
+  format = '[$state $progress_current/$progress_total]($style) '
+
+[git_metrics]
+  disabled = true
+  added_style = 'bold green'
+  deleted_style	= 'bold red'
+  only_nonzero_diffs = true
+  ignore_submodules = false
+  format = '[+$added]($added_style)[-$deleted]($deleted_style) '
+
+[git_status]
+  disabled = false
+  ignore_submodules = true  # Ignore submodule checks (boosts speed)
+  use_git_executable = true # Use git executable vs gitoxide (slower, but more accurate)
+  # Shows $ahead_behind 
+  ahead = '[⇡${count} ](fg:#282c34 bg:#51afef)'
+  behind = '[⇣${count} ](fg:#282c34 bg:#51afef)'
+  diverged = '[⇅ ⇡${ahead_count}⇣${behind_count} ](fg:#282c34 bg:#51afef)'
+  up_to_date = ''
+  # Shows $all_status (in order of appearance)
+  conflicted = '[󱓈 ${count} ](fg:#282c34 bg:#51afef)'
+  stashed = '[*](fg:#282c34 bg:#51afef)'
+  deleted = '[×${count} ](fg:#282c34 bg:#51afef)'
+  renamed = '[»${count} ](fg:#282c34 bg:#51afef)'
+  modified = '[!${count} ](fg:#282c34 bg:#51afef)'
+  staged = '[+${count} ](fg:#282c34 bg:#51afef)'
+  untracked = '[?${count}](fg:#282c34 bg:#51afef)'
+  typechanged = "[](fg:#282c34 bg:#51afef)"
+  style =	'fg:#282c34 bg:#51afef'
+  format = '[](fg:#3896d6 bg:none)[ ](fg:#282c34 bg:#3896d6)[ ](fg:#3896d6 bg:#51afef)[$ahead_behind$all_status]($style)[](fg:#51afef bg:none) '
+
+[hg_branch]
+  disabled = true
+  truncation_symbol = '…'
+  truncation_length = 48
+  style = 'fg:#282c34 bg:#98be65'
+  format = '[](fg:#7fa54c bg:none)[ ](fg:#282c34 bg:#7fa54c)[ ](fg:#7fa54c bg:#98be65)[$branch]($style)[](fg:#98be65 bg:none) '
+
+[hg_state]
+  disabled = true
+  merge =	'MERGING'
+  rebase = 'REBASING'
+  update = 'UPDATING'
+  bisect = 'BISECTING'
+  shelve = 'SHELVING'
+  graft = 'GRAFTING'
+  transplant = 'TRANSPLANTING'
+  histedit = 'HISTEDITING'
+  style =	'bold yellow'
+  format = '[$state $progress_current/$progress_total]($style) '
+  
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#           Configs for Disabled Modules          ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[time]
+  disabled = true
+  use_12hr = true
+  time_format = "%I:%M %p"
+  utc_time_offset = 'local'
+  time_range = ''
+  style='fg:#282c34 bg:#51afef'
+  format='[](fg:#3896d6 bg:none)[ ](fg:#282c34 bg:#3896d6)[ ](fg:#3896d6 bg:#51afef)[$time]($style)[](fg:#51afef bg:none) '
+
+[battery]
+  disabled = true
+  full_symbol = '󰁹'
+  charging_symbol = '󰂄'
+  discharging_symbol = '󰂃'
+  unknown_symbol = '󰁽'
+  empty_symbol = '󰂎'
+  format = '[](fg:#ff6c6b bg:none)[$symbol]($style)[](fg:#ff6c6b bg:#ff7b7a)[ $percentage](fg:#282c34 bg:#ff7b7a)[](fg:#ff7b7a bg:none)'
+
+# 0% - 15% → red
+[[battery.display]]
+  threshold = 15
+  style = 'fg:#CC0000 bg:#ff6c6b'
+
+# 16% - 45% → yellow
+[[battery.display]]
+  threshold = 45
+  style = 'fg:#FFD700 bg:#ff6c6b'
+  
+# 46% - 100% → green
+[[battery.display]]
+  threshold = 100
+  style = 'fg:#7FFF00 bg:#ff6c6b'
+
+[os]
+  disabled = true
+  format = '[](fg:#BCC6CC bg:none)[$symbol](fg:#282c34 bg:#BCC6CC)[](fg:#BCC6CC bg:none) '
+
+[os.symbols]
+  Windows = '󰍲'
+  Macos = ''
+  Linux = '󰌽'
+
+[shell]
+  disabled = true
+  bash_indicator = 'bash'
+  fish_indicator = 'fish'
+  zsh_indicator = 'zsh'
+  powershell_indicator = 'pwsh'
+  ion_indicator = 'ion'
+  elvish_indicator = 'esh'
+  tcsh_indicator = 'tcsh'
+  xonsh_indicator = 'xonsh'
+  cmd_indicator = 'cmd'
+  nu_indicator = 'nu'
+  unknown_indicator = ''
+  format = '[ $indicator ]($style)'
+
+[hostname]
+  disabled = true
+  ssh_only = true
+  trim_at = '.'
+  detect_env_vars = ['!TMUX']
+  style = 'fg:#282c34 bg:#eebebe'
+  format = '[](fg:#de8080 bg:none)[ ](fg:#282c34 bg:#de8080)[](fg:#de8080 bg:#eebebe)[ $hostname]($style)[ ](fg:#eebebe bg:none)'
+
+[username]
+  disabled = true
+  show_always = true
+  style_user = 'fg:#282c34 bg:#ff9cac'
+  style_root = 'fg:#282c34 bg:#ff9cac'
+  format = '[](fg:#d699b6 bg:none)[ ](fg:#282c34 bg:#d699b6)[ ](fg:#d699b6 bg:#ff9cac)[$user]($style)[](fg:#ff9cac bg:none) '
+
+[direnv]
+  disabled = true
+  symbol = 'direnv'
+  detect_folders = []
+  detect_extensions = []
+  detect_files = ['.envrc']
+  detect_env_vars = ['DIRENV_FILE']
+  denied_msg = 'denied'
+  allowed_msg = 'allowed'
+  not_allowed_msg = 'not allowed'
+  loaded_msg = 'loaded'
+  unloaded_msg = 'unloaded'
+  style='fg:#282c34 bg:#51afef'
+  format='[](fg:#3896d6 bg:none)[$symbol](fg:#282c34 bg:#3896d6)[ ](fg:#3896d6 bg:#51afef)[$loaded/$allowed]($style)[](fg:#51afef bg:none) '
+
+[package]
+  disabled = true
+  symbol = '󰏗 '
+  version_format = 'v${raw}'
+  display_private = false
+  style = 'fg:blue'
+  format = '( [$symbol( $version)]($style) )'
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#               Language / Runtimes              ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[bun]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[c]
+  disabled = false
+  symbol = ' '
+  style = 'bold italic blue'
+
+[cpp]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[dart]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[dotnet]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[elixir]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[elm]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[erlang]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[gleam]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[golang]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[haskell]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[java]
+  disabled = false
+  symbol = ' '
+  style = 'bold italic blue'
+
+[julia]
+  disabled = true
+  symbol = 'ஃ '
+  style = 'bold italic blue'
+
+[kotlin]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[lua]
+  disabled = false
+  symbol = ' '
+  style = 'bold italic blue'
+
+[nim]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[nodejs]
+  disabled = false
+  symbol = ' '
+  style = 'bold italic blue'
+
+[ocaml]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[perl]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[php]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[purescript]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[python]
+  disabled = false
+  symbol = ' '
+  style = 'bold italic blue'
+
+[rlang]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[ruby]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[rust]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[scala]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[solidity]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[swift]
+  disabled = true
+  symbol = ' '
+  style = 'bold italic blue'
+
+[zig]
+  disabled=true
+  symbol = ' '
+  style = 'bold italic blue'
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#               Environment Managers             ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[conda]
+  disabled = false
+  symbol = ' '
+  style = 'bold'
+
+[guix_shell]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[nix_shell]
+  disabled = false
+  symbol = ' '
+  style = 'bold'
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#             Package / Build Managers           ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[buf]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[cmake]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[meson]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[spack]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#               Container Management             ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[docker_context]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[kubernetes]
+  disabled = true
+  symbol = '󱃾 '
+  style = 'bold'
+
+[container]
+  disabled = true
+  symbol = '⬢ '
+  style = 'bold'
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+#               Infrastructure / IaC             ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+[aws]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[azure]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[terraform]
+  disabled = true
+  symbol = ' '
+  style = 'bold'
+
+[pulumi]
+  disabled = true
+  symbol = ' '
+  style = 'bold'

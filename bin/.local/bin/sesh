@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+# Description: Opens a tmux session for a selected directory or creates an ad-hoc session using fzf.
+# Requirements: tmux, fzf, fd
+# Usage: sesh [path]
+
+set -euo pipefail
+
+# Select directory or session
+if [[ $# -eq 1 ]]; then
+    selected="$1"
+else
+    selected=$(
+        {
+            echo "[NEW]"
+            tmux list-sessions -F "[SESSION] #{session_name}" 2>/dev/null
+            fd -H . ~/Machfiles ~/Desktop -t d -d 1
+        } | fzf --print-query --prompt="Session/directory: "
+    ) || exit 0
+fi
+
+[[ -z "$selected" ]] && exit 0
+
+# Parse fzf output (query + selection)
+query=$(echo "$selected" | head -n1)
+choice=$(echo "$selected" | tail -n1)
+
+# Ad-hoc session
+if [[ "$choice" == "[NEW]" ]]; then
+    session_name="${query//[^a-zA-Z0-9_-]/_}"
+    
+    [[ -z "$session_name" ]] && { echo "Session name cannot be empty"; exit 1; }
+    
+    if tmux has-session -t="$session_name" 2>/dev/null; then
+        echo "Session '$session_name' already exists"
+        exit 1
+    fi
+    
+    if [[ -z "${TMUX:-}" ]] && ! pgrep tmux >/dev/null; then
+        tmux new-session -s "$session_name"
+    else
+        tmux new-session -ds "$session_name"
+        tmux switch-client -t "$session_name"
+    fi
+    exit 0
+fi
+
+# Use the selected choice, not the query
+selected="$choice"
+
+# Existing session or directory
+if [[ "$selected" =~ ^\[SESSION\]\ (.+)$ ]]; then
+    session_name="${BASH_REMATCH[1]}"
+    session_dir=""
+else
+    session_dir="$selected"
+    session_name="$(basename "$selected" | tr . _)"
+fi
+
+# Start tmux if needed
+if [[ -z "${TMUX:-}" ]] && ! pgrep tmux >/dev/null; then
+    if [[ -n "$session_dir" ]]; then
+        tmux new-session -s "$session_name" -c "$session_dir"
+    else
+        tmux new-session -s "$session_name"
+    fi
+    exit 0
+fi
+
+# Create session if missing
+if ! tmux has-session -t="$session_name" 2>/dev/null; then
+    if [[ -n "$session_dir" ]]; then
+        tmux new-session -ds "$session_name" -c "$session_dir"
+    else
+        tmux new-session -ds "$session_name"
+    fi
+fi
+
+# Switch to session
+tmux switch-client -t "$session_name"

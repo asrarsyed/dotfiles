@@ -1,0 +1,33 @@
+# VCS
+.git/
+
+# Misc Folders
+.vim/
+.snm/
+.java/
+.tmux/
+.yarn/
+.expo/
+.gradle/
+.vscode/
+.themes/
+.android/
+.Android*/
+.oh-my-zsh/
+.local/share/
+.local/state/
+
+# Rust
+.cargo/
+.rustup/
+
+# Package managers / builds
+dist/
+build/
+target/
+node_modules/
+
+# Python
+*.pyc
+.venv/
+__pycache__/

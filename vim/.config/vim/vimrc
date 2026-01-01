@@ -1,0 +1,95 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"               ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
+"               ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
+"               ██║   ██║██║██╔████╔██║██████╔╝██║
+"               ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║
+"                ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
+"                 ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Auto-create vim main directory
+if !isdirectory(expand('~/.local/state/vim'))
+  call mkdir(expand('~/.local/state/vim'), 'p')
+endif
+
+" Auto-create all necessary subdirectories (undo, backup, swap, view)
+call mkdir(expand('~/.local/state/vim/undo'), 'p')
+call mkdir(expand('~/.local/state/vim/backup'), 'p')
+call mkdir(expand('~/.local/state/vim/swap'), 'p')
+call mkdir(expand('~/.local/state/vim/view'), 'p')
+call mkdir(expand('~/.local/state/vim/history'), 'p')
+
+set nocompatible " Use VIM settings rather than Vi settings; this *must* be first
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ──◇◆◇── ──◇◆◇── ──◇◆◇── ──◇◆◇─ GENERAL SETTINGS ─◇◆◇── ──◇◆◇── ──◇◆◇── ──◇◆◇── 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set autoindent           " copy indent from the current line when starting a new line
+set backspace=2          " allow backspacing over everything in insert mode
+set history=50           " keep 50 lines of command line history
+set ignorecase           " search commands are case-insensitive
+set hlsearch             " highlights search terms
+set incsearch            " while typing a search command, show matches incrementally
+
+set mouse=a              " enable mouse interaction
+set number               " line numbers at the side
+set ruler                " show the cursor position all the time
+set shiftwidth=4         " pressing >> or << in normal mode indents by 4 characters
+set tabstop=4            " a tab character indents to the 4th (or 8th, 12th, etc.) column
+set encoding=utf8        " non-ascii characters are encoded with UTF-8 by default
+set noexpandtab          " pressing the tab key creates a tab character, not spaces
+set formatoptions=croq   " c=autowrap comments, r=continue comment on <enter>, 
+                         " o=continue comment on o or O, q=allow format comment with g
+
+set textwidth=0          " no forced wrapping in any file type (unless overridden)
+set showcmd              " show length of visual selection (turn off when working over slow connections)
+
+set complete=.,w,b,u     " make autocomplete faster
+set splitright           " create vertical splits to the right
+set splitbelow           " create horizontal splits below
+
+set switchbuf=usetab     " when switching buffers, include tabs
+set tabpagemax=30        " show up to 30 tabs
+
+set clipboard=unnamed,unnamedplus
+set cryptmethod=blowfish " use blowfish encryption for encrytped files
+let g:netrw_mouse_maps=0 " ignore mouse clicks when browsing directories
+
+syntax on                " enable syntax highlighting.
+
+set viminfo='20,\"50     " set viminfo options for history and registers
+
+" add syntax highlighting to private file of .gitconfig
+augroup gitsecret_ft
+  autocmd!
+  autocmd BufRead,BufNewFile .gitsecret set filetype=gitconfig
+augroup END
+
+
+" ──◇◆◇── XDG State-Compliant Locations ──◇◆◇──
+
+" Use undo history and save it in an XDG-compliant directory
+set undofile
+set undodir=~/.local/state/vim/undo//
+
+" Enable backups and redirect to XDG-compliant path
+set backup
+set backupdir=~/.local/state/vim/backup//
+
+" Swap files location
+set directory=~/.local/state/vim/swap//
+
+" View files (for restoring folds, cursor position, etc.)
+set viewdir=~/.local/state/vim/view//
+
+" Redirect viminfo history
+set viminfo+=n~/.local/state/vim/.viminfo
+
+" Redirect netrw history file
+let g:netrw_historyfile = expand('~/.local/state/vim/.netrwhist')
+
+set background=dark
+colorscheme habamax

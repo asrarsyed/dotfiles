@@ -1,0 +1,440 @@
+// December 2026 Backup of Config
+
+{
+    // SECTION: Open json editor for settings
+    "workbench.settings.editor": "json",
+
+    // SECTION: Misc
+    "workbench.startupEditor": "none",
+    "telemetry.telemetryLevel": "off",
+    "extensions.autoUpdate": "onlyEnabledExtensions",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+
+    // SECTION: Window
+    "window.commandCenter": false,
+    "window.restoreWindows": "none",
+    "window.newWindowProfile": "Default",
+    "window.newWindowDimensions": "offset",
+
+    // SECTION: UI Preference
+    "breadcrumbs.enabled": false,
+    "breadcrumbs.filePath": "off",
+    "editor.mouseWheelZoom": false,
+    "editor.minimap.enabled": false,
+    "breadcrumbs.symbolPath": "off",
+    "editor.renderWhitespace": "none",
+    // "editor.rulers": [88, 120],
+
+    // SECTION: Theme
+    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.productIconTheme": "feather-vscode",
+
+    // SECTION: Workbench
+    // "workbench.tips.enabled": false,
+    // "workbench.statusBar.visible": false,
+    // "workbench.layoutControl.enabled": false,
+    // "workbench.tree.enableStickyScroll": false,
+    // "workbench.colorCustomizations": {
+    //     "tree.indentGuidesStroke": "#4E4B5C",
+    //     "activityBar.activeBorder": "#dbd7caed"
+    // },
+
+    // SECTION: Workbench Scrolling
+    "workbench.list.smoothScrolling": true,
+    "workbench.list.fastScrollSensitivity": 8,
+
+    // SECTION: Workbench Editor
+    "workbench.editor.limit.value": 5,
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.editor.limit.enabled": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.limit.excludeDirty": true,
+    "workbench.editor.pinnedTabSizing": "shrink",
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.editor.tabActionCloseVisibility": false,
+    "workbench.editor.preventPinnedEditorClose": "keyboard",
+
+    // SECTION: Font Preference - "Maple Mono Medium, Zenbones Brainy Medium, JetBrains Mono Regular Medium, DankMono Nerd Font Mono"
+    "editor.fontSize": 14,
+    "editor.lineHeight": 1.6,
+    // "editor.fontWeight": 400,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "Maple Mono",
+
+    // SECTION: Terminal Preference
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.ignoreProcessNames": [
+        "starship",
+    ],
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.customGlyphs": true,
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.tabs.enabled": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.smoothScrolling": true,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.tabs.location": "right",
+    "terminal.integrated.gpuAcceleration": "auto",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.shellIntegration.enabled": false,
+    "terminal.integrated.confirmOnExit": "hasChildProcesses",
+    "terminal.integrated.enableMultiLinePasteWarning": "auto",
+    "terminal.integrated.tabs.hideCondition": "singleTerminal",
+    "terminal.integrated.accessibleViewPreserveCursorPosition": true,
+    "terminal.integrated.accessibleViewFocusOnCommandExecution": true,
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font, DankMono Nerd Font",
+
+    "terminal.explorerKind": "external",
+    "terminal.external.osxExec": "Ghostty.app",
+    "terminal.sourceControlRepositoriesKind": "external",
+
+    // SECTION: Editor Scroll + Scrollbar
+    "editor.smoothScrolling": true,
+    "editor.scrollbar.vertical": "auto",
+    "editor.overviewRulerBorder": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.scrollbar.horizontal": "auto",
+    "editor.scrollbar.verticalScrollbarSize": 12,
+
+    // SECTION: Editor Brackets
+    "editor.guides.bracketPairs": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairsHorizontal": "active",
+
+    // SECTION: Editor Cursor
+    "editor.cursorBlinking": "phase",
+    "editor.cursorStyle": "line",
+    "editor.cursorSurroundingLines": 8,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.hideCursorInOverviewRuler": false,
+
+    // SECTION: Editor Indentation
+    "editor.detectIndentation": false,
+    "editor.guides.indentation": false,
+    "editor.guides.highlightActiveIndentation": "always",
+
+    // SECTION: Editor Controls
+    "editor.dragAndDrop": false,
+    "editor.showFoldingControls": "never",
+
+    // SECTION: Editor Details
+    "editor.matchBrackets": "near",
+    "editor.lineNumbers": "relative",
+    "editor.renderLineHighlight": "none",
+    "editor.occurrencesHighlight": "off",
+
+    // SECTION: Editor Formatting */
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": false,
+    "editor.linkedEditing": true,
+
+    // SECTION: APC
+    "window.titleBarStyle": "custom",
+    "apc.activityBar": {
+        "size": 30,
+        "position": "bottom",
+        "hideSettings": false,
+    },
+    "apc.electron": {
+        // "titleBarStyle": "hiddenInset",
+        "trafficLightPosition": {
+            "x": 10,
+            "y": 10
+        }
+    },
+    "apc.font.family": "Iosevka Custom",
+    "apc.monospace.font.family": "Iosevka Custom",
+    "apc.statusBar": {
+        "height": 30,
+        "fontSize": 12,
+        "position": "editor-bottom",
+    },
+
+    // SECTION: Cusom css
+    "apc.stylesheet": {
+        // ".title-label": "display: none !important",
+        // ".title-actions": "display: none !important",
+        // ".titlebar-right": "display: none !important",
+        // ".titlebar-center": "display: none !important",
+        // ".sidebar > .composite": "height: 12px !important",
+        ".inline-tabs-placeholder": "display: none !important",
+        // ".split-view-view .visible": "background-color: #110f17 !important"
+        // ".tabs-and-actions-container > .editor-actions": "display: none !important",
+    },
+
+    // SECTION: Explorer
+    "explorer.autoReveal": true,
+    "explorer.confirmDelete": true,
+    "explorer.compactFolders": false,
+    "explorer.excludeGitIgnore": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.incrementalNaming": "smart",
+
+    // SECTION: Search
+    "search.smartCase": true,
+    "search.showLineNumbers": true,
+    "search.exclude": {
+        "**/logs": true,
+        "**/.git": true,
+        "**/.nuxt": true,
+        "**/.output": true,
+        "**/.github": true,
+        "**/dist/**": true,
+        "**/yarn.lock": true,
+        "**/node_modules": true,
+        "**/**.code-search": true,
+        "**/pnpm-lock.yaml": true,
+        "**/bower_components": true,
+        "**/package-lock.json": true,
+        "**/npm-shrinkwrap.json": true,
+    },
+
+    // SECTION: Git
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.autofetchPeriod": 180,
+    "git.enableSmartCommit": true,
+    "git.openRepositoryInParentFolders": "always",
+
+    // SECTION: Diff editor
+    "diffEditor.codeLens": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "multiDiffEditor.experimental.enabled": true,
+
+    // SECTION: Files
+    "files.enableTrash": true,
+    "files.restoreUndoStack": true,
+    "files.autoSave": "onWindowChange",
+    "files.exclude": {
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.*": false,
+        "**/.svn": true,
+        "**/dist": true,
+        "**/.next": true,
+        "**/.git": false,
+        "**/.husky": true,
+        "**/drizzle": true,
+        "**/.vscode": false,
+        "**/.DS_Store": true,
+        "**/bun.lockb": true,
+        "**/Thumbs.db": true,
+        "**/migrate.ts": true,
+        "**/cspell.json": true,
+        "**/.gitignore": false,
+        "**/.env.example": true,
+        "**/.editorconfig": true,
+        "**/.eslintrc.cjs": true,
+        "**/node_modules": false,
+        "**/next.config.js": true,
+        "**/next-env.d.ts": false,
+        "**/.prettierignore": true,
+        "**/pnpm-lock.yaml": false,
+        "**/.lintstagedrc.mjs": true,
+        "**/drizzle.config.ts": true,
+        "**/.markdownlint.json": true,
+        "**/postcss.config.cjs": true,
+        "**/prettier.config.js": true,
+        "**/tailwind.config.ts": true,
+        "**/package-lock.json": false,
+        "**/.markdownlintignore": true,
+    },
+
+    // SECTION: Notes
+    "notes.notesLocation": "/Users/asrarsyed/Desktop/code-practice/cheatsheets",
+
+    // SECTION: Indent Rainbow
+    // "indentRainbow.colorOnWhiteSpaceOnly": true,
+    // "indentRainbow.ignoreLinePatterns": [
+    //     "/[ \t]+[/]{2}/g" // lines beginning with <whitespace>//
+    //     "/[ \t]* [*]/g", // lines beginning with <whitespace><space>*
+    // ],
+    // "indentRainbow.ignoreErrorLanguages": [
+    //     "python",
+    //     "haskell",
+    //     "python3",
+    //     "markdown",
+    // ],
+    // "indentRainbow.colors": [
+    //     "rgba(7, 59, 76,0.1)",
+    //     "rgba(7, 59, 76,0.15)",
+    //     "rgba(7, 59, 76,0.05)",
+    //     "rgba(7, 59, 76,0.025)",
+    //     "rgba(239, 71, 111,0.15)",
+    //     "rgba(6, 214, 160, 0.15)",
+    //     "rgba(17, 138, 178,0.15)",
+    //     "rgba(255, 209, 102,0.15)",
+    // ],
+    // "indentRainbow.colors": [
+    //     "rgba(63, 55, 201,0.1)",
+    //     "rgba(86, 11, 173,0.15)",
+    //     "rgba(72, 12, 168,0.15)",
+    //     "rgba(58, 12, 163,0.15)",
+    //     "rgba(63, 55, 201,0.15)",
+    //     "rgba(63, 55, 201,0.05)",
+    //     "rgba(63, 55, 201,0.025)",
+    //     "rgba(247, 37, 133,0.15)",
+    //     "rgba(181, 23, 158,0.15)",
+    //     "rgba(114, 9, 183, 0.15)",
+    // ],
+
+    // SECTION: Better Comments
+    "better-comments.tags": [
+        {
+            "tag": "note", // NOTE → Important information or clarification
+            "bold": false,
+            "italic": false,
+            "color": "#98C379",
+            "underline": false,
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "todo", // TODO → Task awaiting completion or follow-up
+            "bold": false,
+            "italic": false,
+            "color": "#FF8C00",
+            "underline": false,
+            "strikethrough": false,
+            "backgroundColor": "transparent",
+        },
+        {
+            "tag": "fixme", // FIXME → Bug or code that needs fixing
+            "bold": false,
+            "italic": false,
+            "color": "#FF2D00",
+            "underline": false,
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "!", // ! → Urgent alert warning or logic flaw
+            "bold": false,
+            "italic": false,
+            "color": "#FFD700",
+            "underline": false,
+            "strikethrough": false,
+            "backgroundColor": "transparent",
+        },
+        {
+            "tag": "?", // ? → Question or requires clarification
+            "bold": false,
+            "italic": false,
+            "color": "#3498DB",
+            "underline": false,
+            "strikethrough": false,
+            "backgroundColor": "transparent",
+        },
+        {
+            "tag": "anchor", // Anchor → Global bookmark
+            "bold": true,
+            "italic": false,
+            "color": "#FF6F61",
+            "underline": true,
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "section", // SECTION → Local bookmark
+            "bold": true,
+            "italic": false,
+            "color": "#94e2d5",
+            "underline": true,
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+    ],
+
+    // SECTION: Code Runner
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.enableAppInsights": false,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.executorMap": {
+        "php": "php",
+        "lua": "lua",
+        "v": "v run",
+        "perl": "perl",
+        "ruby": "ruby",
+        "go": "go run",
+        "r": "Rscript",
+        "dart": "dart",
+        "bat": "cmd /c",
+        "fsharp": "fsi",
+        "zig": "zig run",
+        "perl6": "perl6",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "ocaml": "ocaml",
+        "mojo": "mojo run",
+        "groovy": "groovy",
+        "racket": "racket",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "haskell": "runghc",
+        "kit": "kitc --run",
+        "javascript": "node",
+        "csharp": "scriptcs",
+        "crystal": "crystal",
+        "shellscript": "bash",
+        "python": "python3",
+        "clojure": "lein exec",
+        "typescript": "ts-node",
+        "scheme": "csi -script",
+        "lisp": "sbcl --script",
+        "coffeescript": "coffee",
+        "applescript": "osascript",
+        "vbscript": "cscript //Nologo",
+        "sass": "sass --style expanded",
+        "scss": "scss --style expanded",
+        "sml": "cd $dir && sml $fileName",
+        "nim": "nim compile --verbosity:0 --hints:off --run",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    },
+
+    // SECTION: Neovim
+    "vscode-neovim.neovimExecutablePaths.linux": "",
+    "vscode-neovim.neovimExecutablePaths.win32": "",
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/vim",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+    "extensions.experimental.affinity": { "asvetliakov.vscode-neovim": 1},
+
+    // SECTION: Python
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSaveMode": "file",
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "always",
+            "source.organizeImports": "explicit",
+        },
+        "diffEditor.ignoreTrimWhitespace": true,
+    },
+    "ruff.importStrategy": "useBundled",
+    "python.analysis.typeCheckingMode": "standard",
+    "cSpell.userWords": [
+    ],
+}
