@@ -1,0 +1,44 @@
+# Global Gitignore File
+
+# OS system files
+.DS_Store
+.DS_Store?
+.Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Thumbnails
+._*
+
+# MacOS Metadata
+.LSOverride
+.AppleDouble
+
+# MacOS Finder Metadata
+.Trashes
+.Spotlight-V100
+
+# Logs
+*.log
+
+# Editor Temporary Files
+*~
+*#
+*.swp
+*.swo
+*.tmp
+*.orig
+
+# Backup Files
+*.bak
+*.old
+*.save
+
+# IDE and Project Settings
+.vscode/
+.idea/
+*.iml
+
+# Dependency Directories
+node_modules/
+jspm_packages/

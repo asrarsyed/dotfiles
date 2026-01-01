@@ -1,0 +1,92 @@
+# Docs: https://ghostty.org/docs/config.
+# ghostty +show-config --default --docs
+
+# Reload by pressing: command+shift+comma
+
+# Font (ghostty +list-fonts)
+font-family = "Maple Mono"
+font-size = 14
+
+# Works: catppuccin mocha, iceberg dark, teerb, pnevma, relaxed, terafox, subliminal, gruvbox material dark
+# Doesn't Work: mellow, jellybeans, vesper, rose pine moon
+# Theme (ghostty +list-themes)
+theme = mellow
+
+# Shader
+# custom-shader = ./shaders/starfield-colors.glsl
+# custom-shader-animation = true
+
+# Transparency
+background = #000000
+background-blur = false
+background-opacity = 0.65
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+mouse-hide-while-typing = true
+
+# cell
+adjust-cell-width = 1
+adjust-cell-height = 1
+
+# Dimensions
+window-width = 162
+window-height = 46
+window-position-x = 21
+window-position-y = -14
+# window-width = 150
+# window-height = 42
+# window-position-x = 72
+# window-position-y = 20
+
+# Window
+window-padding-x = 10
+window-padding-y = 10
+window-padding-color = 
+window-padding-balance = true
+window-inherit-font-size = false
+window-inherit-working-directory = false
+
+# Clipboard
+copy-on-select = clipboard
+clipboard-paste-protection = false
+
+# Updates
+auto-update = check
+auto-update-channel = stable
+
+# Behavior
+working-directory = home
+quit-after-last-window-closed = true
+
+# Integration 
+shell-integration = zsh
+shell-integration-features = no-cursor
+
+# macOS
+# macos-option-as-alt = true
+macos-titlebar-style = hidden
+macos-non-native-fullscreen = visible-menu
+
+# Keybinds (ghostty +list-actions)
+
+# (ctrl b for tmux -> cmb b for ghostty)
+# keybind = super+a>r=reload_config
+keybind = super+a>x=close_surface
+keybind = super+a>i=inspector:toggle
+keybind = super+a>,=toggle_quick_terminal
+
+# splitting
+keybind = super+a>equal=new_split:right
+keybind = super+a>minus=new_split:down
+keybind = super+a>e=equalize_splits
+
+# split nav (setting this to control will not work if tmux already uses it)
+keybind = super+a>h=goto_split:left
+keybind = super+a>j=goto_split:bottom
+keybind = super+a>k=goto_split:top
+keybind = super+a>l=goto_split:right
+
+# https://www.reddit.com/r/neovim/comments/1hne1q6/navigation_between_ghostty_and_neovim_splits/

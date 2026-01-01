@@ -1,0 +1,249 @@
+# This is git's per-user configuration file.
+
+[include]
+  path = ~/.config/git/secret
+  path = ~/.config/delta/themes.gitconfig
+
+[user]
+    useConfigOnly = true
+
+[init]
+  defaultBranch = main
+
+[core]
+  pager = delta
+  editor = nvim
+  fscache = true
+  autocrlf = input
+  preloadindex = true
+  excludesfile = ~/.config/git/ignore
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  light = false
+  navigate = true
+  hyperlinks = true
+  line-numbers = true
+  side-by-side = true
+  true-color = always
+  features = "catppuccin_macchiato"
+  hyperlinks-file-link-format = "file-line://{path}:{line}"
+
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
+[help]
+  autocorrect = 0
+
+[diff]
+  rename = true
+  colorMoved = zebra
+  algorithm = histogram
+ 
+[log]
+  stat = true
+  graph = true
+  decorate = short
+  abbrevCommit = true
+
+[status]
+  hints = false
+
+[commit]
+  verbose = true
+
+[merge]
+  conflictStyle = diff3
+
+[fetch]
+  prune = true
+
+[pull]
+  rebase = true
+
+[push]
+  default = simple
+
+[advice]
+  skippedCherryPicks = false
+
+[color]
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = blue
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = green bold
+  changed = yellow bold
+  untracked = red bold
+  unmerged = cyan bold
+
+[alias]
+  lg = log --graph --decorate --all
+  slg = log --oneline --stat --graph --decorate --all
+  check = fsck --full --strict
+  branches = branch --sort=-committerdate
+  amend = commit --amend --no-edit
+  unstage = reset HEAD --
+  last = log -1 HEAD
+  undo = reset --soft HEAD~1
+
+# <--- Added comments for clarification --->
+
+# [core]
+#   # text viewer for git commands
+#   pager = delta
+#   # text editor for `commit` & `tag` commands
+#   editor = nvim
+#   # enable CRLF line endings
+#   autocrlf = input
+#   # path to global .gitignore file
+#   excludesfile = ~/.gitignore_global
+#   # path to global .gitattributes file
+#   attributesfile = ~/.gitattributes_global
+#   # configures whitespace handling for git
+#   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
+# [interactive]
+#   # use `git-delta` to show colorized diff
+#   diffFilter = delta --color-only
+
+# [delta]
+#   # set the theme for syntax highlighting
+#   features = "catppuccin_macchiato"
+#   # enable support for terminal hyperlinks
+#   hyperlinks = true
+#   # construct the correct URL
+#   hyperlinks-file-link-format = "file-line://{path}:{line}"
+#   # use only dark mode
+#   light = false
+#   # show two columns with the line numbers
+#   line-numbers = true
+#   # activate navigation keybindings
+#   navigate = true
+#   # activate side-by-side view for the diff
+#   side-by-side = true
+
+# [filter "lfs"]
+#   required = true
+#   clean = git-lfs clean -- %f
+#   smudge = git-lfs smudge -- %f
+#   process = git-lfs filter-process
+
+# [help]
+#   # disable automatic correction of mistyped commands
+#   autocorrect = 0
+
+# [diff]
+#   # detect and highlight renamed files
+#   rename = true
+#   # color the moved lines in diffs
+#   colorMoved = default
+#   # use the "patience" algorithm for diffs
+#   algorithm = patience
+ 
+# [log]
+#   # show statistics for each commit
+#   stat = true
+#   # display the commit graph
+#   graph = true
+#   # add decorations (e.g., branch names) to logs
+#   decorate = short
+#   # abbreviate commit hashes
+#   abbrevCommit = true
+
+# [status]
+#   # disable status hints in the output
+#   hints = false
+
+# [commit]
+#   # include diff of changes in commit messages
+#   verbose = true
+#   # all commits should be GPG signed
+#   gpgsign = false
+
+# [merge]
+#   # set a style in which conflicted hunks are written out to working tree files upon merge
+#   conflictStyle = diff3
+
+# [fetch]
+#   # automatically prune remote-tracking branches no longer present
+#   prune = true
+
+# [pull]
+#   # rebase commits instead of merging on pull
+#   rebase = true
+
+# [push]
+#   # push the current branch with the same name on the remote
+#   default = simple
+
+# [credential]
+#   # external helper for when a username/password credential is needed
+# 	helper = osxkeychain
+
+# [advice]
+#   # disable advice on skipped cherry-picks
+#   skippedCherryPicks = false
+
+# [color]
+#   # automatically enable colored output if supported
+#   ui = auto
+
+# [color "branch"]
+#   # current branch in yellow with reverse video effect
+#   current = yellow reverse
+#   # local branches in blue (prev. yellow)
+#   local = blue
+#   # remote branches in green
+#   remote = green
+
+# [color "diff"]
+#   # metadata in yellow bold
+#   meta = yellow bold
+#   # fragment headers (line info) in magenta bold
+#   frag = magenta bold
+#   # deletions in red bold
+#   old = red bold
+#   # additions in green bold
+#   new = green bold
+
+# [color "status"]
+#   # added files in green bold
+#   added = green bold
+#   # modified files in yellow bold
+#   changed = yellow bold
+#   # untracked files in red bold
+#   untracked = red bold
+
+# [alias]
+#   # Log
+#   lg = log --graph --decorate --all  # Shows the commit history expanded
+#   slg = log --oneline --stat --graph --decorate --all  # Condensed commit history in one line.
+
+#   # Organization
+#   check = fsck --full --strict  # Checks the repository for integrity and errors.
+#   branches = branch --sort=-committerdate  # Lists branches sorted by the most recent commit date.
+
+#   # Commit/Unstage
+#   amend = commit --amend --no-edit  # Amends the last commit without changing the commit message.
+#   unstage = reset HEAD --  # Unstages files (removes from the staging area).
+
+#   # Other
+#   last = log -1 HEAD  # Shows the details of the last commit on the current branch.
+#   undo = reset --soft HEAD~1  # Undoes the last commit but keeps changes in the staging area.

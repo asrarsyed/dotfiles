@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# centerbox — fixed-width centered unicode box
+# Usage: centerbox "text" [width]
+
+WIDTH="${2:-48}"  # Total width including borders
+TEXT="$1"
+
+# Strip ANSI codes for accurate length calculation
+TEXT_CLEAN=$(printf "%s" "$TEXT" | sed 's/\x1b\[[0-9;]*m//g')
+TEXT_LEN=${#TEXT_CLEAN}
+
+# Calculate available width: WIDTH - 2 border chars (┃) - 2 padding spaces
+AVAILABLE_WIDTH=$((WIDTH - 4))
+
+# Calculate total padding needed
+TOTAL_PAD=$((AVAILABLE_WIDTH - TEXT_LEN))
+
+if (( TOTAL_PAD < 0 )); then
+  # Text is too long
+  LEFT=0
+  RIGHT=0
+elif (( TOTAL_PAD % 2 == 0 )); then
+  # Even number of padding spaces - split equally
+  LEFT=$((TOTAL_PAD / 2))
+  RIGHT=$((TOTAL_PAD / 2))
+else
+  # Odd number of padding spaces - left gets one less
+  LEFT=$((TOTAL_PAD / 2))
+  RIGHT=$((TOTAL_PAD / 2 + 1))
+fi
+
+# Build the box with heavy box drawing characters
+# Top border
+printf "# ┏"
+printf '━%.0s' $(seq 1 $((WIDTH - 2)))
+printf "┓\n"
+
+# Middle line with centered text
+printf "#   "
+printf '%*s' "$LEFT" ''
+printf "%s" "$TEXT"
+printf '%*s' "$RIGHT" ''
+printf " ┃\n"
+
+# Bottom border
+printf "# ┗"
+printf '━%.0s' $(seq 1 $((WIDTH - 2)))
+printf "┛\n"

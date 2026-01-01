@@ -1,0 +1,95 @@
+# <- Active Taps ->
+tap "buo/cask-upgrade"            # Best for manually updating GUI apps (casks) with more control
+
+
+# <- Essential Binaries ->
+brew "git"                        # Distributed revision control system
+brew "mas"                        # Command-line interface for the Mac App Store
+brew "curl"                       # Gets a file from an HTTP, HTTPS or FTP server
+brew "stow"                       # Symlink farm manager that organizes dotfiles under a single directory
+
+# <- Programming Relevant ->
+brew "fnm"                        # Fast and simple Node.js version manager
+brew "mysql"                      # Open source relational database management system
+cask "temurin@21"                 # Java Development Kit from the Eclipse Foundation (Adoptium)
+cask "dbeaver-community"          # Universal database tool and SQL client
+
+brew "colima"                     #
+brew "docker"                     #
+
+# <- Active Binaries ->
+brew "git-delta"                  # syntax-highlighting pager for git and diff output
+brew "starship"                   # cross-shell prompt for astronauts
+brew "macchina"                   # system information fetcher, with an emphasis on performance & minimalism
+brew "pipes-sh"                   # animated pipes terminal screensaver
+brew "sevenzip"                   # (yazi optional) 7-Zip is a file archiver with high compression ratio
+brew "cmatrix"                    # terminal screensaver based of "the matrix" like implementation
+brew "ripgrep"                    # search tool like grep and the silver searcher
+brew "poppler"                    # (yazi optional) PDF rendering library (based on xpdf-3.0 code base)
+brew "neovim"                     # ambitious vim-fork focused on extensibility and agility
+brew "zoxide"                     # shell extension to navigate your filesy:stem faster
+brew "rmlint"                     # fast tool to remove dupes and other lint from your filesystem
+# brew "vivid"                      # generator for ls_colors; supports multiple color themes
+brew "tokei"                      # fast and accurate code counter
+brew "trash"                      # command-line tool that moves files or folder to the trash
+brew "tmux"                       # terminal multiplexer
+brew "yazi"                       # blazing fast terminal file manager written in Rust
+brew "btop"                       # resource monitor c++ version (Choose 1: btop/neohtop)
+brew "ncdu"                       # (Local) detailed disk usage analysis and cleanup
+brew "bat"                        # syntax highlighting with git integration
+brew "eza"                        # modern replacement for ls
+brew "fzf"                        # command-line fuzzy finder written in go 
+brew "fd"                         # simple, fast and user-friendly alternative to find
+
+# <- Inactive Binaries ->
+# brew "duf"                        # (Global) disk Usage/Free Utility - a better 'df' alternative
+# brew "lazygit"                    # simple terminal ui for git commands
+# brew "tealdeer"                   # simplified, example based and community-driven man pages
+# brew "hyperfine"                  # command-line benchmarking tool
+# brew "lazydocker"                 # advance users: lazier way to manage everything docker
+
+
+# <- Active Apps ->
+cask "nikitabobko/tap/aerospace"  # i3-like tiling window manager for macos
+cask "visual-studio-code"         # open-source code editor
+cask "reminders-menubar"          # simple menu bar app to view and interact with reminders
+cask "appcleaner"                 # small application to thoroughly uninstall unwanted apps
+cask "miniforge"                  # minimal installer for conda specific to conda-forge
+cask "librewolf"                  # privacy-focused version of the firefox browser
+cask "rectangle"                  # move and resize windows using keyboard shortcuts or snap areas
+cask "obsidian"                   # private and flexible writing app stored locally
+cask "ghostty"                    # terminal emulator that uses platform-native ui and gpu acceleration
+cask "alfred"                     # application launcher and productivity software
+cask "github"                     # desktop client for github repositories
+cask "maccy"                      # clipboard manager for macos
+cask "zen"                        # zen browser, another alternative browser
+
+
+# <- Inactive Apps ->
+# cask "xbar"                       # view outputs from scripts in the menu bar
+# cask "neat"                       # github notifications on your desktop and menu bar
+# cask "itsycal"                    # tiny menu bar calendar
+# cask "discord"                    # voice and text chat software
+# cask "bitwarden"                  # password manager for securely storing and managing sensitive data
+# cask "jordanbaird-ice"            # hide menu bar items to give your mac a cleaner look
+# cask "karabiner-elements"         # a powerful and stable keyboard customizer for macos
+
+# <- Active Fonts ->
+cask "font-fira-code"
+cask "font-iosevka-aile"
+cask "font-cascadia-code"
+cask "font-maple-mono-nf"
+cask "font-jetbrains-mono-nerd-font"
+
+
+# <- Active Mac Apps ->
+mas "BarNotes", id: 6744329261, purchase: true
+mas "Amphetamine", id: 937984704, purchase: true
+mas "Hand Mirror", id: 1502839586, purchase: true
+# mas "Microsoft Word", id: 462054704, purchase: true
+# mas "Microsoft Excel", id: 462058435, purchase: true
+
+
+# <- Inactive Mac Apps ->
+# mas "HP Smart", id: 1474276998, purchase: true   # hp smart app that lets you print, scan, fax, and share documents
+# mas "JotItDown", id: 1668513911, purchase: true  # (update STILL breaks things, due to shortcuts)
