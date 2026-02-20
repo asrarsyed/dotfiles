@@ -1,4 +1,4 @@
-# config
+# Core search behavior
 --column
 --smart-case
 --line-number
@@ -7,20 +7,40 @@
 --no-heading
 --max-columns=150
 --max-columns-preview
+
+# Color customization (optional - remove if you like defaults)
 --colors=line:none
 --colors=line:style:bold
+--colors=path:fg:blue
+--colors=match:fg:red
+--colors=match:bg:black
 
-# ignores, etc
---glob=!.git
---glob=!node_modules
+# Common build/dependency directories
+--glob=!.git/*
+--glob=!node_modules/*
+--glob=!bower_components/*
+--glob=!_build/*
+--glob=!.svn/*
+--glob=!.hg/*
+
+# Lock files and generated code
 --glob=!yarn.lock
 --glob=!package-lock.json
---glob=!_build
---glob=!tags
---glob=!storage
---glob=!tmp
---glob=!public
+--glob=!*.min.*
+--glob=!*.zwc
+
+# Temp/cache directories
+--glob=!tmp/*
+--glob=!storage/*
+--glob=!public/assets/*
 --glob=!*.cache
---glob=!.Trash
---glob=!.licenses
+--glob=!*.log
+
+# macOS and other metadata
+--glob=!.DS_Store
+--glob=!.Trash/*
+--glob=!tags
+
+# Project-specific (keep from yours)
 --glob=!config/zsh/plugins/*
+--glob=!.licenses/*
