@@ -5,7 +5,10 @@
 alias cb='centerbox' # remove after
 
 # Print working dir & copy to clipboard
-alias ywd='pwd && echo -n `pwd`| pbcopy'
+alias cwd='pwd && echo -n `pwd`| pbcopy'
+
+# Print dir listing & copy to clipboard
+alias cls='ls && echo -n `ls`| pbcopy'
 
 # Open current/specified directory in finder
 alias op='[[ $# -eq 0 ]] && open . || open "$@"'
@@ -17,6 +20,14 @@ alias mv="mv -vi" # Move files and directories.
 
 # Send files and directories to trash.
 if command -v trash &> /dev/null; then alias rm='trash -vF'; fi # (trash -vlesyF)
+
+# Named directories (instant cd via ~name)
+hash -d des=~/Desktop
+hash -d dev=~/Developer
+hash -d doc=~/Documents
+hash -d dot=~/Dotfiles
+hash -d dow=~/Downloads
+hash -d lib=~/Library
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 #         Commonly used Aliases (Grouped)        ┃
@@ -123,3 +134,12 @@ if command -v tmux &> /dev/null; then
     alias tn='tmux new-session'
     alias tl='tmux list-sessions'
 fi
+
+# chmod {u,g,a}{+,-}{x,w,r}
+local mod target
+for mod in x w r; do
+  for target in u g a ""; do
+    alias -- "${target}+$mod"="chmod ${target}+$mod"
+    alias -- "${target}-$mod"="chmod -- ${target}-$mod"
+  done
+done

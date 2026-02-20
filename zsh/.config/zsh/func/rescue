@@ -1,0 +1,25 @@
+# Description: Moves a given file from the downloads folder to current directory
+# Usage: rescue [filename] | rescue (interactive with fzf)
+
+rescue() {
+    emulate -L zsh
+    
+    local src file
+    
+    if (( $# > 0 )); then
+        src=~/Downloads/"$1"
+    else
+        file=$(eza --sort oldest ~/Downloads | fzf --prompt="Select a file to rescue: " | tr -d "'")
+        [[ -z "$file" ]] && { echo "No file selected"; return 1; }
+        src=~/Downloads/"$file"
+    fi
+    
+    # Check if source file exists
+    [[ ! -e "$src" ]] && {
+        echo "Error: File not found: $src" >&2
+        return 1
+    }
+    
+    # Move file to current directory
+    mv "$src" .
+}

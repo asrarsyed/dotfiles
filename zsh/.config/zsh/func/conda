@@ -1,0 +1,10 @@
+# Description: Lazy-load conda environment on first use
+# Usage: conda <args>
+
+conda() {
+    emulate -L zsh
+    
+    unfunction conda
+    eval "$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook')"
+    command conda "$@"
+}

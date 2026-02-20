@@ -2,10 +2,8 @@
 #               ZSH Compdump Manager             ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-# Ensure XDG_CACHE_HOME is set with fallback
+# Cache directory
 local zcachedir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-
-# Specify default zcompdump location
 local zcompdump="${zcachedir}/zcompdump"
 
 # Ensure cache directory exists
@@ -14,7 +12,7 @@ local zcompdump="${zcachedir}/zcompdump"
 # Load completions
 autoload -Uz compinit
 
-# Regenerate if file exists and is older than 24h
+# Regenerate if dump exists and is older than 24h
 for dump in "${zcompdump}"(N.mh+24); do
     compinit -d "${zcompdump}"
 done
@@ -102,6 +100,9 @@ if [[ -z $_ZSTYLE_INIT_DONE ]]; then
   # Useful if you often do ssh <TAB> or scp <TAB> — it reads /etc/ssh_known_hosts and ~/.ssh/known_hosts
   zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
   
+  # Do not include . and .. in completion results
+  zstyle ':completion:*' special-dirs false
+
   # Controls how // is treated during completions (collapse // to /)
   zstyle ':completion:*' squeeze-slashes true
 fi
@@ -137,30 +138,3 @@ case $OSTYPE in
     darwin*) alias ls='ls -G';;
     linux*) alias ls='ls --color=auto';;
 esac
-
-# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#                Custom Keybindings              ┃
-# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-# Use "bindkey -l" to list available key bindings
-# Use "bindkey -M viins" to list key bindings for insert mode
-# Use "bindkey -M vicmd" to list key bindings for command mode
-
-# Autosuggestions
-bindkey '^X^E' autosuggest-execute  # Accept and execute suggestion
-bindkey '^X^S' autosuggest-toggle   # Toggle suggestions on/off
-
-# History substring search
-bindkey '^[[A' history-substring-search-up            # Up Arrow: Search upwards in history (matches current input substring)
-bindkey '^[[B' history-substring-search-down          # Down Arrow: Search downwards in history (matches current input substring)
-bindkey -M vicmd 'k' history-substring-search-up      # 'k' (vi command mode): Search upwards in history (substring match)
-bindkey -M vicmd 'j' history-substring-search-down    # 'j' (vi command mode): Search downwards in history (substring match)
-
-# Quick commands
-bindkey -s '\el' 'ls\n'                               # [Esc-l] - runs command: ls
-
-# Readline emulation
-bindkey '^w' backward-kill-word
-bindkey '^e' end-of-line
-bindkey '^a' beginning-of-line
-bindkey '^f' forward-word

@@ -1,0 +1,138 @@
+# Description: Stow, restow, or unstow all package directories in the current dotfiles repo
+# Usage: stowdots [any mode flag]
+
+stowdots() {
+    emulate -L zsh
+    setopt local_options err_return pipe_fail
+    
+    # -------- Configuration --------
+    local STOW_MODE="-R"
+    local VERBOSE=""
+    local DRY_RUN=""
+    
+    # Default excludes (overridden by .stowrc if present)
+    local -a DEFAULT_EXCLUDES=(
+        ".git"
+        ".archive"
+    )
+    
+    # -------- Argument Handling --------
+    show_usage() {
+        cat << EOF
+Usage: stowdots [-S|--stow | -R|--restow | -D|--delete] [OPTIONS]
+
+Modes:
+  -S, --stow     Stow packages (create symlinks)
+  -R, --restow   Restow packages (default - remove then re-stow)
+  -D, --delete   Unstow packages (remove symlinks)
+
+Options:
+  -v, --verbose  Verbose output (passed to stow)
+  -n, --dry-run  Show what would be done without doing it
+  -h, --help     Show this help message
+
+Exclusions:
+  Create a .stowrc file in the current directory to specify exclusions.
+  If not present, excludes defaults to: { .git/ .archive/ }
+
+Examples:
+  stowdots           # Restow all packages (default)
+  stowdots -S -v     # Stow all packages with verbose output
+  stowdots -D -n     # Dry-run unstow (see what would be removed)
+  stowdots -R        # Restow everything
+EOF
+    }
+    
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -S|--stow)
+                STOW_MODE="-S"
+                shift
+                ;;
+            -R|--restow)
+                STOW_MODE="-R"
+                shift
+                ;;
+            -D|--delete)
+                STOW_MODE="-D"
+                shift
+                ;;
+            -v|--verbose)
+                VERBOSE="-v"
+                shift
+                ;;
+            -n|--dry-run)
+                DRY_RUN="-n"
+                shift
+                ;;
+            -h|--help)
+                show_usage
+                return 0
+                ;;
+            *)
+                echo "Error: Unknown option '$1'" >&2
+                echo
+                show_usage
+                return 1
+                ;;
+        esac
+    done
+    
+    # -------- Load Exclusions --------
+    local -a EXCLUDES
+    if [[ -f .stowrc ]]; then
+        echo "Loading exclusions from .stowrc"
+        EXCLUDES=(${(f)"$(grep -v '^#' .stowrc | grep -v '^[[:space:]]*$')"})
+    else
+        EXCLUDES=("${DEFAULT_EXCLUDES[@]}")
+    fi
+    
+    # -------- Logic --------
+    should_exclude() {
+        local item="$1"
+        local exclude
+        for exclude in "${EXCLUDES[@]}"; do
+            [[ "$item" == "$exclude" ]] && return 0
+        done
+        return 1
+    }
+    
+    local -a packages
+    local item
+    packages=()
+    for item in *; do
+        # Only stow directories
+        [[ -d "$item" ]] || continue
+        # Skip excluded items
+        should_exclude "$item" && continue
+        packages+=("$item")
+    done
+    
+    if [[ "${#packages[@]}" -eq 0 ]]; then
+        echo "No packages found to stow." >&2
+        return 0
+    fi
+    
+    # Show what we're doing
+    local action
+    case "$STOW_MODE" in
+        -S) action="Stowing" ;;
+        -R) action="Restowing" ;;
+        -D) action="Unstowing" ;;
+    esac
+    [[ -n "$DRY_RUN" ]] && action="$action (DRY RUN)"
+    
+    echo "$action packages:"
+    printf '  %s\n' "${packages[@]}"
+    echo
+    
+    # Build stow command with proper quoting
+    local -a stow_cmd
+    stow_cmd=(stow "$STOW_MODE")
+    [[ -n "$VERBOSE" ]] && stow_cmd+=("$VERBOSE")
+    [[ -n "$DRY_RUN" ]] && stow_cmd+=("$DRY_RUN")
+    stow_cmd+=("${packages[@]}")
+    
+    # Execute stow command
+    "${stow_cmd[@]}"
+}

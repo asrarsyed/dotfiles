@@ -1,0 +1,46 @@
+# Description: creates a fixed-width centered unicode box
+# Usage: centerbox "text" [width]
+
+centerbox() {
+    local WIDTH="${2:-48}"
+    local TEXT="$1"
+    
+    # Strip ANSI codes for accurate length calculation
+    local TEXT_CLEAN=${TEXT//\x1b\[[0-9;]#m/}
+    local TEXT_LEN=${#TEXT_CLEAN}
+    
+    # Calculate available width: WIDTH - 2 border chars (┃) - 2 padding spaces
+    local AVAILABLE_WIDTH=$((WIDTH - 4))
+    
+    # Calculate total padding needed
+    local TOTAL_PAD=$((AVAILABLE_WIDTH - TEXT_LEN))
+    local LEFT RIGHT
+    
+    if (( TOTAL_PAD < 0 )); then
+        LEFT=0
+        RIGHT=0
+    elif (( TOTAL_PAD % 2 == 0 )); then
+        LEFT=$((TOTAL_PAD / 2))
+        RIGHT=$((TOTAL_PAD / 2))
+    else
+        LEFT=$((TOTAL_PAD / 2))
+        RIGHT=$((TOTAL_PAD / 2 + 1))
+    fi
+    
+    # Top border
+    printf "┏"
+    printf '━%.0s' {1..$((WIDTH - 2))}
+    printf "┓\n"
+    
+    # Middle line with centered text
+    printf "┃ "
+    printf '%*s' "$LEFT" ''
+    printf "%s" "$TEXT"
+    printf '%*s' "$RIGHT" ''
+    printf " ┃\n"
+    
+    # Bottom border
+    printf "┗"
+    printf '━%.0s' {1..$((WIDTH - 2))}
+    printf "┛\n"
+}

@@ -1,0 +1,38 @@
+# Description: Display the contents or definition of a command, function, or alias
+# Usage: pluswhich <command>
+
+pluswhich() {
+    emulate -L zsh
+    
+    if (( $# == 0 )); then
+        print "Error: Nothing to show..." >&2
+        return 1
+    fi
+    
+    local command_path
+    
+    # Check what type of callable it is
+    if (( $+commands[$1] )); then
+        # It's a command
+        command_path="$(whence -p "$1")"
+        
+        if file -bL --mime "$command_path" 2>/dev/null | grep -q "charset=binary"; then
+            print "Info: ${1} is a binary file: ${command_path}"
+        else
+            if (( $+commands[bat] )); then
+                bat "$command_path"
+            else
+                cat "$command_path"
+            fi
+        fi
+    elif (( $+functions[$1] )); then
+        # It's a function
+        whence -f "$1"
+    elif (( $+aliases[$1] )); then
+        # It's an alias
+        whence "$1"
+    else
+        # Fallback
+        whence -c "$1"
+    fi
+}

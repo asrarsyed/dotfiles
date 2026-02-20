@@ -1,0 +1,10 @@
+# Description: Lazy-load mamba environment on first use
+# Usage: mamba <args>
+
+mamba() {
+    emulate -L zsh
+    
+    unfunction mamba
+    eval "$('/opt/homebrew/Caskroom/miniforge/base/bin/mamba' 'shell' 'hook' --shell zsh)"
+    command mamba "$@"
+}

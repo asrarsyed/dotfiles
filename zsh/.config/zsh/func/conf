@@ -1,0 +1,22 @@
+# Description: Quick access to configuration files
+# Usage: conf {brew|zsh|nvim|lvim|tmux}
+
+conf() {
+    emulate -L zsh
+    
+    local file
+    case $1 in
+        brew)  file="$HOME/.brewfile" ;;
+        zsh)   file="$HOME/.config/zsh/.zshrc" ;;
+        nvim)  file="$HOME/.config/nvim/init.lua" ;;
+        lvim)  file="$HOME/.config/lvim/config.lua" ;;
+        tmux)  file="$HOME/.config/tmux/.tmux.conf" ;;
+        *)     echo "Usage: conf {brew|zsh|nvim|lvim|tmux}" ; return 1 ;;
+    esac
+    
+    # Launch editor
+    $EDITOR "$file" || return 1
+    
+    # Change to the directory containing the file
+    cd "$(dirname "$file")" || return
+}

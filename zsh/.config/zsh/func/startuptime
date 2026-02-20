@@ -1,0 +1,25 @@
+# Description: Time shell startup with cold start + 10 warm runs and average
+# Usage: startuptime
+
+startuptime() {
+    emulate -L zsh
+    setopt local_options
+    
+    # Initial "cold" run
+    local cold=$((TIMEFMT='%mE'; time zsh -i -c exit) 2>/dev/stdout >/dev/null)
+    cold=${cold//[ms]/}
+    printf "Cold start: %s ms\n\n" $cold
+    
+    # Warm runs
+    local total=0
+    local i ms
+    printf "Warm starts:\n"
+    for i in {1..10}; do
+        ms=$((TIMEFMT='%mE'; time zsh -i -c exit) 2>/dev/stdout >/dev/null)
+        ms=${ms//[ms]/}
+        printf "%2d: %s ms\n" $i $ms
+        (( total += ms ))
+    done
+    
+    printf "\nAverage warm start: %.2f ms\n" $(( total / 10.0 ))
+}

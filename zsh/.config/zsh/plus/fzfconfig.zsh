@@ -46,7 +46,7 @@ export FZF_DEFAULT_OPTS="\
   --preview-window='hidden' \
   --preview-window='border-bold' \
   --bind 'ctrl-k:preview-up,ctrl-j:preview-down' \
-  --bind 'ctrl-b:preview-page-up,ctrl-f:preview-page-down' \
+  --bind 'ctrl-h:preview-page-up,ctrl-l:preview-page-down' \
   --bind 'ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' \
   --bind '?:toggle-preview' \
   --bind 'ctrl-o:become(nvim {})' \
@@ -65,22 +65,23 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # ALT-C − cd into the selected directory.
 # Print tree structure in the preview window
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {}' --preview-window=right:60%"
 
-# CTRL-R − Look/Copy/Use previous command from history.
-export FZF_CTRL_R_OPTS="\
-  --preview 'echo {}' --preview-window down:3:hidden:wrap \
-  --bind 'ctrl-y:execute-silent(echo -n {2} | pbcopy)+abort' \
-  --reverse \
-  --border-label-pos='0' \
-  --border-label='Press CTRL-Y to copy command into clipboard'
-"
+# # CTRL-R − Look/Copy/Use previous command from history.
+# export FZF_CTRL_R_OPTS="\
+#   --preview 'echo {}' --preview-window down:3:hidden:wrap \
+#   --bind 'ctrl-y:execute-silent(echo -n {2} | pbcopy)+abort' \
+#   --reverse \
+#   --border-label-pos='0' \
+#   --border-label='Press CTRL-Y to copy command into clipboard'
+# "
+unset FZF_CTRL_R_OPTS
 
 # FZF-Tab plugin configuration
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' popup-min-size 80 20
 zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
