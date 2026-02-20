@@ -1,0 +1,9 @@
+# Description: List all executable files in $PATH as called by basename
+# Usage: bins
+
+bins() {
+    emulate -L zsh
+    
+    rehash
+    whence -p ${(kon)commands} | ${PAGER:-less}
+}

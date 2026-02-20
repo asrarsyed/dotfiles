@@ -1,0 +1,15 @@
+# Description: Get Bundle ID of macOS app and copy to clipboard
+# Usage: bundleid <app-name>
+
+bundleid() {
+    emulate -L zsh
+    
+    local ID=$(osascript -e 'id of app "'"$1"'"')
+    if [[ -n "$ID" ]]; then
+        echo "$ID" | tr -d '[:space:]' | pbcopy
+        echo "$ID (copied to clipboard)"
+    else
+        echo "Error: Could not find bundle ID for '$1'" >&2
+        return 1
+    fi
+}

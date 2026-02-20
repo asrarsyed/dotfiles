@@ -1,0 +1,12 @@
+# Description: Clone git repo or mkdir & then cd into new directory
+# Usage: md <git-url|directory-name>
+
+md() {
+    emulate -L zsh
+    
+    if [[ $1 =~ ^([A-Za-z0-9._%+-]+@|https?|git|ssh|ftps?|rsync).*\.git/?$ ]]; then
+        git clone "$1" && cd "$(basename "${1%%.git}")"
+    else
+        mkdir -p -- "$1" && cd -P -- "$1"
+    fi
+}

@@ -1,0 +1,30 @@
+# Description: Display local and/or public IP address
+# Usage: show-ip [-l] [-a]
+#   -l: Show local IP only
+#   -a: Show both local and public IP
+
+show-ip() {
+    emulate -L zsh
+
+    local -a listlocal listall
+    zparseopts -D -E l=listlocal a=listall
+
+    local print_local print_public
+
+    print_local() {
+        print "Local IP: $(ipconfig getifaddr en0)"
+    }
+
+    print_public() {
+        print "Public IP: $(curl -fs4 http://checkip.amazonaws.com)"
+    }
+
+    if (( $#listall )); then
+        print_local
+        print_public
+    elif (( $#listlocal )); then
+        print_local
+    else
+        print_public
+    fi
+}

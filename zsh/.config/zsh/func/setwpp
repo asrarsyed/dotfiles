@@ -1,0 +1,35 @@
+# Description: Sets a random wallpaper from wallpaper folder
+# Usage: setwpp
+
+setwpp() {
+    emulate -L zsh
+    setopt local_options null_glob
+    
+    local WALLPAPER_DIR="$HOME/desktop/wallpapers"
+    local -a walls
+    local WALLPAPER
+    
+    # Check if the wallpaper directory exists
+    [[ ! -d "$WALLPAPER_DIR" ]] && {
+        print -P "%F{red}Wallpaper directory not found%f"
+        return 1
+    }
+    
+    # Get all wallpapers using Zsh globbing (recursive **)
+    walls=("$WALLPAPER_DIR"/**/*.(jpg|jpeg|png|heic)(N.))
+    
+    # Check if any wallpapers were found
+    (( ${#walls[@]} == 0 )) && {
+        print -P "%F{red}No wallpapers found%f"
+        return 1
+    }
+    
+    # Pick a random wallpaper
+    WALLPAPER="${walls[RANDOM % ${#walls[@]} + 1]}"
+    
+    # Set the wallpaper for all desktops
+    osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$WALLPAPER\""
+    
+    # Show success message
+    print -P "%F{green}Wallpaper changed to: ${WALLPAPER:t}%f"
+}

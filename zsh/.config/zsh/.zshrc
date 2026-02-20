@@ -52,7 +52,7 @@ plug "romkatv/zsh-defer"
 source $ZAP_PLUGIN_DIR/zsh-defer/zsh-defer.plugin.zsh
 
 # Load compinit, zcompdump, zstyle settings
-zsh-defer source $ZDOTDIR/plus/supercharge.zsh
+zsh-defer source $ZDOTDIR/core/supercharge.zsh
 
 # Install remaining plugins once
 plug "zap-zsh/vim"                               # Mostly key bindings, moderate
@@ -60,7 +60,6 @@ plug "Aloxaf/fzf-tab"                            # A heavier plugin for fzf-tabb
 plug "hlissner/zsh-autopair"                     # Slow but essential for experience
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"         # Heavy syntax highlighting last
-plug "MichaelAquilina/zsh-you-should-use"        # Reminds you to use existing aliases
 plug "zsh-users/zsh-history-substring-search"    # Relatively light, improves navigation?
 
 # Defer ONLY sourcing - execution (explicit entrypoints, minimal delays)
@@ -69,22 +68,22 @@ source $ZAP_PLUGIN_DIR/vim/vim.plugin.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-autopair/autopair.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
-zsh-defer source $ZAP_PLUGIN_DIR/zsh-you-should-use/you-should-use.plugin.zsh
 
 # Bind autosuggest widgets ONCE, after everything exists
 zsh-defer _zsh_autosuggest_bind_widgets
 
 # Final UI sync — ONE redraw - Syntax highlighting MUST be last
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-zsh-defer source $ZDOTDIR/plus/highlighting.zsh
+zsh-defer source $ZDOTDIR/core/syntaxtheme.zsh
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 #    Postload Compinit & Personal Configurations  ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-zsh-defer source "$ZDOTDIR/plus/fzfsettings.zsh" # fzf helpers/bindings/plugin
+zsh-defer source "$ZDOTDIR/plus/fzfconfig.zsh"   # fzf helpers/bindings/plugin
 zsh-defer source "$ZDOTDIR/plus/aliases.zsh"     # user-defined command aliases
 zsh-defer source "$ZDOTDIR/plus/functions.zsh"   # user-defined shell functions
+zsh-defer -c "fpath=($ZDOTDIR/func \$fpath); autoload -Uz $ZDOTDIR/func/*(.:t)" # user-defined shell functions
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 #     Initialize and Cache Deterministic Tools   ┃
@@ -95,66 +94,69 @@ function cache_init() {
     local init_cmd=$2
     local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
     local cache_file="${cache_dir}/${tool}.zsh"
-    local tool_path
     
     # Early exit if tool doesn't exist
-    tool_path=$(command -v "$tool") || return 0
+    (( $+commands[$tool] )) || return 0
     
-    # Ensure cache directory exists
     mkdir -p "$cache_dir"
     
-    # Regenerate cache if missing or outdated
-    if [[ ! -f "$cache_file" ]] || [[ "$tool_path" -nt "$cache_file" ]]; then
-        eval "$init_cmd" >| "$cache_file.tmp" && mv "$cache_file.tmp" "$cache_file"
+    # Regenerate cache if missing, empty, or outdated
+    if [[ ! -s "$cache_file" ]] || [[ "$commands[$tool]" -nt "$cache_file" ]]; then
+        eval "$init_cmd" >| "$cache_file.tmp" 2>/dev/null && {
+            mv "$cache_file.tmp" "$cache_file"
+            zcompile -U "$cache_file" 2>/dev/null
+        }
     fi
     
     # Source the cached initialization
     source "$cache_file"
+    
+    # Handle completions if third argument provided
+    if [[ -n $3 ]]; then
+        local completion_cmd=$3
+        local completion_file="$ZDOTDIR/completions/_${tool}"
+        
+        if [[ ! -f "$completion_file" ]] || [[ "$commands[$tool]" -nt "$completion_file" ]]; then
+            mkdir -p "$ZDOTDIR/completions"
+            eval "$completion_cmd" > "$completion_file" 2>/dev/null
+        fi
+    fi
 }
 
 zsh-defer cache_init "fzf" "fzf --zsh"
 zsh-defer cache_init "zoxide" "zoxide init zsh --hook pwd"
+zsh-defer cache_init "tv" "tv init zsh" "tv completion zsh"
+zsh-defer cache_init "atuin" "atuin init zsh" "atuin gen-completions --shell zsh"
 cache_init "starship" "starship init zsh" # ~2–2.3× extra first prompt/command time, i.e., ~230% overhead.
+# cache_init "fnm" "fnm env --shell zsh --use-on-cd" "fnm completions --shell zsh"
 
-# # Ensure fnm exists
-# if (( $+commands[fnm] )); then
-#   # Lazy env setup
-#   cache_init "fnm" "fnm env --shell zsh --use-on-cd"
-
-#   # Optional: completions
-#   FPATH+=~/.config/zsh/completions
-#   [[ ! -f ~/.config/zsh/completions/_fnm ]] && fnm completions --shell zsh > ~/.config/zsh/completions/_fnm
-#   autoload -Uz _fnm
-# fi
+# Load bindings settings after initializing tools
+zsh-defer source "$ZDOTDIR/plus/keybinds.zsh"
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#            Starship Newline Behavior           ┃
+# ┃      Generate Completions for CLI Tools      ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-# Tmux Newline Behavior
-if [[ -n "$TMUX" ]]; then
-  PROMPT_NEEDS_NEWLINE=true  # In tmux: show newline on first prompt
-else
-  PROMPT_NEEDS_NEWLINE=false  # Otherwise: no newline initially
-fi
-
-# Add newline before prompt (when needed)
-function precmd_starship_newline() {
-    if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
-        echo
+# Helper function to generate completions if tool exists
+generate_completion() {
+    local tool=$1
+    local cmd=$2
+    local completion_file="$ZDOTDIR/completions/_${tool}"
+    
+    (( $+commands[$tool] )) || return 0
+    
+    if [[ ! -f "$completion_file" ]] || [[ "$commands[$tool]" -nt "$completion_file" ]]; then
+        mkdir -p "$ZDOTDIR/completions"
+        eval "$cmd" > "$completion_file" 2>/dev/null
     fi
-    PROMPT_NEEDS_NEWLINE=true
 }
 
-# add-zsh-hook is loaded in zsh-modules.zsh
-add-zsh-hook precmd precmd_starship_newline
+# Generate completions for installed tools (deferred, runs after prompt)
+zsh-defer generate_completion "glow" "glow completion zsh"
+zsh-defer generate_completion "docker" "docker completion zsh"
+zsh-defer generate_completion "colima" "colima completion zsh"
+zsh-defer generate_completion "rustup" "rustup completions zsh"
+zsh-defer generate_completion "cargo" "rustup completions zsh cargo"
 
-# Clear command patch (preserve behavior)
-function clear() {
-    if [[ -n "$TMUX" ]]; then
-        PROMPT_NEEDS_NEWLINE=true
-    else
-        PROMPT_NEEDS_NEWLINE=false
-    fi
-    command clear
-}
+# Starship Newline; has to be last
+source "$ZDOTDIR/plus/starship.zsh"

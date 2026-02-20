@@ -1,0 +1,78 @@
+# Description: Pretty print PATH or other environment path variables
+# Usage: paths [-h|--help] [PATH_VAR]
+# From: https://github.com/RobertAudi
+
+paths() {
+  # Help flag
+  if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    print -P "%B%F{019}paths%f%b — Pretty print PATH or other environment path variables"
+    print ""
+    print -P "%BUsage:%b paths [-h|--help] [PATH_VAR]"
+    print ""
+    print -P "%BFlags:%b"
+    print -P "  %B-h, --help%b     Show this help message"
+    print ""
+    print -P "%BArguments:%b"
+    print -P "  %BPATH_VAR%b       The path variable to display (default: PATH)"
+    print ""
+    print -P "%BSupported variables:%b"
+    print -P "  (none)          Defaults to PATH"
+    print -P "  PATH"
+    print -P "  MANPATH         (also accepts: MAN, MANPATH)"
+    print -P "  FPATH"
+    print -P "  GEM_PATH        (also accepts: GEM, GEMPATH, GEM_PATH)"
+    print -P "  *PATH           Any known environment variable ending in PATH"
+    print -P "  <PREFIX>        Tries \${PREFIX}PATH then \${PREFIX}_PATH"
+    return 0
+  fi
+
+  local path_var="${(U)1}"
+  local path_
+  case "$path_var" in
+    MAN?(PATH))
+      path_="MANPATH"
+      ;;
+    FPATH)
+      path_="FPATH"
+      ;;
+    GEM?(_PATH)|GEMPATH)
+      path_="GEM_PATH"
+      ;;
+    PATH)
+      path_="PATH"
+      ;;
+    *PATH)
+      if [[ -v $path_var ]]; then
+        path_="$path_var"
+      else
+        print-error "Unknown path: $path_var"
+        return 1
+      fi
+      ;;
+    *)
+      if [[ -z "$path_var" ]]; then
+        path_="PATH"
+      elif [[ -v ${path_var}PATH ]]; then
+        path_="${path_var}PATH"
+      elif [[ -v ${path_var}_PATH ]]; then
+        path_="${path_var}_PATH"
+      else
+        print-error "Unknown path: ${path_var}, ${path_var}PATH or ${path_var}_PATH"
+        return 1
+      fi
+      ;;
+  esac
+
+  local current_user="$(whoami)"
+  local awkstr="{ sub(\"/usr\",     \"${fg_no_bold[green]}/usr$reset_color\");"
+  awkstr="${awkstr} sub(\"/bin\",   \"${fg_no_bold[blue]}/bin$reset_color\");"
+  awkstr="${awkstr} sub(\"/opt\",   \"${fg_no_bold[cyan]}/opt$reset_color\");"
+  awkstr="${awkstr} sub(\"/sbin\",  \"${fg_no_bold[magenta]}/sbin$reset_color\");"
+  awkstr="${awkstr} sub(\"/local\", \"${fg_no_bold[yellow]}/local$reset_color\");"
+  awkstr="${awkstr} sub(\"/Users/${current_user}\", \"${fg_no_bold[red]}/Users${fg_no_bold[cyan]}/${current_user}$reset_color\");"
+  awkstr="${awkstr} sub(\"/Users\", \"${fg_no_bold[red]}/Users$reset_color\");"
+  awkstr="${awkstr} print }"
+
+  print -P -- "%F{019}==>%f %B$path_%b"
+  print -- ${(P)path_} | tr ":" "\n" | awk "${awkstr}"
+}

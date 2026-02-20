@@ -1,0 +1,40 @@
+# Description: Runs a command and copies its output to the system clipboard
+# Usage: copy <command> [args...]
+
+copy() {
+    emulate -L zsh
+
+    if (( $# == 0 )); then
+        print "Usage: copy <command> [args...]" >&2
+        return 1
+    fi
+
+    # Detect clipboard command
+    local -a clipboard_cmd
+    if (( $+commands[pbcopy] )); then
+        clipboard_cmd=(pbcopy)
+    elif (( $+commands[wl-copy] )); then
+        clipboard_cmd=(wl-copy)
+    elif (( $+commands[xclip] )); then
+        clipboard_cmd=(xclip -selection clipboard)
+    elif (( $+commands[xsel] )); then
+        clipboard_cmd=(xsel --clipboard --input)
+    else
+        print "Warning: No clipboard tool found (pbcopy/wl-copy/xclip/xsel)" >&2
+        clipboard_cmd=()
+    fi
+
+    local output
+    if output=$("$@" 2>&1); then
+        if (( ${#clipboard_cmd[@]} )); then
+            print -r -- "$output" | "${clipboard_cmd[@]}"
+            print "✓ Output copied to clipboard."
+        else
+            print -r -- "$output"
+            print "⚠ Output printed but not copied (no clipboard found)."
+        fi
+    else
+        print "✗ Command execution failed: $output" >&2
+        return 1
+    fi
+}

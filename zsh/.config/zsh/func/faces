@@ -1,0 +1,77 @@
+# Description: Display and copy emoticons to clipboard (cross-platform)
+# Usage:
+#   faces            -> show menu
+#   faces 1          -> by number
+#   faces shrug      -> by name
+
+faces() {
+    emulate -L zsh
+
+    local -A EMOTES
+    EMOTES=(
+        shrug          '¯\_(ツ)_/¯ '
+        flip            '（╯°□°）╯ ┻━┻ '
+        disappointed   'ಠ_ಠ '
+    )
+
+    local -a ORDER
+    ORDER=(shrug flip disappointed)
+
+    # Detect clipboard command
+    local clipboard_cmd
+    if (( $+commands[pbcopy] )); then
+        clipboard_cmd="pbcopy"
+    elif (( $+commands[wl-copy] )); then
+        clipboard_cmd="wl-copy"
+    elif (( $+commands[xclip] )); then
+        clipboard_cmd="xclip -selection clipboard"
+    elif (( $+commands[xsel] )); then
+        clipboard_cmd="xsel --clipboard --input"
+    else
+        print "Warning: No clipboard tool found (pbcopy/wl-copy/xclip/xsel)" >&2
+        clipboard_cmd=""
+    fi
+
+    # If no argument → show menu
+    if (( $# == 0 )); then
+        print "Available faces:"
+        local i=1
+        for name in $ORDER; do
+            printf "  %d) %-14s %s\n" $i "$name" "${EMOTES[$name]}"
+            ((i++))
+        done
+        print ""
+        print "Usage: faces {1|2|3}"
+        return 0
+    fi
+
+    local selection="$1"
+    local chosen
+
+    # If numeric input
+    if [[ "$selection" == <-> ]]; then
+        local index=$(( selection ))
+        if (( index >= 1 && index <= ${#ORDER[@]} )); then
+            chosen="${EMOTES[${ORDER[$index]}]}"
+        else
+            print "Invalid number: $selection" >&2
+            return 1
+        fi
+    else
+        # If name input
+        if [[ -n "${EMOTES[$selection]}" ]]; then
+            chosen="${EMOTES[$selection]}"
+        else
+            print "Unknown face: $selection" >&2
+            return 1
+        fi
+    fi
+
+    # Print and copy
+    if [[ -n "$clipboard_cmd" ]]; then
+        # print -n -- "$chosen" | tee /dev/tty | eval "$clipboard_cmd"
+        print -rn -- "$chosen" | eval "$clipboard_cmd"
+    else
+        print -n -- "$chosen"
+    fi
+}

@@ -1,0 +1,19 @@
+# Description: Lists all directories (excludes .git/) in the current dir and copies them to clipboard
+# Usage: stowdirs
+
+stowdirs() {
+    emulate -L zsh
+    
+    local -a dirs
+    local dirs_string
+    
+    # Get directories, excluding .git and fonts
+    dirs=(${(f)"$(fd -t d -d 1 --exclude ".git" --exclude "fonts" .)"})
+    
+    # Extract basenames and join with spaces
+    dirs=("${dirs[@]:t}")
+    dirs_string="${(j: :)dirs}"
+    
+    echo "$dirs_string"
+    printf "%s" "$dirs_string" | pbcopy
+}

@@ -1,0 +1,36 @@
+# Description: Copy SSH public key to clipboard
+# Usage: ssh-copy [key-name]
+
+ssh-copy() {
+    emulate -L zsh
+
+    local key
+    local -a keys
+
+    # Collect SSH public keys (basename without .pub)
+    keys=(${HOME}/.ssh/*.pub(:t:r))
+
+    if (( $# == 0 )); then
+        (( ${#keys} == 0 )) && {
+            print "No SSH public keys found." >&2
+            return 1
+        }
+        key=$(printf '%s\n' "${keys[@]}" | fzf)
+    else
+        key="${1%.pub}"
+    fi
+
+    [[ -z "$key" ]] && return 1
+
+    if [[ ! -f "$HOME/.ssh/$key.pub" ]]; then
+        print "Error: SSH key not found: $key.pub" >&2
+        return 1
+    fi
+
+    if pbcopy < "$HOME/.ssh/$key.pub" 2>/dev/null; then
+        print "✓ Copied SSH key: '$key'"
+    else
+        print "✗ Failed to copy SSH key: '$key'" >&2
+        return 1
+    fi
+}
