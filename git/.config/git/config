@@ -1,249 +1,258 @@
 # This is git's per-user configuration file.
 
+# Default
+[user]
+  useConfigOnly = true # Prevents Git from falling back to system or global defaults
+
+[init]
+  defaultBranch = main # Default branch name when initializing a new repository
+
+# Paths
 [include]
   path = ~/.config/git/secret
   path = ~/.config/delta/themes.gitconfig
 
-[user]
-    useConfigOnly = true
-
-[init]
-  defaultBranch = main
-
+# Paths
 [core]
-  pager = delta
-  editor = nvim
-  fscache = true
-  autocrlf = input
-  preloadindex = true
-  excludesfile = ~/.config/git/ignore
-  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile = ~/.config/git/ignore # Path to global .gitignore file
+  attributesfile = ~/.config/git/attributes  # Path to global .gitattributes file
 
-[interactive]
-  diffFilter = delta --color-only
+# Core
+[core]
+  pager = delta # Use Delta as the default pager for all Git output (diff, log, show, etc.)
+  editor = nvim # The text editor used for writing commit messages and tags
+  autocrlf = input # Convert CRLF (Windows) to LF (Unix) on commit; keep LF on checkout
+  fsmonitor = false # Speed up 'git status' by using the OS to watch for file changes
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol # Rules to catch/fix common formatting errors
+  untrackedCache = true # Cache the names of untracked files so Git doesn't have to scan for them every time
 
-[delta]
-  light = false
-  navigate = true
-  hyperlinks = true
-  line-numbers = true
-  side-by-side = true
-  true-color = always
-  features = "catppuccin_macchiato"
-  hyperlinks-file-link-format = "file-line://{path}:{line}"
+[column]
+  ui = auto # Displays branches (and other lists) in multiple columns, filling your terminal width
 
-[filter "lfs"]
-  required = true
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
+[grep]
+  column = true # Show column position in grep results
+  lineNumber = true # Show line numbers in grep results
 
+[pager]
+  diff = diffnav
+  log = delta --paging=always # always paginate git log (using delta)
+
+# Tips
 [help]
-  autocorrect = 0
-
-[diff]
-  rename = true
-  colorMoved = zebra
-  algorithm = histogram
- 
-[log]
-  stat = true
-  graph = true
-  decorate = short
-  abbrevCommit = true
-
-[status]
-  hints = false
-
-[commit]
-  verbose = true
-
-[merge]
-  conflictStyle = diff3
-
-[fetch]
-  prune = true
-
-[pull]
-  rebase = true
-
-[push]
-  default = simple
+  autocorrect = prompt # Disable automatic correction of mistyped commands
 
 [advice]
+  # KEEP
+  statusHints = true # Shows helpful hints in 'git status' (like "use 'git add' to track this file")
+  pushNonFastForward = true # Explains how to fix a rejected push (usually suggests a 'git pull' first)
+  resolveConflict = true # Provides extra guidance on how to fix messy merge or rebase conflicts
+  # DISABLE: These are often just extra noise
   skippedCherryPicks = false
+  addEmptyPathspec = false # Disables advice when running `git add` with no path
 
+# Filter LFS
+[filter "lfs"]
+  required = true # Mark this filter as required for Git LFS files
+  clean = git-lfs clean -- %f # Command to clean files when staging
+  smudge = git-lfs smudge -- %f # Command to restore files when checking out
+  process = git-lfs filter-process # Process mode for LFS
+
+# Integrity
+[transfer]
+  fsckObjects = true # Ensures Git always verifies object integrity during transfers
+
+[receive]
+  fsckObjects = true # Ensures Git always verifies object integrity during transfers
+
+[fetch]
+  all = true # Fetch updates from all your remotes (e.g., origin and upstream) at once
+  prune = true # Automatically prune local copies of remote-tracking branches that no longer exist
+  pruneTags = true # Automatically delete local tags that no longer exist on the server
+  fsckObjects = true # Ensures Git always verifies object integrity during transfers
+
+# Timeline
+[blame]
+  date = relative # Show commit dates as relative ("2 weeks ago")
+  coloring = highlightRecent # Use highlighting for recent changes
+
+[branch]
+  sort = -committerdate # Show the most recently updated branches first
+
+[tag]
+  sort = version:refname # Don't list tags using alpha order
+
+[log]
+  stat = true # Show statistics for each commit
+  graph = true # Display the commit graph
+  decorate = short # Add decorations (e.g., branch names) to logs
+  abbrevCommit = true # Abbreviate commit hashes
+
+# Status, commit & merge
+[status]
+  hints = false # Disable status hints in the output
+
+[commit]
+  verbose = true # Include diff of staged changes in the commit message editor
+
+[merge]
+  renormalize = true # Resolve "fake" merge conflicts due to line-ending differences during merges
+  conflictStyle = zdiff3 # Set style for conflicted hunks to just 'diff3' if git version < 2.3
+
+# Pull, push & rebase
+[push]
+  default = simple # Push the current branch with the same name on the remote
+  followTags = true # Makes pushing new branches and tags easier
+  autoSetupRemote = true # Makes pushing new branches and tags easier
+
+[pull]
+  rebase = true # Rebase commits instead of merging on pull
+
+[rebase]
+  autostash = true # Automatically move your unfinished work out of the way before rebasing
+  updateRefs = true # If you have "stacked" branches, move them all together during a rebase
+  autosquash = true # Automatically organize 'fixup!' commits when doing an interactive rebase
+  missingCommitsCheck = warn # Warns you if you accidentally deleted a commit line while editing the rebase list
+
+[rerere]
+  enabled = true # Remember how you solved a conflict and apply the same fix automatically next time
+  autoupdate = true # Automatically stage fixed files (Careful: 'git rerere forget <file>' if you fix one wrong)
+
+# Performance
+[submodule]
+  fetchJobs = 16 # Faster submodule fetches; adjust depending on your CPU cores
+
+[pack]
+  threads = 0  # Use all available threads to speed up repacking; useful for very large repos
+  windowMemory = 1g  # Use 1g of memory for pack window
+  packSizeLimit = 1g  # Max size of a packfile
+
+# Diff
+[diff]
+  context = 3 # Unchanged code shown above/below a change to provide context
+  rename = copies # Extends rename detection to highlight renamed/copied files
+  colorMoved = default # Highlights lines that were moved around within a file
+  mnemonicPrefix = true # Replaces 'a/' and 'b/' with 'i/' (index), 'w/' (worktree), or 'c/' (commit)
+  algorithm = histogram # Changes the algorithm Git uses to calculate diffs
+  interHunkContext = 10 # Combines multiple diff “hunks” with small changes if they are close together
+  indentHeuristic = true # Makes diffs more readable by shifting hunk boundaries to natural code "breaks" (like braces)
+  ignoreSubmodules = all # Prevents 'git diff' from screaming about dirty submodules you haven't committed yet
+  wsErrorHighlight = all # Highlights whitespace errors on all lines (old, new, and context)
+  submoduleSummary = true # Shows a brief summary of commits added/removed inside a submodule change
+
+[delta]
+  light = false # Use only dark mode
+  navigate = true # Activate navigation keybindings
+  hyperlinks = true # Enable support for terminal hyperlinks
+  line-numbers = true # Show two columns with the line numbers
+  side-by-side = true # Activate side-by-side view for the diff
+  true-color = always # Force true-color output in the terminal
+  features = "catppuccin_macchiato" # Load a custom color palette for syntax highlighting
+  hyperlinks-file-link-format = "file-line://{path}:{line}" # Construct clickable file links in terminal
+
+[interactive]
+  singlekey = true # Don't have to press enter after `y` or `n`
+  diffFilter = delta --color-only # Use `git-delta` to show colorized diff
+
+# Basic colors
+  # black
+  # red
+  # green
+  # yellow
+  # blue
+  # magenta
+  # cyan
+  # white
+  # default (resets to terminal default)
+
+# Bright variants by prefixing basic colors with bright
+# Attributes
+  # bold → bold text
+  # dim → dim/faded text
+  # ul → underline
+  # reverse → reverse foreground/background
+  # italic → italic text (if terminal supports)
+
+# Colors
 [color]
-  ui = auto
+  ui = auto # Automatically enable colored output if supported
+
+[color "blame"]
+  highlightRecent = black bold,1 year ago,white,1 month ago,default,7 days ago,blue
 
 [color "branch"]
-  current = yellow reverse
-  local = blue
-  remote = green
-
+  current = yellow reverse # Color of the current branch
+  local = blue # Color for local branches
+  remote = green # Color for remote branches
+  upstream = magenta # Color for upstream branches
+  plain = default # Color for non-current/other branches
+  
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+  meta = yellow bold # Metadata in diffs (e.g., file headers)
+  frag = magenta bold # Fragment headers (e.g., @@ -1,3 +1,3 @@)
+  old = red bold # Lines removed/deleted
+  new = green bold # Lines added
 
 [color "status"]
-  added = green bold
-  changed = yellow bold
-  untracked = red bold
-  unmerged = cyan bold
+  added = green bold # Files staged for addition
+  changed = yellow bold # Files modified
+  untracked = red bold # Files not tracked by Git
+  unmerged = cyan bold # Files with merge conflicts
 
+[color.decorate]
+  HEAD = red # Color of HEAD pointer
+  branch = blue # Color of branch names
+  tag = yellow # Color of tag names
+  remoteBranch = magenta # Color of remote branch names
+
+# URL shortcuts
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
+[url "git@github.com:"] # Catch-all to ensure you always use SSH instead of HTTPS via swapping url
+  insteadOf = https://github.com/
+
+[pretty]
+  fancy = "%C(magenta)%h%C(reset) %C(white)%an%C(reset) %C(dim)%ar%C(reset) %C(auto)%D%n%s%n"
+
+# Aliases
 [alias]
-  lg = log --graph --decorate --all
-  slg = log --oneline --stat --graph --decorate --all
-  check = fsck --full --strict
-  branches = branch --sort=-committerdate
-  amend = commit --amend --no-edit
-  unstage = reset HEAD --
-  last = log -1 HEAD
-  undo = reset --soft HEAD~1
+  # Log
+  lg = log --graph --all --pretty=fancy
+  slg = log --graph --decorate --all # Shows the commit history expanded
+  elg = log --oneline --stat --graph --decorate --all # Extended commit history in one line
+  last = show --stat # Shows the details of the last commit on the current branch (patch + metadata + stats)
 
-# <--- Added comments for clarification --->
+  # Miscellaneous
+  undo = reset --soft HEAD~1 # Undoes the last commit but keeps changes in the staging area
+  amend = commit --amend --no-edit # Amends the last commit without changing the commit message
 
-# [core]
-#   # text viewer for git commands
-#   pager = delta
-#   # text editor for `commit` & `tag` commands
-#   editor = nvim
-#   # enable CRLF line endings
-#   autocrlf = input
-#   # path to global .gitignore file
-#   excludesfile = ~/.gitignore_global
-#   # path to global .gitattributes file
-#   attributesfile = ~/.gitattributes_global
-#   # configures whitespace handling for git
-#   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  # Idk 
+  review = "!f() { \
+    GIT_REVIEW_ARGS=\"$*\"; export GIT_REVIEW_ARGS; \
+    git diff $GIT_REVIEW_ARGS --name-only \
+    | fzf -m --ansi \
+        --preview 'git diff $GIT_REVIEW_ARGS --color=always -- {-1}'; \
+  }; f"
 
-# [interactive]
-#   # use `git-delta` to show colorized diff
-#   diffFilter = delta --color-only
 
-# [delta]
-#   # set the theme for syntax highlighting
-#   features = "catppuccin_macchiato"
-#   # enable support for terminal hyperlinks
-#   hyperlinks = true
-#   # construct the correct URL
-#   hyperlinks-file-link-format = "file-line://{path}:{line}"
-#   # use only dark mode
-#   light = false
-#   # show two columns with the line numbers
-#   line-numbers = true
-#   # activate navigation keybindings
-#   navigate = true
-#   # activate side-by-side view for the diff
-#   side-by-side = true
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃            Workflow-Documentation            ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-# [filter "lfs"]
-#   required = true
-#   clean = git-lfs clean -- %f
-#   smudge = git-lfs smudge -- %f
-#   process = git-lfs filter-process
+# Workflow:
+#   1. meteor - A highly configurable CLI tool for writing conventional commits.
+#   2. Delta + Diffnav - A git diff pager wrapper/UI around delta (viewer for git and diff output) with a file tree.
+#   3. GitUI or GitHub Desktop
 
-# [help]
-#   # disable automatic correction of mistyped commands
-#   autocorrect = 0
-
-# [diff]
-#   # detect and highlight renamed files
-#   rename = true
-#   # color the moved lines in diffs
-#   colorMoved = default
-#   # use the "patience" algorithm for diffs
-#   algorithm = patience
- 
-# [log]
-#   # show statistics for each commit
-#   stat = true
-#   # display the commit graph
-#   graph = true
-#   # add decorations (e.g., branch names) to logs
-#   decorate = short
-#   # abbreviate commit hashes
-#   abbrevCommit = true
-
-# [status]
-#   # disable status hints in the output
-#   hints = false
-
-# [commit]
-#   # include diff of changes in commit messages
-#   verbose = true
-#   # all commits should be GPG signed
-#   gpgsign = false
-
-# [merge]
-#   # set a style in which conflicted hunks are written out to working tree files upon merge
-#   conflictStyle = diff3
-
-# [fetch]
-#   # automatically prune remote-tracking branches no longer present
-#   prune = true
-
-# [pull]
-#   # rebase commits instead of merging on pull
-#   rebase = true
-
-# [push]
-#   # push the current branch with the same name on the remote
-#   default = simple
-
-# [credential]
-#   # external helper for when a username/password credential is needed
-# 	helper = osxkeychain
-
-# [advice]
-#   # disable advice on skipped cherry-picks
-#   skippedCherryPicks = false
-
-# [color]
-#   # automatically enable colored output if supported
-#   ui = auto
-
-# [color "branch"]
-#   # current branch in yellow with reverse video effect
-#   current = yellow reverse
-#   # local branches in blue (prev. yellow)
-#   local = blue
-#   # remote branches in green
-#   remote = green
-
-# [color "diff"]
-#   # metadata in yellow bold
-#   meta = yellow bold
-#   # fragment headers (line info) in magenta bold
-#   frag = magenta bold
-#   # deletions in red bold
-#   old = red bold
-#   # additions in green bold
-#   new = green bold
-
-# [color "status"]
-#   # added files in green bold
-#   added = green bold
-#   # modified files in yellow bold
-#   changed = yellow bold
-#   # untracked files in red bold
-#   untracked = red bold
-
-# [alias]
-#   # Log
-#   lg = log --graph --decorate --all  # Shows the commit history expanded
-#   slg = log --oneline --stat --graph --decorate --all  # Condensed commit history in one line.
-
-#   # Organization
-#   check = fsck --full --strict  # Checks the repository for integrity and errors.
-#   branches = branch --sort=-committerdate  # Lists branches sorted by the most recent commit date.
-
-#   # Commit/Unstage
-#   amend = commit --amend --no-edit  # Amends the last commit without changing the commit message.
-#   unstage = reset HEAD --  # Unstages files (removes from the staging area).
-
-#   # Other
-#   last = log -1 HEAD  # Shows the details of the last commit on the current branch.
-#   undo = reset --soft HEAD~1  # Undoes the last commit but keeps changes in the staging area.
+# Useful tools to maybe add if needed later:
+#   1. forgit - A utility tool powered by fzf for using Git interactively. Git search engine (20% of operations).
+#   - Likely to Add
+#   2. lazyworktree – Manage multiple Git worktrees and jump between branches.
+#     Use if you work on 2+ branches, do code reviews while coding, or handle hotfixes.
+#   3. prs – Track relevant pull requests in the terminal.
+#     Use if you review 5+ PRs/week, work across multiple repos, or prefer terminal PR tracking.
+#   - Situational
+#   4. ghq – Organize cloned repositories on disk. 
+#     Use if you have 5+ repos, clone often, or like ~/ghq/github.com/user/repo structure.
+#   5. oyo – Interactive multi-file code review. 
+#     Use for critical reviews, regulatory/security inspections, or final pre-production checks.
