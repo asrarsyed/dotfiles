@@ -1,0 +1,39 @@
+# Global Gitattributes File
+
+# Treat all text files as text and normalize line endings
+* text=auto
+
+# Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+*.zsh text eol=lf
+*.py text eol=lf
+*.rb text eol=lf
+*.pl text eol=lf
+
+# Markdown / documentation
+*.md text
+*.rst text
+*.txt text
+
+# Binary files (do not diff/merge)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.psd binary
+
+# Git LFS placeholder (applies if a repo uses LFS)
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+
+# Generated / minified files
+*.min.js -diff -merge
+*.min.css -diff -merge
