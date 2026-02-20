@@ -32,6 +32,7 @@ To add new configurations or update existing ones:
 
 1. Add or modify the files within their respective directories in dotfiles repository.
 2. Re-run the `stow` command for the configurations you've updated:
+
    ```sh
    stow tmux vim
    ```
