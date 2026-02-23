@@ -1,0 +1,22 @@
+{
+  "prefixes": [
+    { "type":  "fix", "description":  "resolves a bug causing incorrect or broken project behavior"},
+    { "type":  "feat", "description":  "introduces new functionality or capabilities to the project"},
+    { "type":  "perf", "description":  "improves performance or efficiency of existing project code"},
+    { "type":  "revert", "description":  "reverses a previous commit, restoring the prior project state"},
+    { "type":  "refactor", "description":  "restructures code without adding new features or fixing bugs"},
+    { "type":  "cleanup", "description":  "removes dead code, unused imports, or redundant logic safely"},
+    { "type":  "style", "description":  "formatting or stylistic changes that do not affect any logic"},
+    { "type":  "test", "description":  "adds or updates tests to verify correctness and code coverage"},
+    { "type":  "docs", "description":  "updates to documentation, comments, or README files for clarity"},
+    { "type":  "build", "description":  "changes to build tooling, compilation, or external dependencies"},
+    { "type":  "ci", "description":  "modifies ci/cd pipeline configuration, workflows, or scripts"},
+    { "type":  "chore", "description":  "changes to the build process or auxiliary tools and libraries"}
+  ],
+  "commitTitleCharLimit": 60,
+  "commitBodyCharLimit": 60,
+  "commitBodyLineLength": 40,
+  "readContributorsFromGit": true,
+  
+  "showIntro": true
+}
