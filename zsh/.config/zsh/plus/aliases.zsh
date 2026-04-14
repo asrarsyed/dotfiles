@@ -98,18 +98,6 @@ if command -v macchina &> /dev/null; then
     alias macchina='macchina; printf "\033[A\033[2K"'
 fi
 
-# Suggested workflow:
-    # Normal day-to-day: do nothing vs After editing configs: exec zsh
-    # After plugin updates: zshrefresh # Update plugins, force recompile all plugins, restart shell
-    # Test without compiled plugins: zshcleanup # Restart with no zsh cache and no compiled plugins (debug / comparison)
-    # If something is really broken: zshrebuild # Full reset: clear cache, remove compiled plugins, rebuild everything, restart
-# zap
-if command -v zap &> /dev/null; then
-    alias zshrefresh='zap update plugins && zapcompile --force && echo "" && exec zsh'
-    alias zshcleanup='rm -rf ~/.cache/zsh ~/.local/share/zap/plugins/**/*.zwc && echo "" && exec zsh'
-    alias zshrebuild='echo "🧹 Cleaning zsh cache..." && rm -rf ~/.cache/zsh ~/.local/share/zap/plugins/**/*.zwc(N) >/dev/null 2>&1 && zapcompile --silent && echo "✨ Done. Restarting..." && echo "" && exec zsh'
-fi
-
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 #        Uncommonly Used Aliases (Grouped)       ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛

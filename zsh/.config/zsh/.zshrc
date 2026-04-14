@@ -126,9 +126,10 @@ function cache_init() {
 zsh-defer cache_init "fzf" "fzf --zsh"
 zsh-defer cache_init "zoxide" "zoxide init zsh --hook pwd"
 zsh-defer cache_init "tv" "tv init zsh" "tv completion zsh"
+zsh-defer cache_init "uv" ":" "uv generate-shell-completion zsh"
 zsh-defer cache_init "atuin" "atuin init zsh" "atuin gen-completions --shell zsh"
 cache_init "starship" "starship init zsh" # ~2–2.3× extra first prompt/command time, i.e., ~230% overhead.
-# cache_init "fnm" "fnm env --shell zsh --use-on-cd" "fnm completions --shell zsh"
+zsh-defer cache_init "fnm" "fnm env --shell zsh --use-on-cd" "fnm completions --shell zsh"
 
 # Load bindings settings after initializing tools
 zsh-defer source "$ZDOTDIR/plus/keybinds.zsh"
@@ -152,7 +153,6 @@ generate_completion() {
 }
 
 # Generate completions for installed tools (deferred, runs after prompt)
-zsh-defer generate_completion "glow" "glow completion zsh"
 zsh-defer generate_completion "docker" "docker completion zsh"
 zsh-defer generate_completion "colima" "colima completion zsh"
 zsh-defer generate_completion "rustup" "rustup completions zsh"
