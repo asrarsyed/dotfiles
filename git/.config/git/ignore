@@ -42,3 +42,4 @@ desktop.ini
 # Dependency Directories
 node_modules/
 jspm_packages/
+**/.claude/settings.local.json

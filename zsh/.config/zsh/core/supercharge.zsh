@@ -12,20 +12,25 @@ local zcompdump="${zcachedir}/zcompdump"
 # Load completions
 autoload -Uz compinit
 
-# Regenerate if dump exists and is older than 24h
-for dump in "${zcompdump}"(N.mh+24); do
-    compinit -d "${zcompdump}"
-done
-
-# Always load (and implicitly create if missing)
-compinit -C -d "${zcompdump}"
+# Rebuild dump if missing or older than 24h
+if [[ ! -f "$zcompdump" || "$zcompdump" -ot "${zcompdump}"(#qN.mh+24) ]]; then
+    compinit -d "$zcompdump" # full init: missing or stale
+else
+    compinit -C -d "$zcompdump" # fast init: fresh dump exists
+fi
 
 # Compile zcompdump in background if needed
 {
-    if [[ -s "${zcompdump}" && (! -s "${zcompdump}.zwc" || "${zcompdump}" -nt "${zcompdump}.zwc") ]]; then
-        zcompile "${zcompdump}"
-    fi
+  if [[ -s "$zcompdump" && (! -s "$zcompdump.zwc" || "$zcompdump" -nt "$zcompdump.zwc") ]]; then
+      zcompile "$zcompdump"
+  fi
 } &!
+
+# BUGGY OLD VERSION
+# for dump in "${zcompdump}"(N.mh+24); do
+#     compinit -d "${zcompdump}" # only runs if file exists AND is stale
+# done
+# compinit -C -d "${zcompdump}" # ALWAYS runs regardless
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 #              ZSH Completion Styling            ┃
