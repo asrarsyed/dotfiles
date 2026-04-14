@@ -4,6 +4,8 @@ This repository contains my personal dotfiles — configuration files for  the v
 The repo is organized using GNU Stow, a symlink farm manager, with a per-package layout, and is designed to work across environments and branches, with a long-term goal of migrating to **nix-darwin** and
 **home-manager**.
 
+<a href=".archive/images/preview.png" target="_blank"><img src='.archive/images/preview.png' title='' width='' alt='' class='center-block' /></a>
+
 ## Installation
 
 To deploy these dotfiles on your system:
