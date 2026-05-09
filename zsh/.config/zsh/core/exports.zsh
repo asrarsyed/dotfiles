@@ -15,9 +15,6 @@ export R_HISTFILE="$XDG_STATE_HOME/history/.r_history"
 export NPM_HISTORY="$XDG_STATE_HOME/history/.npm_history"
 export LESSHISTFILE="$XDG_STATE_HOME/history/.less_history"
 export BASH_HISTFILE="$XDG_STATE_HOME/history/.bash_history"
-export MYSQL_HISTFILE="$XDG_STATE_HOME/history/.mysql_history"
-export SQLITE_HISTORY="$XDG_STATE_HOME/history/.sqlite_history"
-export PYTHONHISTFILE="$XDG_STATE_HOME/history/.python_history"
 export NODE_REPL_HISTORY="$XDG_STATE_HOME/history/.node_repl_history"
 
 # Homebrew Configuration

@@ -1,4 +1,4 @@
-appearance = "auto"
+appearance = "dark"
 theme = "tokyo-night"
 refresh_ms = 2000
 show_graph = true
@@ -12,15 +12,15 @@ excluded_processes = []
 log_level = "info"
 
 [history]
-	background_recording = false
-	sample_interval_secs = 60
-	retention_raw_days = 30
-	retention_hourly_days = 180
-	retention_daily_days = 0
-	retention_sessions_days = 90
-	max_database_mb = 500
+background_recording = false
+sample_interval_secs = 60
+retention_raw_days = 30
+retention_hourly_days = 180
+retention_daily_days = 0
+retention_sessions_days = 90
+max_database_mb = 500
 
 [units]
-	energy = "wh"
-	temperature = "fahrenheit"
-	data_size = "binary"
+energy = "wh"
+temperature = "fahrenheit"
+data_size = "binary"

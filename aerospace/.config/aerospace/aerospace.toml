@@ -9,7 +9,11 @@ start-at-login = true
 after-login-command = []
 
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+    # JankyBorders has a built-in detection of already running process, so it won't be run twice on AeroSpace restart
+    # 'exec-and-forget borders style=round width=3.0 active_color=0xc0e2e2e3 inactive_color=0xc02c2e34 background_color=0x302c2e34 hidpi=on ax_focus=off order=below blacklist="Finder,Spotlight,Notification Center"'
+    'exec-and-forget borders style=round width=3.0 active_color=0xffe2e2e3 inactive_color=0x662c2e34 background_color=0x00000000 hidpi=on ax_focus=off order=above blacklist="Finder,Spotlight,Notification Center"'
+]
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -47,6 +51,11 @@ automatically-unhide-macos-hidden-apps = false
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.main.binding]
+
+  # See: https://nikitabobko.github.io/AeroSpace/goodies
+  cmd-m = [] # Disable "minimize"
+  cmd-h = [] # Disable "hide application"
+  cmd-alt-h = [] # Disable "hide others"
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#layout
   alt-slash = 'layout tiles horizontal vertical'
@@ -177,6 +186,14 @@ automatically-unhide-macos-hidden-apps = false
   run = "layout floating"
 
 [[on-window-detected]]
+  if.app-id = "com.apple.TextEdit"
+  run = "layout floating"
+
+[[on-window-detected]]
+  if.app-id = "com.apple.stocks"
+  run = "layout floating"
+
+[[on-window-detected]]
   if.app-id = "com.apple.Preview"
   run = "layout floating"
 
@@ -206,6 +223,10 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
   if.app-id = "com.apple.AddressBook"
+  run = "layout floating"
+
+[[on-window-detected]]
+  if.app-id = "com.apple.weather"
   run = "layout floating"
 
 [[on-window-detected]]

@@ -1,0 +1,337 @@
+{
+  "UMPIRE Docstring": {
+    "prefix": "umpire",
+    "description": "UMPIRE problem-solving docstring",
+    "body": [
+      "\"\"\"",
+      "Understand:",
+      "${1:-}",
+      "",
+      "Match:",
+      "${2:-}",
+      "",
+      "Plan:",
+      "${3:-}",
+      "",
+      "Time Complexity:",
+      "Space Complexity:",
+      "\"\"\""
+    ]
+  },
+
+  "Binary search": {
+    "prefix": "dsa-bs",
+    "description": "Binary search template",
+    "body": [
+      "l, r = 0, len(${1:arr}) - 1",
+      "",
+      "while l <= r:",
+      "    m = (l + r) // 2",
+      "",
+      "    if ${2:condition}:",
+      "        r = m - 1",
+      "    else:",
+      "        l = m + 1",
+      "",
+      "return ${3:l}"
+    ]
+  },
+  "Two pointers": {
+    "prefix": "dsa-2p",
+    "description": "Two pointer pattern",
+    "body": [
+      "left, right = 0, len(${1:arr}) - 1",
+      "",
+      "while left < right:",
+      "    if ${2:condition}:",
+      "        left += 1",
+      "    else:",
+      "        right -= 1",
+      "",
+      "    ${3:# process}",
+      "$0"
+    ]
+  },
+  "Prefix sum": {
+    "prefix": "dsa-ps",
+    "description": "Prefix sum template",
+    "body": [
+      "prefix = [0]",
+      "",
+      "for x in ${1:nums}:",
+      "    prefix.append(prefix[-1] + x)",
+      "",
+      "# range sum [l, r] inclusive: prefix[r+1] - prefix[l]"
+    ]
+  },
+  "Reverse linked list": {
+    "prefix": "dsa-revll",
+    "description": "Iterative linked list reversal",
+    "body": [
+      "prev = None",
+      "curr = ${1:head}",
+      "",
+      "while curr:",
+      "    nxt = curr.next",
+      "    curr.next = prev",
+      "    prev = curr",
+      "    curr = nxt",
+      "",
+      "return prev"
+    ]
+  },
+  "ListNode": {
+    "prefix": "dsa-listnode",
+    "description": "Singly linked list node definition",
+    "body": [
+      "class ListNode:",
+      "    def __init__(self, val=0, next=None):",
+      "        self.val = val",
+      "        self.next = next"
+    ]
+  },
+  "TreeNode": {
+    "prefix": "dsa-treenode",
+    "description": "Binary tree node definition",
+    "body": [
+      "class TreeNode:",
+      "    def __init__(self, val=0, left=None, right=None):",
+      "        self.val = val",
+      "        self.left = left",
+      "        self.right = right"
+    ]
+  },
+
+  "Sliding window": {
+    "prefix": "dsa-sw",
+    "description": "Variable-size sliding window template",
+    "body": [
+      "from collections import defaultdict",
+      "",
+      "count = defaultdict(int)",
+      "l = 0",
+      "",
+      "for r in range(len(${1:s})):",
+      "    count[${1:s}[r]] += 1",
+      "",
+      "    while ${2:window_invalid}:",
+      "        count[${1:s}[l]] -= 1",
+      "        l += 1",
+      "",
+      "    ${3:# update answer}",
+      "$0"
+    ]
+  },
+  "Binary search on answer": {
+    "prefix": "dsa-bs-ans",
+    "description": "Binary search on answer (leftmost valid value)",
+    "body": [
+      "def feasible(${1:val}) -> bool:",
+      "    ${2:...}",
+      "",
+      "l, r = ${3:0}, ${4:max(nums)}",
+      "",
+      "while l < r:",
+      "    m = (l + r) // 2",
+      "    if feasible(m):",
+      "        r = m",
+      "    else:",
+      "        l = m + 1",
+      "",
+      "return l"
+    ]
+  },
+  "BFS": {
+    "prefix": "dsa-bfs",
+    "description": "Breadth-first search template",
+    "body": [
+      "from collections import deque",
+      "",
+      "q = deque([${1:start}])",
+      "visited = set([${1:start}])",
+      "",
+      "while q:",
+      "    node = q.popleft()",
+      "    ${2:# process node}",
+      "",
+      "    for nei in ${3:graph}[node]:",
+      "        if nei not in visited:",
+      "            visited.add(nei)",
+      "            q.append(nei)",
+      "$0"
+    ]
+  },
+  "DFS recursive": {
+    "prefix": "dsa-dfs",
+    "description": "Recursive depth-first search template",
+    "body": [
+      "def dfs(${1:node}):",
+      "    if ${2:base_case}:",
+      "        return",
+      "",
+      "    ${3:# process node}",
+      "",
+      "    for nei in ${4:graph}[${1:node}]:",
+      "        dfs(nei)",
+      "",
+      "dfs(${5:start})",
+      "$0"
+    ]
+  },
+  "DFS iterative": {
+    "prefix": "dsa-dfs-i",
+    "description": "Iterative depth-first search template",
+    "body": [
+      "stack = [${1:start}]",
+      "visited = {${1:start}}",
+      "",
+      "while stack:",
+      "    node = stack.pop()",
+      "    for nei in ${2:graph}[node]:",
+      "        if nei not in visited:",
+      "            visited.add(nei)",
+      "            stack.append(nei)",
+      "$0"
+    ]
+  },
+  "Heap (Top K)": {
+    "prefix": "dsa-heap",
+    "description": "Min-heap / top-K template",
+    "body": [
+      "import heapq",
+      "",
+      "heap = []",
+      "",
+      "for x in ${1:iterable}:",
+      "    heapq.heappush(heap, x)",
+      "",
+      "    if len(heap) > ${2:k}:",
+      "        heapq.heappop(heap)",
+      "",
+      "return heap"
+    ]
+  },
+  "Monotonic stack": {
+    "prefix": "dsa-mono",
+    "description": "Monotonic increasing stack",
+    "body": [
+      "stack = []",
+      "",
+      "for i, x in enumerate(${1:arr}):",
+      "    while stack and stack[-1][1] > x:",
+      "        stack.pop()",
+      "",
+      "    stack.append((i, x))",
+      "$0"
+    ]
+  },
+  "Merge intervals": {
+    "prefix": "dsa-intervals",
+    "description": "Merge overlapping intervals",
+    "body": [
+      "${1:intervals}.sort(key=lambda x: x[0])",
+      "merged = [${1:intervals}[0]]",
+      "",
+      "for start, end in ${1:intervals}[1:]:",
+      "    if start <= merged[-1][1]:",
+      "        merged[-1][1] = max(merged[-1][1], end)",
+      "    else:",
+      "        merged.append([start, end])",
+      "",
+      "return merged"
+    ]
+  },
+  "1D DP": {
+    "prefix": "dsa-dp1",
+    "description": "1D DP array template",
+    "body": [
+      "dp = [${1:0}] * (len(${2:nums}) + 1)",
+      "dp[0] = ${3:base_case}",
+      "",
+      "for i in range(1, len(${2:nums}) + 1):",
+      "    dp[i] = ${4:# transition}",
+      "",
+      "return dp[-1]"
+    ]
+  },
+
+  "2D DP grid": {
+    "prefix": "dsa-dp2",
+    "description": "2D DP grid init and traversal",
+    "body": [
+      "m, n = len(${1:grid}), len(${1:grid}[0])",
+      "dp = [[${2:0}] * n for _ in range(m)]",
+      "",
+      "# base cases",
+      "dp[0][0] = ${3:...}",
+      "",
+      "for i in range(m):",
+      "    for j in range(n):",
+      "        dp[i][j] = ${4:# transition}",
+      "",
+      "return dp[m-1][n-1]"
+    ]
+  },
+  "Memoize (lru_cache)": {
+    "prefix": "dsa-memo",
+    "description": "Top-down DP with lru_cache",
+    "body": [
+      "from functools import lru_cache",
+      "",
+      "@lru_cache(maxsize=None)",
+      "def ${1:dp}(${2:i}: int) -> ${3:int}:",
+      "    if ${4:base_case}:",
+      "        return ${5:0}",
+      "    return ${6:# transition}",
+      "",
+      "return ${1:dp}(${7:0})"
+    ]
+  },
+  "Backtracking": {
+    "prefix": "dsa-bt",
+    "description": "Backtracking template",
+    "body": [
+      "res = []",
+      "",
+      "def backtrack(path, ${1:options}):",
+      "    if ${2:done_condition}:",
+      "        res.append(path[:])",
+      "        return",
+      "",
+      "    for i in range(len(${1:options})):",
+      "        path.append(${1:options}[i])",
+      "        backtrack(path, ${1:options})",
+      "        path.pop()",
+      "",
+      "backtrack([], ${1:options})",
+      "return res"
+    ]
+  },
+  "Topological sort (Kahn's)": {
+    "prefix": "dsa-topo",
+    "description": "BFS-based topological sort",
+    "body": [
+      "from collections import deque, defaultdict",
+      "",
+      "graph = defaultdict(list)",
+      "indegree = [0] * ${1:n}",
+      "",
+      "for u, v in ${2:edges}:",
+      "    graph[u].append(v)",
+      "    indegree[v] += 1",
+      "",
+      "q = deque([i for i in range(${1:n}) if indegree[i] == 0])",
+      "order = []",
+      "",
+      "while q:",
+      "    node = q.popleft()",
+      "    order.append(node)",
+      "    for nei in graph[node]:",
+      "        indegree[nei] -= 1",
+      "        if indegree[nei] == 0:",
+      "            q.append(nei)",
+      "",
+      "return order if len(order) == ${1:n} else []  # [] = cycle detected"
+    ]
+  }
+}

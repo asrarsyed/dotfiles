@@ -169,7 +169,7 @@ $line_break$character\
   disabled = false
   ignore_submodules = true  # Ignore submodule checks (boosts speed)
   use_git_executable = true # Use git executable vs gitoxide (slower, but more accurate)
-  # Shows $ahead_behind 
+  # Shows $ahead_behind
   ahead = '[⇡${count} ](fg:#282c34 bg:#51afef)'
   behind = '[⇣${count} ](fg:#282c34 bg:#51afef)'
   diverged = '[⇅ ⇡${ahead_count}⇣${behind_count} ](fg:#282c34 bg:#51afef)'
@@ -205,7 +205,7 @@ $line_break$character\
   histedit = 'HISTEDITING'
   style =	'bold yellow'
   format = '[$state $progress_current/$progress_total]($style) '
-  
+
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 #           Configs for Disabled Modules          ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -237,7 +237,7 @@ $line_break$character\
 [[battery.display]]
   threshold = 45
   style = 'fg:#FFD700 bg:#ff6c6b'
-  
+
 # 46% - 100% → green
 [[battery.display]]
   threshold = 100

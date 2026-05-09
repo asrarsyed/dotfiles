@@ -1,0 +1,72 @@
+# My Unbinded Keybinds (+list-keybinds --default)
+keybind = super+-=unbind
+keybind = super+==unbind
+keybind = super+backspace=unbind
+keybind = super+alt+arrow_down=unbind
+keybind = super+alt+arrow_left=unbind
+keybind = super+alt+arrow_right=unbind
+keybind = super+alt+arrow_up=unbind
+keybind = super+ctrl+==unbind
+keybind = super+ctrl+arrow_down=ignore
+keybind = super+ctrl+arrow_left=ignore
+keybind = super+ctrl+arrow_right=ignore
+keybind = super+ctrl+arrow_up=ignore
+keybind = super+shift+arrow_down=unbind
+keybind = super+shift+arrow_up=unbind
+keybind = super+enter=unbind
+keybind = super+alt+shift+j=unbind
+keybind = super+alt+shift+w=unbind
+keybind = super+ctrl+shift+j=unbind
+keybind = super+shift+j=unbind
+keybind = super+ctrl+f=unbind
+keybind = super+,=unbind
+keybind = super+end=unbind
+keybind = super+home=unbind
+keybind = super+page_down=unbind
+keybind = super+page_up=unbind
+keybind = super+e=unbind
+keybind = super+j=unbind
+keybind = shift+end=unbind
+keybind = shift+home=unbind
+keybind = shift+page_down=unbind
+keybind = shift+page_up=unbind
+keybind = alt+arrow_left=unbind
+keybind = alt+arrow_right=unbind
+keybind = super+alt+w=unbind
+keybind = super+shift+[=unbind
+keybind = super+shift+]=unbind
+keybind = ctrl+shift+tab=unbind
+keybind = super+digit_1=unbind
+keybind = super+digit_2=unbind
+keybind = super+digit_3=unbind
+keybind = super+digit_4=unbind
+keybind = super+digit_5=unbind
+keybind = super+digit_6=unbind
+keybind = super+digit_7=unbind
+keybind = super+digit_8=unbind
+keybind = super+1=unbind
+keybind = super+2=unbind
+keybind = super+3=unbind
+keybind = super+4=unbind
+keybind = super+5=unbind
+keybind = super+6=unbind
+keybind = super+7=unbind
+keybind = super+8=unbind
+keybind = super+9=unbind
+keybind = ctrl+tab=unbind
+
+
+# My Keybinds (+list-keybinds --default)
+keybind = super+shift+minus=decrease_font_size:1
+
+# Pane Behavior
+keybind = super+enter=new_split
+keybind = super+==equalize_splits
+
+# Pane Navigation
+keybind = super+shift+arrow_down=goto_split:down
+keybind = super+shift+arrow_left=goto_split:left
+keybind = super+shift+arrow_right=goto_split:right
+keybind = super+shift+arrow_up=goto_split:up
+
+# https://www.reddit.com/r/neovim/comments/1hne1q6/navigation_between_ghostty_and_neovim_splits/

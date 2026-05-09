@@ -94,12 +94,12 @@ function cache_init() {
     local init_cmd=$2
     local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
     local cache_file="${cache_dir}/${tool}.zsh"
-    
+
     # Early exit if tool doesn't exist
     (( $+commands[$tool] )) || return 0
-    
+
     mkdir -p "$cache_dir"
-    
+
     # Regenerate cache if missing, empty, or outdated
     if [[ ! -s "$cache_file" ]] || [[ "$commands[$tool]" -nt "$cache_file" ]]; then
         eval "$init_cmd" >| "$cache_file.tmp" 2>/dev/null && {
@@ -107,15 +107,15 @@ function cache_init() {
             zcompile -U "$cache_file" 2>/dev/null
         }
     fi
-    
+
     # Source the cached initialization
     source "$cache_file"
-    
+
     # Handle completions if third argument provided
     if [[ -n $3 ]]; then
         local completion_cmd=$3
         local completion_file="$ZDOTDIR/completions/_${tool}"
-        
+
         if [[ ! -f "$completion_file" ]] || [[ "$commands[$tool]" -nt "$completion_file" ]]; then
             mkdir -p "$ZDOTDIR/completions"
             eval "$completion_cmd" > "$completion_file" 2>/dev/null
@@ -143,9 +143,9 @@ generate_completion() {
     local tool=$1
     local cmd=$2
     local completion_file="$ZDOTDIR/completions/_${tool}"
-    
+
     (( $+commands[$tool] )) || return 0
-    
+
     if [[ ! -f "$completion_file" ]] || [[ "$commands[$tool]" -nt "$completion_file" ]]; then
         mkdir -p "$ZDOTDIR/completions"
         eval "$cmd" > "$completion_file" 2>/dev/null

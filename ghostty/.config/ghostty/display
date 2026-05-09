@@ -1,0 +1,35 @@
+# Font (ghostty +list-fonts)
+font-family = "JetBrains Maple Mono"
+font-size = 15
+
+# Works: catppuccin mocha, iceberg dark, teerb, pnevma, relaxed, terafox, subliminal, gruvbox material dark
+# Doesn't Work: mellow, jellybeans, vesper, rose pine moon
+# Theme (ghostty +list-themes)
+theme = mellow
+
+# Transparency
+background = #000000
+background-blur = false
+background-opacity = 0.75
+unfocused-split-opacity = 0.75
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+mouse-hide-while-typing = true
+
+# cell
+adjust-cell-width = 1
+adjust-cell-height = 1
+
+# Window
+window-padding-x = 10
+window-padding-y = 10
+window-padding-color =
+window-padding-balance = true
+window-inherit-font-size = false
+
+# Shader
+# custom-shader = ./shaders/starfield-colors.glsl
+# custom-shader-animation = false

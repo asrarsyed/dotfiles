@@ -104,7 +104,7 @@ if [[ -z $_ZSTYLE_INIT_DONE ]]; then
 
   # Useful if you often do ssh <TAB> or scp <TAB> — it reads /etc/ssh_known_hosts and ~/.ssh/known_hosts
   zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
-  
+
   # Do not include . and .. in completion results
   zstyle ':completion:*' special-dirs false
 

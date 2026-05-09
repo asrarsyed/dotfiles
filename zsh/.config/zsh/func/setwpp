@@ -17,9 +17,13 @@ setwpp() {
     
     # Get all wallpapers using Zsh globbing (recursive **)
     # walls=("$WALLPAPER_DIR"/**/*.(jpg|jpeg|png|heic)(N.))
-	walls=("${WALLPAPER_DIR}"/**/*.(jpg|jpeg|png|heic)(N.)~"${WALLPAPER_DIR}/mobile/*") # exclude 
+	# walls=("${WALLPAPER_DIR}"/**/*.(jpg|jpeg|png|heic)(N.)~"${WALLPAPER_DIR}/mobile/*") # exclude 
     
-    # Check if any wallpapers were found
+    walls=("${WALLPAPER_DIR}"/**/*.(jpg|jpeg|png|heic)(N.))
+    walls=("${(@)walls:#${WALLPAPER_DIR}/mobile/*}") # exclude
+	walls=("${(@)walls:#${WALLPAPER_DIR}/assets/*}") # exclude
+    
+	# Check if any wallpapers were found
     (( ${#walls[@]} == 0 )) && {
         print -P "%F{red}No wallpapers found%f"
         return 1

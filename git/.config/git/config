@@ -27,13 +27,27 @@
   untrackedCache = true # Cache the names of untracked files so Git doesn't have to scan for them every time
 
 [column]
-  ui = auto # Displays branches (and other lists) in multiple columns, filling your terminal width
+  ui = never # Prevents automatic column formatting for most Git commands
+  tag = auto # Uses columns for git tag when output is to a terminal
+  branch = never # Forces git branch to always print one branch per line
 
 [grep]
   column = true # Show column position in grep results
   lineNumber = true # Show line numbers in grep results
 
 [pager]
+  # Disable pager for quick commands
+  tag = false
+  stash = false
+  branch = false
+  status = false
+  remote = false
+  shortlog = false
+  # Keep pager where it matters
+  show = delta
+  blame = true
+  config = true
+  reflog = true
   diff = diffnav
   log = delta --paging=always # always paginate git log (using delta)
 
@@ -52,10 +66,10 @@
 
 # Filter LFS
 [filter "lfs"]
-  required = true # Mark this filter as required for Git LFS files
-  clean = git-lfs clean -- %f # Command to clean files when staging
-  smudge = git-lfs smudge -- %f # Command to restore files when checking out
-  process = git-lfs filter-process # Process mode for LFS
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 
 # Integrity
 [transfer]
@@ -252,7 +266,16 @@
 #   3. prs – Track relevant pull requests in the terminal.
 #     Use if you review 5+ PRs/week, work across multiple repos, or prefer terminal PR tracking.
 #   - Situational
-#   4. ghq – Organize cloned repositories on disk. 
+#   4. ghq – Organize cloned repositories on disk.
 #     Use if you have 5+ repos, clone often, or like ~/ghq/github.com/user/repo structure.
-#   5. oyo – Interactive multi-file code review. 
+#   5. oyo – Interactive multi-file code review.
 #     Use for critical reviews, regulatory/security inspections, or final pre-production checks.
+#   - Evaluate / Conditional
+#   6. git-extras – 60+ small Git utilities (summary, changelog, guilt, etc.).
+#     Skip unless you need a specific command not covered by your aliases or config.
+#   7. git-toolbelt – Shell-scripting helpers (is-clean, current-branch, contains, etc.).
+#     Skip unless you write Git shell scripts; adds little to interactive workflows.
+#   8. git-town – High-level branch lifecycle commands (hack, sync, append, set-parent).
+#     Add if you regularly open stacked/dependent PRs; redundant if updateRefs covers your needs.
+#   9. git-branchless – Commit-graph tools: undo, smartlog, auto-restack on amend, git move.
+#     Add for 'git undo' alone or if you want amend-heavy patch-stack workflows. Still in alpha.

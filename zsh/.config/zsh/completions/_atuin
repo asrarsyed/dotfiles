@@ -69,6 +69,12 @@ _arguments "${_arguments_options[@]}" : \
 ':id:_default' \
 && ret=0
 ;;
+(tail)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
 (list)
 _arguments "${_arguments_options[@]}" : \
 '-r+[]::REVERSE:(true false)' \
@@ -145,6 +151,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(tail)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (list)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -162,6 +172,56 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (dedup)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(hook)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::agent -- Which agent'\''s hook format to parse (e.g., "claude-code"):_default' \
+":: :_atuin__hook_commands" \
+"*::: :->hook" \
+&& ret=0
+
+    case $state in
+    (hook)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-hook-command-$line[2]:"
+        case $line[2] in
+            (install)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':agent -- Agent to install hooks for (e.g., "claude-code"):_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__hook__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-hook-help-command-$line[1]:"
+        case $line[1] in
+            (install)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -367,6 +427,7 @@ _arguments "${_arguments_options[@]}" : \
 '-f+[Available variables\: {command}, {directory}, {duration}, {user}, {host}, {time}, {exit} and {relativetime}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT:_default' \
 '--format=[Available variables\: {command}, {directory}, {duration}, {user}, {host}, {time}, {exit} and {relativetime}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT:_default' \
 '--inline-height=[Set the maximum number of lines Atuin'\''s interface should take up]:INLINE_HEIGHT:_default' \
+'*--author=[Filter by author. Supports \$all-user (non-agents), \$all-agent, or literal names. Can be specified multiple times]:AUTHOR:_default' \
 '--result-file=[File name to write the result to (hidden from help as this is meant to be used from a script)]:RESULT_FILE:_default' \
 '-i[Open interactive search UI]' \
 '--interactive[Open interactive search UI]' \
@@ -1304,6 +1365,92 @@ _arguments "${_arguments_options[@]}" : \
 '--help[Print help]' \
 && ret=0
 ;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__config_commands" \
+"*::: :->config" \
+&& ret=0
+
+    case $state in
+    (config)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-config-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" : \
+'-r[Print the value after defaults and overrides are applied]' \
+'--resolved[Print the value after defaults and overrides are applied]' \
+'-v[Print both the config file value and the resolved value]' \
+'--verbose[Print both the config file value and the resolved value]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':key -- The configuration key to get:_default' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+'-t+[Store value as an explicit type]:TYPE:((auto\:"Automatically determine the type of the value"
+string\:"Store value as a string"
+boolean\:"Store value as a boolean"
+integer\:"Store value as an integer"
+float\:"Store the value as a float"))' \
+'--type=[Store value as an explicit type]:TYPE:((auto\:"Automatically determine the type of the value"
+string\:"Store value as a string"
+boolean\:"Store value as a boolean"
+integer\:"Store value as an integer"
+float\:"Store the value as a float"))' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':key -- The configuration key to set:_default' \
+':value -- The value to set:_default' \
+&& ret=0
+;;
+(print)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::key -- Print the value of a specific key and all its children:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__config__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-config-help-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(print)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
 (ai)
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
@@ -1479,6 +1626,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(tail)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (list)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -1496,6 +1647,26 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (dedup)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(hook)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__hook_commands" \
+"*::: :->hook" \
+&& ret=0
+
+    case $state in
+    (hook)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-hook-command-$line[1]:"
+        case $line[1] in
+            (install)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -1887,6 +2058,34 @@ esac
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__config_commands" \
+"*::: :->config" \
+&& ret=0
+
+    case $state in
+    (config)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-config-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(print)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
 (ai)
 _arguments "${_arguments_options[@]}" : \
 ":: :_atuin__help__ai_commands" \
@@ -1961,6 +2160,7 @@ _atuin_commands() {
     local commands; commands=(
 'setup:Setup Atuin features' \
 'history:Manipulate shell history' \
+'hook:Manage AI-agent shell hooks' \
 'import:Import shell history from file' \
 'stats:Calculate statistics for your history' \
 'search:Interactive history search' \
@@ -1981,6 +2181,7 @@ _atuin_commands() {
 'wrapped:' \
 'daemon:*Experimental* Manage the background daemon' \
 'default-config:Print the default atuin configuration (config.toml)' \
+'config:' \
 'ai:Run the AI assistant' \
 'hex:Terminal emulator for atuin' \
 'uuid:Generate a UUID' \
@@ -2123,6 +2324,61 @@ _atuin__ai__init_commands() {
 _atuin__ai__inline_commands() {
     local commands; commands=()
     _describe -t commands 'atuin ai inline commands' commands "$@"
+}
+(( $+functions[_atuin__config_commands] )) ||
+_atuin__config_commands() {
+    local commands; commands=(
+'get:Get a configuration value from your config.toml file or after defaults and overrides are applied' \
+'set:Set a configuration value in your config.toml file' \
+'print:Print all configuration values from your config.toml file in TOML format' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin config commands' commands "$@"
+}
+(( $+functions[_atuin__config__get_commands] )) ||
+_atuin__config__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin config get commands' commands "$@"
+}
+(( $+functions[_atuin__config__help_commands] )) ||
+_atuin__config__help_commands() {
+    local commands; commands=(
+'get:Get a configuration value from your config.toml file or after defaults and overrides are applied' \
+'set:Set a configuration value in your config.toml file' \
+'print:Print all configuration values from your config.toml file in TOML format' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin config help commands' commands "$@"
+}
+(( $+functions[_atuin__config__help__get_commands] )) ||
+_atuin__config__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin config help get commands' commands "$@"
+}
+(( $+functions[_atuin__config__help__help_commands] )) ||
+_atuin__config__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin config help help commands' commands "$@"
+}
+(( $+functions[_atuin__config__help__print_commands] )) ||
+_atuin__config__help__print_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin config help print commands' commands "$@"
+}
+(( $+functions[_atuin__config__help__set_commands] )) ||
+_atuin__config__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin config help set commands' commands "$@"
+}
+(( $+functions[_atuin__config__print_commands] )) ||
+_atuin__config__print_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin config print commands' commands "$@"
+}
+(( $+functions[_atuin__config__set_commands] )) ||
+_atuin__config__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin config set commands' commands "$@"
 }
 (( $+functions[_atuin__contributors_commands] )) ||
 _atuin__contributors_commands() {
@@ -2415,6 +2671,7 @@ _atuin__help_commands() {
     local commands; commands=(
 'setup:Setup Atuin features' \
 'history:Manipulate shell history' \
+'hook:Manage AI-agent shell hooks' \
 'import:Import shell history from file' \
 'stats:Calculate statistics for your history' \
 'search:Interactive history search' \
@@ -2435,6 +2692,7 @@ _atuin__help_commands() {
 'wrapped:' \
 'daemon:*Experimental* Manage the background daemon' \
 'default-config:Print the default atuin configuration (config.toml)' \
+'config:' \
 'ai:Run the AI assistant' \
 'hex:Terminal emulator for atuin' \
 'uuid:Generate a UUID' \
@@ -2503,6 +2761,30 @@ _atuin__help__ai__init_commands() {
 _atuin__help__ai__inline_commands() {
     local commands; commands=()
     _describe -t commands 'atuin help ai inline commands' commands "$@"
+}
+(( $+functions[_atuin__help__config_commands] )) ||
+_atuin__help__config_commands() {
+    local commands; commands=(
+'get:Get a configuration value from your config.toml file or after defaults and overrides are applied' \
+'set:Set a configuration value in your config.toml file' \
+'print:Print all configuration values from your config.toml file in TOML format' \
+    )
+    _describe -t commands 'atuin help config commands' commands "$@"
+}
+(( $+functions[_atuin__help__config__get_commands] )) ||
+_atuin__help__config__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help config get commands' commands "$@"
+}
+(( $+functions[_atuin__help__config__print_commands] )) ||
+_atuin__help__config__print_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help config print commands' commands "$@"
+}
+(( $+functions[_atuin__help__config__set_commands] )) ||
+_atuin__help__config__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help config set commands' commands "$@"
 }
 (( $+functions[_atuin__help__contributors_commands] )) ||
 _atuin__help__contributors_commands() {
@@ -2638,6 +2920,7 @@ _atuin__help__history_commands() {
     local commands; commands=(
 'start:Begins a new command in the history' \
 'end:Finishes a new command in the history (adds time, exit code)' \
+'tail:Stream history events from the daemon as they are received' \
 'list:List all items in history' \
 'last:Get the last command ran' \
 'init-store:' \
@@ -2680,6 +2963,23 @@ _atuin__help__history__prune_commands() {
 _atuin__help__history__start_commands() {
     local commands; commands=()
     _describe -t commands 'atuin help history start commands' commands "$@"
+}
+(( $+functions[_atuin__help__history__tail_commands] )) ||
+_atuin__help__history__tail_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help history tail commands' commands "$@"
+}
+(( $+functions[_atuin__help__hook_commands] )) ||
+_atuin__help__hook_commands() {
+    local commands; commands=(
+'install:Install hooks for an AI agent to capture commands in atuin history' \
+    )
+    _describe -t commands 'atuin help hook commands' commands "$@"
+}
+(( $+functions[_atuin__help__hook__install_commands] )) ||
+_atuin__help__hook__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help hook install commands' commands "$@"
 }
 (( $+functions[_atuin__help__import_commands] )) ||
 _atuin__help__import_commands() {
@@ -2986,6 +3286,7 @@ _atuin__history_commands() {
     local commands; commands=(
 'start:Begins a new command in the history' \
 'end:Finishes a new command in the history (adds time, exit code)' \
+'tail:Stream history events from the daemon as they are received' \
 'list:List all items in history' \
 'last:Get the last command ran' \
 'init-store:' \
@@ -3010,6 +3311,7 @@ _atuin__history__help_commands() {
     local commands; commands=(
 'start:Begins a new command in the history' \
 'end:Finishes a new command in the history (adds time, exit code)' \
+'tail:Stream history events from the daemon as they are received' \
 'list:List all items in history' \
 'last:Get the last command ran' \
 'init-store:' \
@@ -3059,6 +3361,11 @@ _atuin__history__help__start_commands() {
     local commands; commands=()
     _describe -t commands 'atuin history help start commands' commands "$@"
 }
+(( $+functions[_atuin__history__help__tail_commands] )) ||
+_atuin__history__help__tail_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help tail commands' commands "$@"
+}
 (( $+functions[_atuin__history__init-store_commands] )) ||
 _atuin__history__init-store_commands() {
     local commands; commands=()
@@ -3083,6 +3390,42 @@ _atuin__history__prune_commands() {
 _atuin__history__start_commands() {
     local commands; commands=()
     _describe -t commands 'atuin history start commands' commands "$@"
+}
+(( $+functions[_atuin__history__tail_commands] )) ||
+_atuin__history__tail_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history tail commands' commands "$@"
+}
+(( $+functions[_atuin__hook_commands] )) ||
+_atuin__hook_commands() {
+    local commands; commands=(
+'install:Install hooks for an AI agent to capture commands in atuin history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin hook commands' commands "$@"
+}
+(( $+functions[_atuin__hook__help_commands] )) ||
+_atuin__hook__help_commands() {
+    local commands; commands=(
+'install:Install hooks for an AI agent to capture commands in atuin history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin hook help commands' commands "$@"
+}
+(( $+functions[_atuin__hook__help__help_commands] )) ||
+_atuin__hook__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin hook help help commands' commands "$@"
+}
+(( $+functions[_atuin__hook__help__install_commands] )) ||
+_atuin__hook__help__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin hook help install commands' commands "$@"
+}
+(( $+functions[_atuin__hook__install_commands] )) ||
+_atuin__hook__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin hook install commands' commands "$@"
 }
 (( $+functions[_atuin__import_commands] )) ||
 _atuin__import_commands() {
