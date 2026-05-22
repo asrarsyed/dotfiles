@@ -124,7 +124,7 @@ function cache_init() {
 }
 
 zsh-defer cache_init "fzf" "fzf --zsh"
-zsh-defer cache_init "zoxide" "zoxide init zsh --hook pwd"
+zsh-defer cache_init "zoxide" "zoxide init zsh --cmd cd --hook pwd"
 zsh-defer cache_init "tv" "tv init zsh" "tv completion zsh"
 zsh-defer cache_init "uv" ":" "uv generate-shell-completion zsh"
 zsh-defer cache_init "atuin" "atuin init zsh" "atuin gen-completions --shell zsh"

@@ -11,7 +11,8 @@ conf() {
         nvim)  file="$HOME/.config/nvim/init.lua" ;;
         lvim)  file="$HOME/.config/lvim/config.lua" ;;
         tmux)  file="$HOME/.config/tmux/.tmux.conf" ;;
-        *)     echo "Usage: conf {brew|zsh|nvim|lvim|tmux}" ; return 1 ;;
+        space)  file="$HOME/.config/aerospace/aerospace.toml" ;;
+        *)     echo "Usage: conf {brew|zsh|nvim|lvim|tmux|space}" ; return 1 ;;
     esac
     
     # Launch editor

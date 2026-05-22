@@ -333,5 +333,42 @@
       "",
       "return order if len(order) == ${1:n} else []  # [] = cycle detected"
     ]
+  },
+
+  "Function Definition Type Hint": {
+    "prefix": "dfh",
+    "description": "Typed function definition",
+    "body": [
+      "def ${1:func}(${2:arg}: ${3:type}) -> ${4:None}:",
+      "    ${0:pass}"
+    ]
+  },
+  "Method Definition Type Hint": {
+    "prefix": "mth",
+    "description": "Typed instance method",
+    "body": [
+      "def ${1:method}(self, ${2:arg}: ${3:type}) -> ${4:None}:",
+      "    ${0:pass}"
+    ]
+  },
+  "Variable Type Hint - Int": {
+    "prefix": "thi",
+    "description": "Typed integer variable",
+    "body": ["${1:value}: int = ${0:0}"]
+  },
+  "Variable Type Hint - String": {
+    "prefix": "ths",
+    "description": "Typed string variable",
+    "body": ["${1:text}: str = \"${0}\""]
+  },
+  "Variable Type Hint - List": {
+    "prefix": "thl",
+    "description": "Typed list variable",
+    "body": ["${1:items}: list[${2:str}] = [${0}]"]
+  },
+  "Variable Type Hint - Dict": {
+    "prefix": "thd",
+    "description": "Typed dictionary variable",
+    "body": ["${1:data}: dict[${2:str}, ${3:Any}] = {${0}}"]
   }
 }

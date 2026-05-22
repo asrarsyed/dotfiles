@@ -8,15 +8,68 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 
 {
-  // Theme & Colors
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃                Core Behavior                 ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  // Window & Startup
+  "use_system_path_prompts": true,
+  "use_system_prompts": true,
   "cli_default_open_behavior": "existing_window",
-  "diff_view_style": "split",
+  "restore_on_startup": "launchpad",
+  "confirm_quit": true,
+  "close_on_file_delete": true,
+  "focus_follows_mouse": {
+    "enabled": true,
+    "debounce_ms": 250,
+  },
+
+  // Editing
+  "autosave": "on_focus_change",
+  "always_treat_brackets_as_autoclosed": true,
+  "snippet_sort_order": "top",
+  "auto_signature_help": true,
+  "show_signature_help_after_edits": true,
+
+  // Privacy & Telemetry
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "calls": {
+    "mute_on_join": true,
+    "share_on_join": false,
+  },
+  "disable_ai": true,
+  "private_files": [
+    "**/.env*",
+    "**/*.pem",
+    "**/*.key",
+    "**/*.cert",
+    "**/*.crt",
+    "**/secrets.yml",
+    "**/secrets.yaml",
+    "**/*.p12",
+    "**/*.pfx",
+    "**/id_rsa",
+    "**/id_ed25519",
+    "**/*.kubeconfig",
+    "**/.npmrc",
+    "**/.aws/credentials",
+    "**/.ssh/config",
+  ],
+  "redact_private_values": true,
+
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃              Appearance & Theme              ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  // Theme
   "theme": {
     "mode": "dark",
     "light": "Catppuccin Macchiato",
     "dark": "Catppuccin Mocha",
   },
-  // Fix comment colors
   "theme_overrides": {
     "Catppuccin Mocha": {
       // Color reference: https://catppuccin.com/palette/
@@ -42,145 +95,81 @@
       },
     },
   },
+  "experimental.theme_overrides": {
+    "background.appearance": "transparent",
+  },
   "icon_theme": {
     "mode": "dark",
     "light": "Catppuccin Macchiato",
     "dark": "Catppuccin Mocha",
   },
-  "experimental.theme_overrides": {
-    "background.appearance": "transparent",
+
+  // Layout
+  "diff_view_style": "split",
+  "active_pane_modifiers": {
+    "border_size": 1.0,
+    "inactive_opacity": 1.0,
   },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15,
+  },
+  "zoomed_padding": true,
+
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃                  Typography                  ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
   // Buffer Font
   "buffer_font_size": 15,
   "buffer_font_weight": 400,
   "buffer_font_family": "JetBrains Maple Mono",
   "buffer_line_height": "comfortable",
-  // Ligatures
   "buffer_font_features": {
-    "calt": true, // Texture healing
-    // "liga": true, // Dynamic spacing for certain repeating character patterns like ///
-    // "ss01": true,
-    // "ss02": true,
-    // "ss03": true,
-    // "ss04": true,
-    // "ss05": true,
-    // "ss06": true,
-    // "ss07": true,
-    // "ss08": true,
-    // "ss09": true,
-    // "ss10": true,
+    "calt": true,
   },
 
   // UI Font
   "ui_font_size": 16,
   "ui_font_weight": 400,
-  "ui_font_family": "JetBrains Maple Mono", // default is .SystemUIFont
-  // Ligatures
+  "ui_font_family": "JetBrains Maple Mono",
   "ui_font_features": {
-    // Disable ligatures:
     "calt": false,
   },
 
-  // Active pane styling settings
-  "active_pane_modifiers": {
-    "border_size": 1.0,
-    "inactive_opacity": 1.0,
-  },
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃              Keyboard Settings               ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-  // Centered layout related settings
-  "centered_layout": {
-    "left_padding": 0.15,
-    "right_padding": 0.15,
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 200,
   },
-
-  // Whether to enable vim modes and key bindings
   "vim_mode": false,
-  // Whether to enable helix mode and key bindings
   "helix_mode": false,
   "relative_line_numbers": "disabled",
-
-  // Whether to confirm before quitting Zed
-  "confirm_quit": true,
-
-  // Whether to restore last closed project when fresh Zed instance is opened
-  "restore_on_startup": "launchpad",
-
-  // Whether to automatically close files that have been deleted on disk
-  "close_on_file_delete": true,
-
-  // Whether to show padding for zoomed panels
-  "zoomed_padding": true,
-
-  // Whether to use the system provided dialogs for Open and Save As
-  "use_system_path_prompts": true,
-  // Whether to use the system provided dialogs for prompts, such as confirmation prompts
-  "use_system_prompts": true,
-
-  // Determines whether the focused panel follows the mouse location
-  "focus_follows_mouse": {
-    "enabled": true,
-    "debounce_ms": 250,
+  "vim": {
+    "default_mode": "normal",
+    "toggle_relative_line_numbers": false,
+    "use_system_clipboard": "always",
+    "use_smartcase_find": false,
+    "use_regex_search": true,
+    "gdefault": false,
+    "highlight_on_yank_duration": 200,
+    "custom_digraphs": {},
+    "cursor_shape": {
+      "normal": "block",
+      "replace": "underline",
+      "visual": "hollow",
+      "insert": "bar",
+    },
   },
 
-  // Determines how snippets are sorted relative to other completion items.
-  "snippet_sort_order": "top",
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃              UI Navigation Bars              ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-  // Color different indentation levels
-  "colorize_brackets": true,
-
-  // Show method signatures in the editor, when inside parentheses
-  "auto_signature_help": true,
-
-  // Whether to show the signature help after completion or a bracket pair inserted
-  "show_signature_help_after_edits": true,
-
-  // Hide the values of in variables from visual display in private files
-  "redact_private_values": true,
-  // Globs to match against file paths to determine if a file is private
-  "private_files": [
-    "**/.env*",
-    "**/*.pem",
-    "**/*.key",
-    "**/*.cert",
-    "**/*.crt",
-    "**/secrets.yml",
-    "**/secrets.yaml",
-    "**/*.p12",
-    "**/*.pfx",
-    "**/id_rsa",
-    "**/id_ed25519",
-    "**/*.kubeconfig",
-    "**/.npmrc",
-    "**/.aws/credentials",
-    "**/.ssh/config",
-  ],
-
-  // Controls how the editor handles the autoclosed characters
-  "always_treat_brackets_as_autoclosed": true,
-
-  // Controls whether edit predictions are shown immediately (true)
-  "show_edit_predictions": false,
-
-  // Controls whether edit predictions are shown in a given language scope
-  "edit_predictions_disabled_in": [],
-
-  // Call settings
-  "calls": {
-    "mute_on_join": true,
-    "share_on_join": false,
-  },
-
-  // Toolbar settings
-  "toolbar": {
-    "breadcrumbs": false,
-    "quick_actions": false,
-    "selections_menu": true,
-    "agent_review": true,
-    "code_actions": true,
-  },
-
-  // Titlebar settings
+  // Title Bar
   "title_bar": {
     "show_branch_status_icon": true,
     "show_branch_name": true,
@@ -192,7 +181,59 @@
     "show_menus": true,
   },
 
-  // Indent guides in the editor
+  // Tab Bar
+  "tab_bar": {
+    "show": false,
+    "show_nav_history_buttons": true,
+    "show_tab_bar_buttons": true,
+    "show_pinned_tabs_in_separate_row": false,
+  },
+  "tabs": {
+    "git_status": true,
+    "close_position": "right",
+    "file_icons": true,
+    "show_close_button": "hover",
+    "activate_on_close": "history",
+    "show_diagnostics": "errors",
+  },
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_project_panel": true,
+    "enable_preview_from_file_finder": false,
+    "enable_preview_from_multibuffer": true,
+    "enable_preview_multibuffer_from_code_navigation": false,
+    "enable_preview_file_from_code_navigation": true,
+    "enable_keep_preview_on_code_navigation": false,
+  },
+
+  // Tool Bar
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": true,
+    "agent_review": true,
+    "code_actions": true,
+  },
+
+  // Status Bar
+  "status_bar": {
+    "experimental.show": true,
+    "show_active_file": true,
+    "active_language_button": false,
+    "cursor_position_button": true,
+    "line_endings_button": false,
+    "active_encoding_button": "non_utf8",
+  },
+
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃                Editor Display                ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  // Semantic Tokens
+  "semantic_tokens": "combined",
+
+  // Visual Guides
+  "colorize_brackets": true,
   "indent_guides": {
     "enabled": true,
     "line_width": 1,
@@ -201,7 +242,7 @@
     "background_coloring": "disabled",
   },
 
-  // Inlay hint settings
+  // Inlay Hints
   "inlay_hints": {
     "enabled": false,
     "show_type_hints": true,
@@ -220,10 +261,130 @@
     },
   },
 
-  // Resize all the panels in a dock when resizing the dock
+  // Edit Predictions
+  "show_edit_predictions": false,
+  "edit_predictions_disabled_in": [],
+  "edit_predictions": {
+    // Which edit prediction provider to use.
+    "provider": "none",
+    // A list of globs representing files that edit predictions should be disabled for.
+    // There's a sensible default list of globs already included.
+    // Any addition to this list will be merged with the default list.
+    // Globs are matched relative to the worktree root,
+    // except when starting with a slash (/) or equivalent in Windows.
+    "disabled_globs": [
+      "**/.env*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/.dev.vars",
+      "**/secrets.yml",
+      "**/.zed/settings.json", // zed project settings
+      "/**/zed/settings.json", // zed user settings
+      "/**/zed/keymap.json",
+    ],
+    // When to show edit predictions previews in buffer.
+    // This setting takes two possible values:
+    // 1. Display predictions inline when there are no language server completions available.
+    //     "mode": "eager"
+    // 2. Display predictions inline only when holding a modifier key (alt by default).
+    //     "mode": "subtle"
+    "mode": "subtle",
+    // Copilot-specific settings
+    // "copilot": {
+    //   "enterprise_uri": "",
+    //   "proxy": "",
+    //   "proxy_no_verify": false
+    //   "enable_next_edit_suggestions": true
+    // },
+    "copilot": {
+      "enterprise_uri": null,
+      "proxy": null,
+      "proxy_no_verify": null,
+      "enable_next_edit_suggestions": true,
+    },
+    "codestral": {
+      "api_url": "https://codestral.mistral.ai",
+      "model": "codestral-latest",
+      "max_tokens": 150,
+    },
+    "ollama": {
+      "api_url": "http://localhost:11434",
+      "model": "qwen2.5-coder:7b-base",
+      "prompt_format": "infer",
+      "max_output_tokens": 64,
+    },
+    "open_ai_compatible_api": {
+      "api_url": "",
+      "model": "",
+      "prompt_format": "infer",
+      "max_output_tokens": 64,
+    },
+  },
+
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃           File Finder / Exclusions           ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  "read_only_files": ["**/*.lock", "**/vendor/**", "**/node_modules/**"],
+  "file_finder": {
+    "file_icons": true,
+    "modal_max_width": "medium",
+    "skip_focus_for_active_in_search": true,
+    "include_ignored": "smart",
+    "include_channels": true,
+  },
+  "file_scan_exclusions": [
+    "**/.hg",
+    "**/.jj",
+    "**/.sl",
+    "**/CVS",
+    "**/.git",
+    "**/.svn",
+    "**/.repo",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.settings",
+    "**/.classpath",
+    // above is default from Zed
+    "**/venv",
+    "**/.venv",
+    "**/*.log",
+    "**/__pycache__",
+    "**/.mypy_cache",
+    "**/node_modules",
+    "**/.pytest_cache",
+  ],
+
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃            File Type Associations            ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  "file_types": {
+    "Shell Script": ["*.env", "*.env.*", "*.envrc*"],
+    "Dockerfile": ["Dockerfile*"],
+    "YAML": [
+      "docker-compose*.yml",
+      "docker-compose*.yaml",
+      "compose.yml",
+      "compose.yaml",
+    ],
+    "Git Attributes": ["**/{git,.git,.git/info}/attributes"],
+    "Git Config": [
+      "*.gitconfig",
+      "**/{git,.git,.git/modules,.git/modules/*}/config",
+    ],
+    "Git Ignore": ["**/{git,.git}/ignore", "**/.git/info/exclude"],
+  },
+
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃            Panels (Docked Tools)             ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
   "resize_all_panels_in_dock": [],
 
-  // Project panel settings
+  // Project Panel
   "project_panel": {
     "button": true,
     "hide_gitignore": false,
@@ -261,7 +422,7 @@
     },
   },
 
-  // Outline panel settings
+  // Outline Panel
   "outline_panel": {
     "button": true,
     "default_width": 360,
@@ -281,14 +442,14 @@
     "expand_outlines_with_depth": 100,
   },
 
-  // Collaboration panel settings
+  // Collaboration Panel
   "collaboration_panel": {
     "button": true,
     "dock": "right",
     "default_width": 360,
   },
 
-  // Git panel settings
+  // Git Panel
   "git_panel": {
     "button": true,
     "dock": "left",
@@ -305,7 +466,10 @@
     "diff_stats": true,
   },
 
-  // Agent panel settings
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃              AI & Agent System               ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
   "agent": {
     // Whether the inline assistant should use streaming tools, when available
     "inline_assistant_use_streaming_tools": true,
@@ -314,13 +478,13 @@
     // Whether to show the agent panel button in the status bar.
     "button": true,
     // Where to dock the agent panel. Can be 'left', 'right' or 'bottom'.
-    "dock": "right",
+    "dock": "left",
     // Whether the agent panel should use flexible (proportional) sizing.
     //
     // Default: true
     "flexible": true,
     // Where to position the threads sidebar. Can be 'left' or 'right'.
-    "sidebar_side": "right",
+    "sidebar_side": "left",
     // Default width when the agent panel is docked to the left or right.
     "default_width": 640,
     // Default height when the agent panel is docked to the bottom.
@@ -418,13 +582,18 @@
           "create_directory": true,
           "delete_path": true,
           "diagnostics": true,
+          "apply_code_action": true,
           "edit_file": true,
           "fetch": true,
+          "find_path": true,
+          "find_references": true,
+          "get_code_actions": true,
+          "go_to_definition": true,
           "list_directory": true,
           "project_notifications": false,
           "move_path": true,
           "now": true,
-          "find_path": true,
+          "rename_symbol": true,
           "read_file": true,
           "restore_file_from_disk": true,
           "save_file": true,
@@ -448,6 +617,9 @@
           "project_notifications": false,
           "now": true,
           "find_path": true,
+          "find_references": true,
+          "get_code_actions": true,
+          "go_to_definition": true,
           "read_file": true,
           "open": true,
           "grep": true,
@@ -463,10 +635,6 @@
         "tools": {},
       },
     },
-    // Whether to start a new thread in the current local project or in a new Git worktree.
-    //
-    // Default: local_project
-    "new_thread_location": "local_project",
     // Where to show notifications when the agent has either completed
     // its response, or else needs confirmation before it can run a
     // tool action.
@@ -518,60 +686,10 @@
     "show_merge_conflict_indicator": true,
   },
 
-  // Controls how semantic tokens from language servers are used for syntax highlighting
-  "semantic_tokens": "combined",
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃                 Diagnostics                  ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-  // When to automatically save edited buffers
-  "autosave": "on_focus_change",
-
-  // Settings related to the editor's tab bar
-  "tab_bar": {
-    "show": true,
-    "show_nav_history_buttons": true,
-    "show_tab_bar_buttons": true,
-    "show_pinned_tabs_in_separate_row": false,
-  },
-
-  // Settings related to the editor's tabs
-  "tabs": {
-    "git_status": true,
-    "close_position": "right",
-    "file_icons": true,
-    "show_close_button": "hover",
-    "activate_on_close": "history",
-    "show_diagnostics": "errors",
-  },
-
-  // Settings related to preview tabs
-  "preview_tabs": {
-    "enabled": true,
-    "enable_preview_from_project_panel": true,
-    "enable_preview_from_file_finder": false,
-    "enable_preview_from_multibuffer": true,
-    "enable_preview_multibuffer_from_code_navigation": false,
-    "enable_preview_file_from_code_navigation": true,
-    "enable_keep_preview_on_code_navigation": false,
-  },
-
-  // Settings related to the file finder
-  "file_finder": {
-    "file_icons": true,
-    "modal_max_width": "medium",
-    "skip_focus_for_active_in_search": true,
-    "include_ignored": "smart",
-    "include_channels": true,
-  },
-
-  // Control what info is collected by Zed
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false,
-  },
-
-  // Whether to disable all AI features in Zed
-  "disable_ai": false,
-
-  // Diagnostics configuration
   "diagnostics": {
     "button": true,
     "include_warnings": true,
@@ -589,105 +707,10 @@
     },
   },
 
-  // Files or globs of files that will be excluded by Zed entirely
-  "file_scan_exclusions": [
-    "**/.git",
-    "**/.svn",
-    "**/.hg",
-    "**/.jj",
-    "**/.sl",
-    "**/.repo",
-    "**/CVS",
-    "**/.DS_Store",
-    "**/Thumbs.db",
-    "**/.classpath",
-    "**/.settings",
-    // above is default from Zed
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃                   Terminal                   ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-    "**/__pycache__",
-    "**/.pytest_cache",
-    "**/.mypy_cache",
-
-    "**/*.log",
-    "**/*.tmp",
-
-    "**/node_modules",
-    "**/coverage",
-
-    "**/venv",
-    "**/.venv",
-  ],
-
-  "edit_predictions": {
-    // Which edit prediction provider to use.
-    "provider": "none",
-    // A list of globs representing files that edit predictions should be disabled for.
-    // There's a sensible default list of globs already included.
-    // Any addition to this list will be merged with the default list.
-    // Globs are matched relative to the worktree root,
-    // except when starting with a slash (/) or equivalent in Windows.
-    "disabled_globs": [
-      "**/.env*",
-      "**/*.pem",
-      "**/*.key",
-      "**/*.cert",
-      "**/*.crt",
-      "**/.dev.vars",
-      "**/secrets.yml",
-      "**/.zed/settings.json", // zed project settings
-      "/**/zed/settings.json", // zed user settings
-      "/**/zed/keymap.json",
-    ],
-    // When to show edit predictions previews in buffer.
-    // This setting takes two possible values:
-    // 1. Display predictions inline when there are no language server completions available.
-    //     "mode": "eager"
-    // 2. Display predictions inline only when holding a modifier key (alt by default).
-    //     "mode": "subtle"
-    "mode": "subtle",
-    // Copilot-specific settings
-    // "copilot": {
-    //   "enterprise_uri": "",
-    //   "proxy": "",
-    //   "proxy_no_verify": false
-    //   "enable_next_edit_suggestions": true
-    // },
-    "copilot": {
-      "enterprise_uri": null,
-      "proxy": null,
-      "proxy_no_verify": null,
-      "enable_next_edit_suggestions": true,
-    },
-    "codestral": {
-      "api_url": "https://codestral.mistral.ai",
-      "model": "codestral-latest",
-      "max_tokens": 150,
-    },
-    "ollama": {
-      "api_url": "http://localhost:11434",
-      "model": "qwen2.5-coder:7b-base",
-      "prompt_format": "infer",
-      "max_output_tokens": 64,
-    },
-    "open_ai_compatible_api": {
-      "api_url": "",
-      "model": "",
-      "prompt_format": "infer",
-      "max_output_tokens": 64,
-    },
-  },
-
-  // Status bar-related settings
-  "status_bar": {
-    "experimental.show": true,
-    "show_active_file": true,
-    "active_language_button": false,
-    "cursor_position_button": true,
-    "line_endings_button": false,
-    "active_encoding_button": "non_utf8",
-  },
-
-  // Settings specific to the terminal
   "terminal": {
     "shell": "system",
     "dock": "bottom",
@@ -773,46 +796,22 @@
     "show_count_badge": true,
   },
 
-  // Vim settings
-  "vim": {
-    "default_mode": "normal",
-    "toggle_relative_line_numbers": false,
-    "use_system_clipboard": "always",
-    "use_smartcase_find": false,
-    "use_regex_search": true,
-    "gdefault": false,
-    "highlight_on_yank_duration": 200,
-    "custom_digraphs": {},
-    "cursor_shape": {
-      "normal": "block",
-      "replace": "underline",
-      "visual": "hollow",
-      "insert": "bar",
-    },
-  },
-
-  // Which-key popup settings
-  "which_key": {
-    "enabled": true,
-    "delay_ms": 200,
-  },
-
-  // =========================
-  // Language-Specific Settings
-  // =========================
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃          Language-Specific Settings          ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
   "languages": {
     "Python": {
-      "formatter": {
-        "language_server": {
-          "name": "ruff",
-        },
-      },
       "format_on_save": "on",
-      "language_servers": ["basedpyright", "ruff"],
-      "preferred_line_length": 100,
-      "show_wrap_guides": true,
       "soft_wrap": "bounded",
+      "wrap_guides": [88, 100],
+      "show_wrap_guides": true,
+      "preferred_line_length": 100,
+      "code_actions_on_format": {
+        "source.fixAll.ruff": false,
+        "source.organizeImports.ruff": false,
+      },
+      "language_servers": ["ruff", "basedpyright", "!ty"],
     },
     "Rust": {
       "formatter": {
@@ -833,21 +832,27 @@
     },
   },
 
-  // =========================
-  // LSP (Language Server Protocol) for Rust
-  // =========================
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃       Language Server Protocols (LSPs)       ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
   "lsp": {
-    // "basedpyright": {
-    //   "settings": {
-    //     "basedpyright.analysis": {
-    //       "inlayHints": {
-    //         "callArgumentNames": false, // Example: Disable arg name hints
-    //         "functionReturnTypes": false,
-    //       },
-    //     },
-    //   },
-    // },
+    "ruff": {},
+    "ty": {},
+    "basedpyright": {
+      "settings": {
+        "python": {
+          "pythonPath": ".venv/bin/python",
+        },
+        "basedpyright.analysis": {
+          "diagnosticMode": "openFilesOnly",
+          "inlayHints": {
+            "callArgumentNames": false,
+            "functionReturnTypes": false,
+          },
+        },
+      },
+    },
     "rust-analyzer": {
       "initialization_options": {
         "check": {
@@ -874,13 +879,24 @@
     },
   },
 
-  // Git Firefly extension
-  "file_types": {
-    "Git Attributes": ["**/{git,.git,.git/info}/attributes"],
-    "Git Config": [
-      "*.gitconfig",
-      "**/{git,.git,.git/modules,.git/modules/*}/config",
-    ],
-    "Git Ignore": ["**/{git,.git}/ignore", "**/.git/info/exclude"],
+  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  // ┃           Auto-install Extensions            ┃
+  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+  "auto_install_extensions": {
+    // Active
+    "env": true,
+    "log": true,
+    "lua": true,
+    "toml": true,
+    "comment": true,
+    "catppuccin": true,
+    "rainbow-csv": true,
+    "git-firefly": true,
+    "python-snippets": true,
+    "catppuccin-icons": true,
+    // Inactive
+    "sql": false,
+    "html": false,
   },
 }

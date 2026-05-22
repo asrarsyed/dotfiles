@@ -33,6 +33,12 @@ hash -d lib=~/Library
 #         Commonly used Aliases (Grouped)        ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+# nvim
+if command -v nvim &> /dev/null; then
+	alias lv='NVIM_APPNAME=LazyVim nvim'
+    alias lvim='NVIM_APPNAME=LazyVim nvim'
+fi
+
 # bat (comment when running cache --build)
 if command -v bat &> /dev/null; then
   alias cat='bat -pp --theme "gruvbox-dark"'
@@ -104,7 +110,7 @@ fi
 
 # curl
 if command -v curl &> /dev/null; then
-    alias get='curl --fail --continue-at - --location --progress-bar --remote-name --remote-time --connect-timeout 10'
+	alias get='curl --fail --location --continue-at - --progress-bar --remote-name --remote-time  --connect-timeout 10 --retry 5 --retry-delay 2'
 fi
 
 # sudo

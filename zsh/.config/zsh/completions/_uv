@@ -1743,6 +1743,8 @@ _arguments "${_arguments_options[@]}" : \
 '*--no-extra=[Don'\''t audit the specified optional dependencies]:NO_EXTRA:' \
 '*--no-group=[Don'\''t audit the specified dependency group]:NO_GROUP:' \
 '*--only-group=[Only audit dependencies from the specified dependency group]:ONLY_GROUP:' \
+'--output-format=[Select the output format]:OUTPUT_FORMAT:((text\:"Display the result in a human-readable format"
+json\:"Display the result in JSON format"))' \
 '*--no-build-package=[Don'\''t build source distributions for a specific package]:NO_BUILD_PACKAGE:' \
 '*--no-binary-package=[Don'\''t install pre-built wheels for a specific package]:NO_BINARY_PACKAGE:' \
 '*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX:_default' \
@@ -4122,6 +4124,7 @@ never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files -/' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'--no-editable[Install any editable dependencies as non-editable \[env\: UV_NO_EDITABLE=\]]' \
 '(--extra)--all-extras[Include all optional dependencies]' \
 '--no-all-extras[]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \

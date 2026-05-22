@@ -1,26 +1,92 @@
-# Description: Dynamic nvim config switcher with fzf
-# Usage: nvimswap [nvim-args]
-
 nvimswap() {
     emulate -L zsh
-    
-    local -a items
-    local config
-    
-    # Available configurations
-    items=("default" "custom" "kickstart" "LazyVim" "NvChad" "AstroNvim")
-    
-    # Show fzf selector with preview
-    config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --border --exit-0)
-    
-    # Handle selection
-    if [[ -z $config ]]; then
-        # Nothing selected
-        return 0
-    elif [[ $config == "default" ]]; then
-        config=""
+
+    command -v fzf >/dev/null || {
+        echo "nvimswap: fzf not installed" >&2
+        return 1
+    }
+
+    local config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"
+    local cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/nvimswap_last"
+
+    local -a configs
+    configs=("default")
+
+    # ----------------------------
+    # Discover valid Neovim configs
+    # ----------------------------
+    while IFS= read -r dir; do
+        configs+=("$(basename "$dir")")
+    done < <(
+        find "$config_dir" -maxdepth 1 -type d \
+            ! -name "nvim" \
+            ! -name ".*" \
+            \( -exec test -f "{}/init.lua" ';' \
+            -o -exec test -f "{}/init.vim" ';' \) \
+            -print 2>/dev/null | sort
+    )
+
+    # ----------------------------
+    # Float last-used to top (if valid)
+    # ----------------------------
+    if [[ -f "$cache_file" ]]; then
+        local last
+        last=$(<"$cache_file")
+
+        if [[ "$last" == "default" || -d "$config_dir/$last" ]]; then
+            configs=("$last" "${(@)configs:#$last}")
+        fi
     fi
-    
-    # Launch nvim with selected config
-    NVIM_APPNAME=$config command nvim "$@"
+
+    # ----------------------------
+    # Preview (lua or vim fallback)
+    # ----------------------------
+	local preview_cmd='
+        config_dir="'"$config_dir"'"
+        if [[ {} == default ]]; then
+            echo "$config_dir/nvim (default)"
+        elif [[ -f "$config_dir/{}/init.lua" ]]; then
+            bat --style=plain --color=always "$config_dir/{}/init.lua" 2>/dev/null ||
+            cat "$config_dir/{}/init.lua"
+        elif [[ -f "$config_dir/{}/init.vim" ]]; then
+            bat --style=plain --color=always "$config_dir/{}/init.vim" 2>/dev/null ||
+            cat "$config_dir/{}/init.vim"
+        else
+            echo "No init file found"
+        fi
+    '
+
+    # ----------------------------
+    # fzf picker
+    # ----------------------------
+    local selected
+    selected=$(
+        printf '%s\n' "${configs[@]}" |
+        fzf \
+            --prompt=" Neovim Config > " \
+            --height=~50% \
+            --layout=reverse \
+            --border=rounded \
+            --header="↑↓ select · enter confirm · esc cancel" \
+            --preview="$preview_cmd" \
+            --preview-window=right:60%:wrap \
+            --exit-0
+    )
+
+    [[ -z "$selected" ]] && return 0
+
+    # ----------------------------
+    # Persist selection
+    # ----------------------------
+    echo "$selected" >| "$cache_file"
+
+    # ----------------------------
+    # Launch Neovim
+    # ----------------------------
+    if [[ "$selected" == "default" ]]; then
+        unset NVIM_APPNAME
+        command nvim "$@"
+    else
+        NVIM_APPNAME="$selected" command nvim "$@"
+    fi
 }

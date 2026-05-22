@@ -14,11 +14,11 @@ brew "colima"                     # Container runtimes on MacOS (and Linux) with
 brew "docker"                     # Pack, ship and run any application as a lightweight container
 cask "miniforge"                  # minimal installer for conda specific to conda-forge
 cask "copilot-cli"                # Brings the power of Copilot coding agent directly to your terminal
+cask "dbeaver-community"          # Universal database tool and SQL client
 
 # <- Inactive Programming Relevant ->
 # brew "mysql"                      # Open source relational database management system
 # cask "temurin@21"                 # Java Development Kit from the Eclipse Foundation (Adoptium)
-# cask "dbeaver-community"          # Universal database tool and SQL client
 
 
 # <- Active "Everyday" Binaries ->
@@ -81,6 +81,7 @@ cask "maccy"                      # clipboard manager for macos
 cask "thaw"                       # hide menu bar items to give your mac a cleaner look
 cask "trex"                       # easy to use text extraction tool
 cask "pika"                       # colour picker for colours onscreen
+cask "loom"                       # screen and video recording software
 cask "zed"                        # multiplayer code editor
 cask "zen"                        # firefox alternative browser
 
@@ -97,10 +98,10 @@ cask "font-jetbrains-mono-nerd-font"
 # <- Active Mac Apps ->
 mas "CmdList", id: 6747479815, purchase: true
 mas "BarNotes", id: 6744329261, purchase: true
+mas "SnippetsLab", id: 1006087419, purchase: true
 mas "Microsoft Word", id: 462054704, purchase: true
 mas "Microsoft Excel", id: 462058435, purchase: true
-
+mas "Flow: Focus & Pomodoro Timer", id: 1423210932, purchase: true
 
 # <- Inactive Mac Apps ->
 # mas "HP Smart", id: 1474276998, purchase: true    # hp smart app that lets you print, scan, fax, and share documents
-# mas "SnippetsLab", id: 1006087419, purchase: true # full-featured snippet manager and note-taking app designed for developers
