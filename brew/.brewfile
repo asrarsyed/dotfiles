@@ -8,12 +8,17 @@ brew "curl"                       # Gets a file from an HTTP, HTTPS or FTP serve
 brew "stow"                       # Symlink farm manager that organizes dotfiles under a single directory
 
 # <- Programming Relevant ->
-brew "uv"                         # extremely fast Python package installer and resolver
+brew "uv"                         # Extremely fast Python package installer and resolver
 brew "fnm"                        # Fast and simple Node.js version manager
+brew "pass"                       # The standard unix password manager
+brew "gnupg"                      # Formerly known as: gnupg2
 brew "colima"                     # Container runtimes on MacOS (and Linux) with minimal setup
 brew "docker"                     # Pack, ship and run any application as a lightweight container
-cask "miniforge"                  # minimal installer for conda specific to conda-forge
+brew "direnv"                     # Load/unload environment variables based on $PWD
+cask "miniforge"                  # Minimal installer for conda specific to conda-forge
 cask "copilot-cli"                # Brings the power of Copilot coding agent directly to your terminal
+brew "pinentry-mac"               # Pinentry for GPG on Mac
+cask "wireshark-app"              # Network protocol analyzer and capture tool
 cask "dbeaver-community"          # Universal database tool and SQL client
 
 # <- Inactive Programming Relevant ->
@@ -49,13 +54,11 @@ brew "ncdu"                       # (Local) detailed disk usage analysis and cle
 brew "lhvy/tap/pipes-rs"          # over-engineered rewrite of pipes.sh in Rust
 brew "macchina"                   # system information fetcher, with an emphasis on performance & minimalism
 brew "cmatrix"                    # terminal screensaver based of "the matrix" like implementation
-brew "cava"                       # console-based Audio Visualizer for ALSA
 brew "borders"                    # lightweight tool designed to add colored borders to user windows
+brew "cava"                       # console-based Audio Visualizer for ALSA
 
 # <- Inactive Binaries ->
-# brew "glow"                       # render markdown on the cli
 # brew "yazi"                       # blazing fast terminal file manager written in Rust
-# brew "helix"                      # post-modern modal text editor
 # brew "tokei"                      # fast and accurate code counter
 # brew "gitui"                      # blazing fast terminal-ui for git written in rust
 # brew "vivid"                      # generator for ls_colors; supports multiple color themes
@@ -66,10 +69,8 @@ brew "borders"                    # lightweight tool designed to add colored bor
 # <- Active Apps ->
 cask "TheBoredTeam/boring-notch/boring-notch"
 cask "nikitabobko/tap/aerospace"  # i3-like tiling window manager for macos
-cask "visual-studio-code"         # open-source code editor
+cask "visual-studio-code"         # fake open-source code editor
 cask "helium-browser"             # ya baby! - ungoogled chromium without the shitty google
-cask "hammerspoon"                # desktop automation application
-cask "appcleaner"                 # small application to thoroughly uninstall unwanted apps
 cask "localsend"                  # open-source cross-platform alternative to airdrop
 cask "rectangle"                  # move and resize windows using keyboard shortcuts
 cask "obsidian"                   # private and flexible writing app stored locally
@@ -80,14 +81,14 @@ cask "meteor"                     # customisable CLI tool to write formatted con
 cask "maccy"                      # clipboard manager for macos
 cask "thaw"                       # hide menu bar items to give your mac a cleaner look
 cask "trex"                       # easy to use text extraction tool
-cask "pika"                       # colour picker for colours onscreen
 cask "loom"                       # screen and video recording software
+cask "zoom"                       # video communication and virtual meeting platform
 cask "zed"                        # multiplayer code editor
 cask "zen"                        # firefox alternative browser
 
 # <- Inactive Apps ->
+# cask "pika"                       # colour picker for colours onscreen
 # cask "hyperkey"                   # convert your caps lock key or any of your modifier keys to the hyper key
-
 
 # <- Active Fonts ->
 cask "font-maple-mono-nf"
@@ -101,7 +102,3 @@ mas "BarNotes", id: 6744329261, purchase: true
 mas "SnippetsLab", id: 1006087419, purchase: true
 mas "Microsoft Word", id: 462054704, purchase: true
 mas "Microsoft Excel", id: 462058435, purchase: true
-mas "Flow: Focus & Pomodoro Timer", id: 1423210932, purchase: true
-
-# <- Inactive Mac Apps ->
-# mas "HP Smart", id: 1474276998, purchase: true    # hp smart app that lets you print, scan, fax, and share documents

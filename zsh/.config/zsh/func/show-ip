@@ -1,30 +1,14 @@
-# Description: Display local and/or public IP address
-# Usage: show-ip [-l] [-a]
-#   -l: Show local IP only
-#   -a: Show both local and public IP
+# Description: Display local and public IP address
+# Usage: show-ip
 
 show-ip() {
     emulate -L zsh
 
-    local -a listlocal listall
-    zparseopts -D -E l=listlocal a=listall
+    local ip
+    ip=$(curl -fs4 --connect-timeout 1 --max-time 2 \
+        https://1.1.1.1/cdn-cgi/trace 2>/dev/null \
+        | awk -F= '/^ip=/{print $2}')
 
-    local print_local print_public
-
-    print_local() {
-        print "Local IP: $(ipconfig getifaddr en0)"
-    }
-
-    print_public() {
-        print "Public IP: $(curl -fs4 http://checkip.amazonaws.com)"
-    }
-
-    if (( $#listall )); then
-        print_local
-        print_public
-    elif (( $#listlocal )); then
-        print_local
-    else
-        print_public
-    fi
+    print "Public IP: ${ip:-unavailable}"
+    print "Local IP: $(ipconfig getifaddr en0)"
 }

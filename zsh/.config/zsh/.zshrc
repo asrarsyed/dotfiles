@@ -61,6 +61,7 @@ plug "hlissner/zsh-autopair"                     # Slow but essential for experi
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"         # Heavy syntax highlighting last
 plug "zsh-users/zsh-history-substring-search"    # Relatively light, improves navigation?
+plug "MichaelAquilina/zsh-autoswitch-virtualenv" 
 
 # Defer ONLY sourcing - execution (explicit entrypoints, minimal delays)
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -68,6 +69,7 @@ source $ZAP_PLUGIN_DIR/vim/vim.plugin.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-autopair/autopair.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
+zsh-defer source $ZAP_PLUGIN_DIR/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh
 
 # Bind autosuggest widgets ONCE, after everything exists
 zsh-defer _zsh_autosuggest_bind_widgets
@@ -124,7 +126,8 @@ function cache_init() {
 }
 
 zsh-defer cache_init "fzf" "fzf --zsh"
-zsh-defer cache_init "zoxide" "zoxide init zsh --cmd cd --hook pwd"
+zsh-defer cache_init "direnv" "direnv hook zsh"
+zsh-defer cache_init "zoxide" "zoxide init zsh --hook pwd"
 zsh-defer cache_init "tv" "tv init zsh" "tv completion zsh"
 zsh-defer cache_init "uv" ":" "uv generate-shell-completion zsh"
 zsh-defer cache_init "atuin" "atuin init zsh" "atuin gen-completions --shell zsh"

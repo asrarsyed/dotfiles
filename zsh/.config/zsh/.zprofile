@@ -81,7 +81,7 @@ fpath=(
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Core environment setup
-# export GPG_TTY=$TTY
+export GPG_TTY=$(tty)
 
 # Conda/Mamba (session-level preferences)
 export MAMBA_CHANGEPS1=false

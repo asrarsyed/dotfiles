@@ -44,3 +44,15 @@ __pycache__/
 node_modules/
 jspm_packages/
 **/.claude/settings.local.json
+
+# Direnv
+.envrc
+
+# Secret/API Key Files
+.env
+.env.*
+*.env
+.env-keys
+secrets.*
+*.secret
+*.secrets

@@ -36,7 +36,7 @@ hash -d lib=~/Library
 # nvim
 if command -v nvim &> /dev/null; then
 	alias lv='NVIM_APPNAME=LazyVim nvim'
-    alias lvim='NVIM_APPNAME=LazyVim nvim'
+  alias lvim='NVIM_APPNAME=LazyVim nvim'
 fi
 
 # bat (comment when running cache --build)
@@ -49,7 +49,7 @@ fi
 if command -v brew &> /dev/null; then
     alias bbcat="cat $HOMEBREW_BUNDLE_FILE"  # View contents of Brewfile
     alias buubc="brew upgrade --cask --greedy"  # Main Command (Upgrade all Casks separately)
-    alias buubi="brew update && brew bundle install --cleanup --file=~/.brewfile && brew upgrade"  # Main Command (Upgrade Formulae)
+	  alias buubi="brew update && brew bundle install --cleanup --force --file=~/.brewfile && brew upgrade" # Main Command (Upgrade Formulae)
     alias bbcuz="brew bundle cleanup --force --zap --file=~/.brewfile && brew cleanup --prune=all"  # Cleanup unneeded packages aggressively
 fi
 
@@ -74,13 +74,11 @@ fi
 
 # eza
 if command -v eza &> /dev/null; then
-    alias ls='eza --group-directories-first --icons -s name'
-    alias lf='eza --group-directories-first --icons -s name -A'
-    alias ll='eza --group-directories-first --icons --git -s name -lh'
-    alias la='eza --group-directories-first --icons --git -s name -lha'
-    alias lld="eza --group-directories-first --icons -s name -l | grep ^d"
-    alias tree='ll --tree --level=2'
-    alias trees='ll -abhT --level=3 -I .git --no-filesize --no-user --no-time --no-permissions'
+   alias ll='eza --icons=always --color=always --hyperlink --across --group-directories-first --all'
+   alias ls='eza --icons=always --color=always --hyperlink --long --group-directories-first --time-style=relative --no-user'
+   alias la='eza --icons=always --color=always --hyperlink --long --group-directories-first --all --header --git'
+   alias lr='eza --icons=always --color=always --hyperlink --long --group-directories-first --all --sort=modified --header'
+   alias trees='eza --classify=always --hyperlink --tree --level=3 -I .git --no-filesize --no-user --no-time --no-permissions'
 fi
 
 # fd
