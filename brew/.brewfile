@@ -1,5 +1,11 @@
 #<- Active Taps ->
 tap "buo/cask-upgrade"            # Best for manually updating GUI apps (casks) with more control
+tap "nikitabobko/tap"             # required for aerospace
+tap "TheBoredTeam/boring-notch"   # required for boring-notch
+tap "stefanlogue/tools"           # required for meteor
+tap "felixkratz/formulae"         # required for borders
+tap "jordond/tap"                 # required for jolt
+tap "lhvy/tap"                    # required for pipes-rs
 
 # <- Essential Binaries ->
 brew "git"                        # Distributed revision control system
@@ -10,6 +16,7 @@ brew "stow"                       # Symlink farm manager that organizes dotfiles
 # <- Programming Relevant ->
 brew "uv"                         # Extremely fast Python package installer and resolver
 brew "fnm"                        # Fast and simple Node.js version manager
+cask "utm"                        # Virtual machines UI using QEMU
 brew "pass"                       # The standard unix password manager
 brew "gnupg"                      # Formerly known as: gnupg2
 brew "colima"                     # Container runtimes on MacOS (and Linux) with minimal setup
@@ -44,21 +51,20 @@ brew "fd"                         # simple, fast and user-friendly alternative t
 brew "jq"                         # lightweight and flexible command-line json processor
 
 # <- Active "Occasional" Binaries ->
-brew "jordond/tap/jolt"           # terminal-based battery and energy monitor for macOS and Linux
+brew "jolt"                       # terminal-based battery and energy monitor for macOS and Linux
 brew "scooter"                    # interactive find-and-replace terminal UI app
 brew "rmlint"                     # fast tool to remove dupes and other lint from your filesystem
 brew "btop"                       # resource monitor c++ version (Choose 1: btop/neohtop)
 brew "ncdu"                       # (Local) detailed disk usage analysis and cleanup
 
 # <- Active "Fun" Binaries ->
-brew "lhvy/tap/pipes-rs"          # over-engineered rewrite of pipes.sh in Rust
+brew "pipes-rs"                   # over-engineered rewrite of pipes.sh in Rust
 brew "macchina"                   # system information fetcher, with an emphasis on performance & minimalism
 brew "cmatrix"                    # terminal screensaver based of "the matrix" like implementation
 brew "borders"                    # lightweight tool designed to add colored borders to user windows
 brew "cava"                       # console-based Audio Visualizer for ALSA
 
 # <- Inactive Binaries ->
-# brew "yazi"                       # blazing fast terminal file manager written in Rust
 # brew "tokei"                      # fast and accurate code counter
 # brew "gitui"                      # blazing fast terminal-ui for git written in rust
 # brew "vivid"                      # generator for ls_colors; supports multiple color themes
@@ -67,8 +73,8 @@ brew "cava"                       # console-based Audio Visualizer for ALSA
 
 
 # <- Active Apps ->
-cask "TheBoredTeam/boring-notch/boring-notch"
-cask "nikitabobko/tap/aerospace"  # i3-like tiling window manager for macos
+cask "boring-notch"               # free and open-source macbook notch
+cask "aerospace"                  # i3-like tiling window manager for macos
 cask "visual-studio-code"         # fake open-source code editor
 cask "helium-browser"             # ya baby! - ungoogled chromium without the shitty google
 cask "localsend"                  # open-source cross-platform alternative to airdrop

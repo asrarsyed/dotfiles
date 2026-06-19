@@ -16,6 +16,7 @@ auto-update-channel = stable
 
 # Behavior
 working-directory = home
+confirm-close-surface = false
 quit-after-last-window-closed = true
 tab-inherit-working-directory = false
 window-inherit-working-directory = false

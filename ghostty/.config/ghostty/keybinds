@@ -60,7 +60,7 @@ keybind = ctrl+tab=unbind
 keybind = super+shift+minus=decrease_font_size:1
 
 # Pane Behavior
-keybind = super+enter=new_split
+keybind = super+enter=toggle_split_zoom
 keybind = super+==equalize_splits
 
 # Pane Navigation

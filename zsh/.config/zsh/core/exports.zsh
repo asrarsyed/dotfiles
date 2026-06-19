@@ -93,4 +93,3 @@ LS_COLORS+=":*.db=36:*.sqlite=36:*.sqlite3=36"
 
 # Final export
 export LS_COLORS
-

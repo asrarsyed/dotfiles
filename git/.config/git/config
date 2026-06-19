@@ -19,7 +19,7 @@
 
 # Core
 [core]
-  pager = delta # Use Delta as the default pager for all Git output (diff, log, show, etc.)
+	pager = /opt/homebrew/bin/delta
   editor = nvim # The text editor used for writing commit messages and tags
   autocrlf = input # Convert CRLF (Windows) to LF (Unix) on commit; keep LF on checkout
   fsmonitor = false # Speed up 'git status' by using the OS to watch for file changes
@@ -47,7 +47,7 @@
   show = delta
   blame = true
   config = true
-  reflog = true
+	reflog = false
   diff = diffnav
   log = delta --paging=always # always paginate git log (using delta)
 

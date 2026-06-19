@@ -44,17 +44,13 @@ WORDCHARS='' # Redundant with setopt complete_in_word: improve edge-case complet
 if [[ -z $_ZSTYLE_INIT_DONE ]]; then
   _ZSTYLE_INIT_DONE=1
   # Case-insensitive matching (ranked from slowest-fastest)
-  # zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
   zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-  # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' '+r:|?=**'
-  # zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
   # zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
   # Menu-based selection
   zstyle ':completion:*:default' menu select
   zstyle ':completion:*' increment yes
   zstyle ':completion:*' verbose yes
-  zstyle ':completion:*' squeeze-slashes yes  # replace // with /; may inadvertently mask issues when debugging paths
 
   # Use faster hashtable for completion caching
   zstyle ':completion:*' rehash false  # improves performance
@@ -79,7 +75,6 @@ if [[ -z $_ZSTYLE_INIT_DONE ]]; then
 
   # Colorize completion candidates
   zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-  zstyle ':completion:*' special-dirs true
 
   # _complete is base completer (standard completion for commands, files, etc.)
   # _approximate will fix completion if there are no exact matches (e.g., correct typos)
@@ -96,8 +91,6 @@ if [[ -z $_ZSTYLE_INIT_DONE ]]; then
 
   # Optimize sudo completion (faster path search)
   zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
-
-  # Testing these below (gotta organize if I keep)
 
   # Affects how completions are grouped for commands; could improve clarity
   zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands

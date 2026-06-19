@@ -1,8 +1,8 @@
 # Description: A better and recursive which/whence - traces command resolution
-# Usage: pluswhat <command> [command...]
+# Usage: inspect <command> [command...]
 # From: https://leahneukirchen.org/dotfiles/.zshrc
 
-pluswhat() {
+inspect() {
     emulate -L zsh
     
     ( # constrain unalias to subshell
@@ -16,23 +16,23 @@ pluswhat() {
                     words[1]=${words[1]#'\'}
                     unalias $words[1] 2>/dev/null
                 fi
-                pluswhat $words[1]
+                inspect $words[1]
             elif (( $+functions[$cmd] )); then
                 whence -v $cmd
                 whence -f $cmd
             elif (( $+commands[$cmd] )); then
-                pluswhat $commands[$cmd]
+                inspect $commands[$cmd]
             elif [[ -h $cmd ]]; then
                 file $cmd
-                pluswhat $cmd:A
+                inspect $cmd:A
             elif [[ -x $cmd ]]; then
                 file $cmd
             else
-                which $cmd
+                whence -va $cmd
             fi
         done
     )
 }
 
 # Enable completion
-compdef pluswhat=which
+compdef inspect=which

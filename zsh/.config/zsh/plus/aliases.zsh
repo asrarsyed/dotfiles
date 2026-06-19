@@ -47,16 +47,16 @@ fi
 
 # brew
 if command -v brew &> /dev/null; then
-    alias bbcat="cat $HOMEBREW_BUNDLE_FILE"  # View contents of Brewfile
-    alias buubc="brew upgrade --cask --greedy"  # Main Command (Upgrade all Casks separately)
-	  alias buubi="brew update && brew bundle install --cleanup --force --file=~/.brewfile && brew upgrade" # Main Command (Upgrade Formulae)
-    alias bbcuz="brew bundle cleanup --force --zap --file=~/.brewfile && brew cleanup --prune=all"  # Cleanup unneeded packages aggressively
+    alias bbcat='cat "${HOMEBREW_BUNDLE_FILE:-$HOME/.brewfile}"'  # View contents of Brewfile
+    alias buubc='brew upgrade --cask --greedy'  # Main Command (Upgrade all Casks separately)
+    alias buubi='brew update && brew bundle install --force --file=~/.brewfile && brew upgrade' # Main Command (Sync Brewfile + Upgrade Formulae)
+    alias bbcuz='brew bundle cleanup --force --zap --no-mas --file=~/.brewfile && brew cleanup --prune=all'  # Cleanup unneeded packages aggressively
 fi
 
 # btop
 if command -v btop &> /dev/null; then
-    alias top="btop"
-    alias htop="btop"
+    alias top='btop'
+    alias htop='btop'
 fi
 
 # clear
@@ -78,7 +78,7 @@ if command -v eza &> /dev/null; then
    alias ls='eza --icons=always --color=always --hyperlink --long --group-directories-first --time-style=relative --no-user'
    alias la='eza --icons=always --color=always --hyperlink --long --group-directories-first --all --header --git'
    alias lr='eza --icons=always --color=always --hyperlink --long --group-directories-first --all --sort=modified --header'
-   alias trees='eza --classify=always --hyperlink --tree --level=3 -I .git --no-filesize --no-user --no-time --no-permissions'
+   alias trees='eza --classify=always --hyperlink --tree --level=3 -I .git --no-filesize --no-user --no-time --no-permissions --group-directories-first'
 fi
 
 # fd

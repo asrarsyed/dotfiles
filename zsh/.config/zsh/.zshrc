@@ -2,7 +2,7 @@
 # Execution Order: .zshenv ➜ .zprofile ➜ .zshrc ➜ .zlogin ➜ .zlogout
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#        Starship Configuration File Version      ┃
+#        Starship Configuration File Version     ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 (( $+commands[starship] )) && export STARSHIP_CONFIG="$HOME/.config/starship/version01.toml"
@@ -41,7 +41,7 @@ done
 # }
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#          Load Essential Workflow Plugins        ┃
+#          Load Essential Workflow Plugins       ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Enable install-only mode
@@ -79,7 +79,7 @@ zsh-defer source $ZAP_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting
 zsh-defer source $ZDOTDIR/core/syntaxtheme.zsh
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#    Postload Compinit & Personal Configurations  ┃
+#    Postload Compinit & Personal Configurations ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 zsh-defer source "$ZDOTDIR/plus/fzfconfig.zsh"   # fzf helpers/bindings/plugin

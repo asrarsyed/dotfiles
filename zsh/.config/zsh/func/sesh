@@ -15,7 +15,7 @@ sesh() {
             {
                 echo "[NEW]"
                 tmux list-sessions -F "[SESSION] #{session_name}" 2>/dev/null
-                fd -H . ~/Dotfiles ~/Desktop -t d -d 1
+                fd -H . ~/Developer -t d -d 1
             } | fzf --print-query --prompt="Session/directory: "
         ) || return 0
     fi

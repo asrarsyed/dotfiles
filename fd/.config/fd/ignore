@@ -31,3 +31,19 @@ node_modules/
 *.pyc
 .venv/
 __pycache__/
+.pytest_cache/
+.mypy_cache/
+.tox/
+.ruff_cache/
+.coverage
+
+# JS/TS
+.next/
+.turbo/
+.nuxt/
+.svelte-kit/
+
+# Misc
+.DS_Store
+.cache/
+tmp/
