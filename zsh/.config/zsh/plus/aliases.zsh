@@ -1,8 +1,8 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#   Aliases - Common Shortcuts & Command Tweaks  ┃
+# ┃      Aliases Shortcuts & Command Tweaks      ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-alias cb='centerbox' # remove after
+alias cb='copy centerbox'
 
 # Print working dir & copy to clipboard
 alias cwd='pwd && echo -n `pwd`| pbcopy'
@@ -30,7 +30,7 @@ hash -d dow=~/Downloads
 hash -d lib=~/Library
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#         Commonly used Aliases (Grouped)        ┃
+# ┃       Commonly used Aliases (Grouped)        ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # nvim
@@ -103,7 +103,7 @@ if command -v macchina &> /dev/null; then
 fi
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#        Uncommonly Used Aliases (Grouped)       ┃
+# ┃      Uncommonly Used Aliases (Grouped)       ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # curl

@@ -1,5 +1,5 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#           Main Starship Configuration           ┃
+#           Main Starship Configuration          ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Get editor completions based on the config schema
@@ -17,25 +17,23 @@ add_newline = false
 # Follows symlinks to check if they're directories; used in modules such as git.
 follow_symlinks = false
 
-# 1: First Line: Left Formatting
-# 2: First Line: Right Formatting
-# 3: Second Line: Character
-format = """
-$directory$git_branch$git_commit$git_status$cmd_duration$all$fill\
-$git_state$status$jobs\
-$line_break$character\
-"""
+# format = """
+# $directory$git_branch$git_commit$git_status$cmd_duration$all$git_state$status$jobs\
+# $line_break$character\
+# """
+
+format = """$directory$git_branch$git_commit$git_status$cmd_duration$all$line_break$character"""
+right_format = """$git_state$status$jobs"""
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#            Configs for Custom Palettes          ┃
+#            Configs for Custom Palettes         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
 
 # palette = 'custom_theme'
 # [palettes.custom_theme]
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#            Configs for Default Modules          ┃
+#            Configs for Default Modules         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 [character]
@@ -75,9 +73,9 @@ $line_break$character\
   disabled = false
   symbol_threshold = 1
   number_threshold = 1
-  symbol = '✦ '
+  symbol = ' ✦ '
   style = 'bold #a9a1e1'
-  format = '[$symbol$number]($style) '
+  format = '[$symbol$number]($style)'
 
 [line_break]
   disabled = false
@@ -102,12 +100,17 @@ $line_break$character\
   recognize_signal_code = true
   map_symbol = true
   pipestatus = true
-  pipestatus_separator = ''
-  pipestatus_format = '\[ $pipestatus\] ⇒ [$symbol$common_meaning$signal_name$maybe_int]($style)'
-  format = '([$symbol($common_meaning)($signal_name)($maybe_int)]($style) )'
+#   pipestatus_separator = ' | '
+#   pipestatus_format = '\[$pipestatus\] '
+#   pipestatus_segment_format = '[$symbol$common_meaning]($style)'
+#   format = '([$symbol($common_meaning)($signal_name)($maybe_int)]($style) )'
+  pipestatus_separator = ' | '
+  pipestatus_format = ' $pipestatus'
+  pipestatus_segment_format = '[$symbol$common_meaning]($style)'
+  format = '([$symbol($common_meaning)($signal_name)($maybe_int)]($style))'
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#        Config for Version Control Modules       ┃
+#        Config for Version Control Modules      ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 [fossil_branch]
@@ -147,15 +150,13 @@ $line_break$character\
 
 [git_state]
   disabled = false
-  rebase = 'REBASING'
   merge =	'MERGING'
+  rebase = 'REBASING'
   revert = 'REVERTING'
-  cherry_pick = 'CHERRY-PICKING'
   bisect = 'BISECTING'
-  am = 'AM'
-  am_or_rebase = 'AM/REBASE'
+  cherry_pick = 'CHERRY-PICKING'
   style =	'bold yellow'
-  format = '[$state $progress_current/$progress_total]($style) '
+  format = '[$state $progress_current/$progress_total]($style)'
 
 [git_metrics]
   disabled = true
@@ -207,7 +208,7 @@ $line_break$character\
   format = '[$state $progress_current/$progress_total]($style) '
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#           Configs for Disabled Modules          ┃
+#           Configs for Disabled Modules         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 [time]

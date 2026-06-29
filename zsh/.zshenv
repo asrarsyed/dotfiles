@@ -12,6 +12,9 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 export XDG_PROJECTS_DIR="${XDG_PROJECTS_DIR:-$HOME/Developer}"
 
+# Store npm cache and logs under XDG cache instead of ~/.npm
+export npm_config_cache="$XDG_CACHE_HOME/npm"
+
 # Terminal Settings
 export TERM=xterm-256color
 export COLORTERM='truecolor'

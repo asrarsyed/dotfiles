@@ -1,5 +1,5 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#                Custom Keybindings              ┃
+# ┃              Custom Keybindings              ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Use "bindkey -l" to list available key bindings
@@ -72,7 +72,7 @@ zmodload zsh/terminfo 2>/dev/null
 bindkey -v
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-# ┃            Global / Esc sequences            ┃
+# ┃          Global / Escape Sequences           ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Autosuggestions
@@ -88,11 +88,16 @@ bindkey -s "${key_info[Escape]}l" 'ls\n'
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Insert mode readline-style helpers
-bindkey -M viins "${key_info[Control]}A" beginning-of-line
-bindkey -M viins "${key_info[Control]}E" end-of-line
-bindkey -M viins "${key_info[Control]}F" forward-word
-bindkey -M viins "${key_info[Control]}W" backward-word
-bindkey -M viins "${key_info[Control]}X" backward-kill-word
+bindkey -M viins "${key_info[Control]}A" beginning-of-line       # jump to start of line
+bindkey -M viins "${key_info[Control]}E" end-of-line             # jump to end of line
+bindkey -M viins "${key_info[Control]}F" forward-word            # move forward one word
+bindkey -M viins "${key_info[Control]}W" backward-word           # move backward one word
+bindkey -M viins "${key_info[Control]}D" kill-word               # delete word after cursor
+bindkey -M viins "${key_info[Control]}X" backward-kill-word      # delete word before cursor
+bindkey -M viins "${key_info[Control]}K" kill-line               # delete everything right of cursor
+bindkey -M viins "${key_info[Control]}U" backward-kill-line      # delete everything left of cursor
+bindkey -M viins "${key_info[Control]}Y" yank                    # paste last killed text
+# bindkey -M viins "${key_info[Control]}T" transpose-chars         # swap char before cursor with char under cursor
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                 Command Mode                 ┃

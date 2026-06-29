@@ -1,0 +1,164 @@
+# Description: Bootstrap a project's .envrc using direnv
+# Usage: envrc
+#   Stage 1 — choose venv-only or venv + API keys
+#   Stage 2 — multi-select API keys from pass (if chosen)
+#   Stage 3 — write/update .envrc, run direnv allow
+
+envrc() {
+    emulate -L zsh
+    setopt local_options pipe_fail
+
+    # ── Verify dependencies ────────────────────────────────────────────────
+    (( $+commands[fzf] ))    || { print "❌ fzf is not installed"    >&2; return 1 }
+    (( $+commands[direnv] )) || { print "❌ direnv is not installed" >&2; return 1 }
+
+    local envrc=".envrc"
+    local fence="# ============================================================"
+
+    # ── Helper: strip the managed block in-place ──────────────────────────
+    # Removes from the first fence to the second fence, inclusive.
+    _envrc_strip_block() {
+        local file=$1
+        local tmp
+        tmp=$(mktemp)
+        awk -v f="$fence" '
+            $0 == f && !skip { skip=1; next }
+            $0 == f &&  skip { skip=0; next }
+            !skip
+        ' "$file" > "$tmp" && mv "$tmp" "$file"
+    }
+
+    # ── Helper: trim leading/trailing blank lines from a string ───────────
+    _envrc_trim_blanks() {
+        printf '%s' "$1" | awk '
+            /[^[:space:]]/ { found=1; blanks="" }
+            !found          { next }
+            /^[[:space:]]*$/ { blanks = blanks $0 "\n"; next }
+            { printf "%s", blanks; blanks=""; print }
+        '
+    }
+
+    # ── Helper: warn about duplicate exports in unmanaged content ─────────
+    _envrc_warn_duplicates() {
+        local remainder=$1
+        shift
+        local -a selected_keys=("$@")
+        local p var_name
+        for p in "${selected_keys[@]}"; do
+            var_name="${${p:t:u}//-/_}_API_KEY"
+            if printf '%s' "$remainder" | grep -q "export ${var_name}="; then
+                print "  ⚠️  ${var_name} already set outside managed block — duplicate export" >&2
+            fi
+        done
+    }
+
+    # ── Helper: write / update .envrc idempotently ────────────────────────
+    # Managed block goes at the TOP; unmanaged user content follows beneath.
+    _envrc_apply() {
+        local -a selected_keys=("$@")
+
+        local existing=""
+        [[ -f $envrc ]] && existing="$(<$envrc)"
+
+        local tmp
+        tmp=$(mktemp)
+        printf '%s\n' "$existing" > "$tmp"
+        _envrc_strip_block "$tmp"
+
+        local remainder
+        remainder="$(_envrc_trim_blanks "$(<$tmp)")"
+        rm -f "$tmp"
+
+        (( ${#selected_keys} > 0 )) && _envrc_warn_duplicates "$remainder" "${selected_keys[@]}"
+
+        # ── Build the managed block ────────────────────────────────────────
+        local block="${fence}
+# Managed by the envrc script. Do not edit within this block.
+# Any changes here will be overwritten on the next run.
+
+# Automatically activate the Python virtual environment.
+if [[ -f .venv/bin/activate ]]; then
+    source .venv/bin/activate
+fi"
+
+        if (( ${#selected_keys} > 0 )); then
+            block+=$'\n\n'"# API keys managed by pass."
+            local p var_name
+            for p in "${selected_keys[@]}"; do
+                var_name="${${p:t:u}//-/_}_API_KEY"
+                block+=$'\n'"export ${var_name}=\"\$(pass ${p})\""
+            done
+        fi
+
+        block+=$'\n\n'"${fence}"
+
+        local new_content="${block}"
+        [[ -n $remainder ]] && new_content+=$'\n\n'"${remainder}"
+
+        printf '%s\n' "$new_content" > "$envrc"
+    }
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Stage 1 — Choose configuration
+    # ─────────────────────────────────────────────────────────────────────
+    local choice
+    choice=$(printf 'Virtual environment only\nVirtual environment + API keys' \
+        | fzf --height='40%' --header="Configure project environment")
+    [[ -z $choice ]] && { print "Cancelled."; return 0 }
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Option 1 — Virtual environment only
+    # ─────────────────────────────────────────────────────────────────────
+    if [[ $choice == "Virtual environment only" ]]; then
+        _envrc_apply
+        print ""
+        print "  ✓ Added virtual environment activation"
+        print "  ✓ Updated ${envrc}"
+        direnv allow 2>/dev/null
+        print "  ✓ Ran direnv allow"
+        return 0
+    fi
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Stage 2 — Select API keys
+    # ─────────────────────────────────────────────────────────────────────
+    (( $+commands[pass] )) || { print "❌ pass is not installed" >&2; return 1 }
+
+    local pass_dir="${PASSWORD_STORE_DIR:-${HOME}/.password-store}"
+    local -a all_keys
+    all_keys=(${(f)"$(
+        find "${pass_dir}/api-keys" -name '*.gpg' 2>/dev/null \
+            | sed "s|${pass_dir}/||; s|\.gpg$||" \
+            | sort
+    )"})
+
+    (( ${#all_keys} > 0 )) || { print "❌ No keys found under api-keys/ in pass store" >&2; return 1 }
+
+    local -a selected_keys
+    selected_keys=(${(f)"$(printf '%s\n' "${all_keys[@]}" \
+        | fzf \
+            --height='40%' \
+            --bind="tab:toggle" \
+            --header="Select API keys  (Tab to toggle, Enter to confirm)")"})
+
+    (( ${#selected_keys} > 0 )) || { print "Cancelled."; return 0 }
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Stage 3 — Apply changes
+    # ─────────────────────────────────────────────────────────────────────
+    _envrc_apply "${selected_keys[@]}"
+
+    print ""
+    print "  ✓ Added virtual environment activation"
+    print ""
+    print "  ✓ Added:"
+    local p var_name
+    for p in "${selected_keys[@]}"; do
+        var_name="${${p:t:u}//-/_}_API_KEY"
+        print "      ${var_name}"
+    done
+    print ""
+    print "  ✓ Updated ${envrc}"
+    direnv allow 2>/dev/null
+    print "  ✓ Ran direnv allow"
+}

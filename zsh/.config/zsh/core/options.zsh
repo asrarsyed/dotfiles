@@ -1,5 +1,5 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#            ZSH Setup Option Settings           ┃
+# ┃          ZSH Setup Option Settings           ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # NOTE:
@@ -49,7 +49,7 @@ setopt auto_menu               # shows the completion menu on successive Tab pre
 setopt magic_equal_subst       # allow command-line arguments to be completed after "=" (e.g., --prefix=/usr)
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#              Miscellaneous Options             ┃
+# ┃            Miscellaneous Options             ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Job control and background process management

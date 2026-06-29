@@ -1,11 +1,12 @@
 #<- Active Taps ->
-tap "buo/cask-upgrade"            # Best for manually updating GUI apps (casks) with more control
-tap "nikitabobko/tap"             # required for aerospace
-tap "TheBoredTeam/boring-notch"   # required for boring-notch
-tap "stefanlogue/tools"           # required for meteor
-tap "felixkratz/formulae"         # required for borders
-tap "jordond/tap"                 # required for jolt
-tap "lhvy/tap"                    # required for pipes-rs
+tap "buo/cask-upgrade", trusted: true            # Best for manually updating GUI apps (casks) with more control
+tap "TheBoredTeam/boring-notch", trusted: true   # required for boring-notch
+tap "felixkratz/formulae", trusted: true         # required for borders
+tap "stefanlogue/tools", trusted: true           # required for meteor
+tap "nikitabobko/tap", trusted: true             # required for aerospace
+tap "jordond/tap", trusted: true                 # required for jolt
+tap "lhvy/tap", trusted: true                    # required for pipes-rs
+
 
 # <- Essential Binaries ->
 brew "git"                        # Distributed revision control system
@@ -18,19 +19,15 @@ brew "uv"                         # Extremely fast Python package installer and 
 brew "fnm"                        # Fast and simple Node.js version manager
 cask "utm"                        # Virtual machines UI using QEMU
 brew "pass"                       # The standard unix password manager
-brew "gnupg"                      # Formerly known as: gnupg2
 brew "colima"                     # Container runtimes on MacOS (and Linux) with minimal setup
 brew "docker"                     # Pack, ship and run any application as a lightweight container
 brew "direnv"                     # Load/unload environment variables based on $PWD
 cask "miniforge"                  # Minimal installer for conda specific to conda-forge
 cask "copilot-cli"                # Brings the power of Copilot coding agent directly to your terminal
 brew "pinentry-mac"               # Pinentry for GPG on Mac
-cask "wireshark-app"              # Network protocol analyzer and capture tool
 cask "dbeaver-community"          # Universal database tool and SQL client
 
 # <- Inactive Programming Relevant ->
-# brew "mysql"                      # Open source relational database management system
-# cask "temurin@21"                 # Java Development Kit from the Eclipse Foundation (Adoptium)
 
 
 # <- Active "Everyday" Binaries ->
@@ -48,12 +45,11 @@ brew "bat"                        # syntax highlighting with git integration
 brew "eza"                        # modern replacement for ls
 brew "fzf"                        # command-line fuzzy finder written in go
 brew "fd"                         # simple, fast and user-friendly alternative to find
-brew "jq"                         # lightweight and flexible command-line json processor
 
 # <- Active "Occasional" Binaries ->
-brew "jolt"                       # terminal-based battery and energy monitor for macOS and Linux
+brew "superfile"                  # modern and pretty fancy file manager for the terminal
 brew "scooter"                    # interactive find-and-replace terminal UI app
-brew "rmlint"                     # fast tool to remove dupes and other lint from your filesystem
+brew "jolt"                       # terminal-based battery and energy monitor for macOS/Linux
 brew "btop"                       # resource monitor c++ version (Choose 1: btop/neohtop)
 brew "ncdu"                       # (Local) detailed disk usage analysis and cleanup
 
@@ -65,18 +61,21 @@ brew "borders"                    # lightweight tool designed to add colored bor
 brew "cava"                       # console-based Audio Visualizer for ALSA
 
 # <- Inactive Binaries ->
+# brew "yazi"                       # blazing fast terminal file manager written in rust, based on async I/O
+# brew "herdr"                      # agent multiplexer that lives in your terminal
 # brew "tokei"                      # fast and accurate code counter
 # brew "gitui"                      # blazing fast terminal-ui for git written in rust
 # brew "vivid"                      # generator for ls_colors; supports multiple color themes
-# brew "zellij"                     # pluggable terminal workspace and terminal multiplexer
+# brew "rmlint"                     # fast tool to remove dupes and other lint from your filesystem
+# brew "mactop"                     # apple silicon monitor top written in go lang
 # brew "hyperfine"                  # command-line benchmarking tool
 
 
 # <- Active Apps ->
-cask "boring-notch"               # free and open-source macbook notch
-cask "aerospace"                  # i3-like tiling window manager for macos
 cask "visual-studio-code"         # fake open-source code editor
 cask "helium-browser"             # ya baby! - ungoogled chromium without the shitty google
+cask "boring-notch"               # free and open-source macbook notch
+cask "aerospace"                  # i3-like tiling window manager for macos
 cask "localsend"                  # open-source cross-platform alternative to airdrop
 cask "rectangle"                  # move and resize windows using keyboard shortcuts
 cask "obsidian"                   # private and flexible writing app stored locally
@@ -95,6 +94,7 @@ cask "zen"                        # firefox alternative browser
 # <- Inactive Apps ->
 # cask "pika"                       # colour picker for colours onscreen
 # cask "hyperkey"                   # convert your caps lock key or any of your modifier keys to the hyper key
+
 
 # <- Active Fonts ->
 cask "font-maple-mono-nf"

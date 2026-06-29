@@ -1,5 +1,5 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#                Bindkey Functions               ┃
+# ┃              Bindkey Functions               ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Replace multiple dots (.. -> ../., ... -> ../../., etc.)
@@ -14,7 +14,7 @@ zle -N replace_multiple_dots
 bindkey "." replace_multiple_dots
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#             Shell Wrapper Functions            ┃
+# ┃           Shell Wrapper Functions            ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Save original function

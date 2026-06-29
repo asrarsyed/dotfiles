@@ -1,5 +1,5 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#               ZSH Compdump Manager             ┃
+# ┃             ZSH Compdump Manager             ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Cache directory
@@ -26,14 +26,8 @@ fi
   fi
 } &!
 
-# BUGGY OLD VERSION
-# for dump in "${zcompdump}"(N.mh+24); do
-#     compinit -d "${zcompdump}" # only runs if file exists AND is stale
-# done
-# compinit -C -d "${zcompdump}" # ALWAYS runs regardless
-
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#              ZSH Completion Styling            ┃
+# ┃            ZSH Completion Styling            ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # https://thevaluable.dev/zsh-completion-guide-examples/
@@ -106,7 +100,7 @@ if [[ -z $_ZSTYLE_INIT_DONE ]]; then
 fi
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#             ZSH Modules & Utilities            ┃
+# ┃           ZSH Modules & Utilities            ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Load required modules (synchronously - they're tiny and needed immediately)
@@ -125,7 +119,7 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#             Colors & Visual Settings           ┃
+# ┃           Colors & Visual Settings           ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Disable paste highlighting

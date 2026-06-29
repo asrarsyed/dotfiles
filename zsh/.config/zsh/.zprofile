@@ -69,7 +69,7 @@ manpath=(
 
 # Zsh completions
 fpath=(
-  $ZDOTDIR/completions(N-/) # custom completions
+  $XDG_DATA_HOME/zsh/completions(N-/) # custom completions
   $HOMEBREW_PREFIX/share/zsh/site-functions(N-/)
   $HOMEBREW_PREFIX/share/zsh-completions(N-/)
   /usr/share/zsh/site-functions(N-/)
@@ -77,7 +77,7 @@ fpath=(
 )
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#           Login Session-Wide Settings          ┃
+# ┃         Login Session-Wide Settings          ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Core environment setup
@@ -100,35 +100,14 @@ done
 done
 
 # Homebrew Configuration
-export HOMEBREW_NO_ANALYTICS=1           # Privacy
-export HOMEBREW_NO_ENV_HINTS=1           # Clean output
-export HOMEBREW_NO_AUTO_UPDATE=          # Skip auto updates (faster but riskier)
-export HOMEBREW_BUNDLE_NO_LOCK=1         # No lock files for brew bundle
-export HOMEBREW_INSTALL_CLEANUP=1        # Auto cleanup
-export HOMEBREW_FORCE_BREWED_GIT=1       # Consistent git version
-export HOMEBREW_FORCE_BREWED_CURL=1      # Consistent curl version
-export HOMEBREW_NO_INSECURE_REDIRECT=1   # Security
-export HOMEBREW_DISPLAY_INSTALL_TIMES=1  # Show install times
-export HOMEBREW_BUNDLE_FILE=~/.brewfile   # Default Brewfile path
-
-# Man Configuration
-export MANWIDTH='100'
-export MANPAGER='nvim +Man!'
-
-# Less Configuration
-export PAGER=less
-export LESS='-~ --tabs=4 --incsearch -i --LONG-PROMPT -c -d -J --jump-target=10 -S -R -s'
-export LESSOPEN="|$ZDOTDIR/func/lessfilter.sh %s"
-
-# Less Colors
-if [[ ${PAGER} == 'less' ]]; then
-    (( ! ${+LESS_TERMCAP_mh} )) && export LESS_TERMCAP_mh=$'\e[2m'             # Turn on dim mode
-    (( ! ${+LESS_TERMCAP_mr} )) && export LESS_TERMCAP_mr=$'\e[7m'             # Turn on reverse mode
-    (( ! ${+LESS_TERMCAP_me} )) && export LESS_TERMCAP_me=$'\e[0m'             # Turn off all attributes
-    (( ! ${+LESS_TERMCAP_mb} )) && export LESS_TERMCAP_mb=$'\E[1;31m'          # Begins blinking
-    (( ! ${+LESS_TERMCAP_se} )) && export LESS_TERMCAP_se=$'\e[27;0m'          # Exit standout mode
-    (( ! ${+LESS_TERMCAP_so} )) && export LESS_TERMCAP_so=$'\e[1;33m'          # Begin standout mode
-    (( ! ${+LESS_TERMCAP_ue} )) && export LESS_TERMCAP_ue=$'\e[24;0m'          # Exit underline mode
-    (( ! ${+LESS_TERMCAP_md} )) && export LESS_TERMCAP_md=$'\e[01;34m'         # Turn on bold mode
-    (( ! ${+LESS_TERMCAP_us} )) && export LESS_TERMCAP_us=$'\e[4;1;38;5;250m'  # Begin underline mode
-fi
+export HOMEBREW_VERBOSE=1                        # Detailed debug output (slower)
+export HOMEBREW_NO_ANALYTICS=1                   # Privacy
+export HOMEBREW_NO_ENV_HINTS=1                   # Clean output
+export HOMEBREW_NO_AUTO_UPDATE=                  # Skip auto updates (faster but riskier)
+export HOMEBREW_BUNDLE_NO_LOCK=1                 # No lock files for brew bundle
+export HOMEBREW_INSTALL_CLEANUP=1                # Auto cleanup
+export HOMEBREW_FORCE_BREWED_GIT=1               # Consistent git version
+export HOMEBREW_FORCE_BREWED_CURL=1              # Consistent curl version
+export HOMEBREW_NO_INSECURE_REDIRECT=1           # Security
+export HOMEBREW_DISPLAY_INSTALL_TIMES=1          # Show install times
+export HOMEBREW_BUNDLE_FILE="$HOME/.brewfile"    # Default brewfile path

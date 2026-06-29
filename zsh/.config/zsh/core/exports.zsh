@@ -1,5 +1,5 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#             Interactive Environments           ┃
+# ┃           Interactive Environments           ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # History Settings
@@ -14,23 +14,40 @@ export HISTFILE="$XDG_STATE_HOME/history/.zsh_history"
 export R_HISTFILE="$XDG_STATE_HOME/history/.r_history"
 export NPM_HISTORY="$XDG_STATE_HOME/history/.npm_history"
 export LESSHISTFILE="$XDG_STATE_HOME/history/.less_history"
-export BASH_HISTFILE="$XDG_STATE_HOME/history/.bash_history"
 export NODE_REPL_HISTORY="$XDG_STATE_HOME/history/.node_repl_history"
 
-# Homebrew Configuration
-export HOMEBREW_VERBOSE=1                # Detailed debug output (slower)
-
 # Autosuggest config (BEFORE sourcing)
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 # ignore commands longer than 20 lines
-# optional ignores:
-# ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *" # never suggest cd commands
-# ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *" # ignore commands longer than 50 chars
-# unset ZSH_AUTOSUGGEST_USE_ASYNC # disable async suggestions (for debugging)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# Debug option:
+# ZSH_AUTOSUGGEST_USE_ASYNC=0
+
+# Man Configuration
+export MANWIDTH='100'
+export MANPAGER='less'
+
+# Less Configuration
+export PAGER=less
+export LESS='-~ --tabs=4 --incsearch -i --LONG-PROMPT -c -d -J --jump-target=10 -S -R -s'
+export LESSOPEN="|$ZDOTDIR/func/lessfilter.sh %s"
+
+# Less Colors
+if [[ ${PAGER} == 'less' ]]; then
+    (( ! ${+LESS_TERMCAP_mh} )) && export LESS_TERMCAP_mh=$'\e[2m'             # Turn on dim mode
+    (( ! ${+LESS_TERMCAP_mr} )) && export LESS_TERMCAP_mr=$'\e[7m'             # Turn on reverse mode
+    (( ! ${+LESS_TERMCAP_me} )) && export LESS_TERMCAP_me=$'\e[0m'             # Turn off all attributes
+    (( ! ${+LESS_TERMCAP_mb} )) && export LESS_TERMCAP_mb=$'\E[1;31m'          # Begins blinking
+    (( ! ${+LESS_TERMCAP_se} )) && export LESS_TERMCAP_se=$'\e[27;0m'          # Exit standout mode
+    (( ! ${+LESS_TERMCAP_so} )) && export LESS_TERMCAP_so=$'\e[1;33m'          # Begin standout mode
+    (( ! ${+LESS_TERMCAP_ue} )) && export LESS_TERMCAP_ue=$'\e[24;0m'          # Exit underline mode
+    (( ! ${+LESS_TERMCAP_md} )) && export LESS_TERMCAP_md=$'\e[01;34m'         # Turn on bold mode
+    (( ! ${+LESS_TERMCAP_us} )) && export LESS_TERMCAP_us=$'\e[4;1;38;5;250m'  # Begin underline mode
+fi
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#              LS_COLORS Configuration            ┃
+# ┃           LS_COLORS Configurations           ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Code 	  Effects         Notes

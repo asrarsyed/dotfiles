@@ -2,13 +2,13 @@
 # Execution Order: .zshenv ➜ .zprofile ➜ .zshrc ➜ .zlogin ➜ .zlogout
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#        Starship Configuration File Version     ┃
+# ┃     Starship Configuration File Version      ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 (( $+commands[starship] )) && export STARSHIP_CONFIG="$HOME/.config/starship/version01.toml"
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#     Preload Options, Exports, Zap Installer    ┃
+# ┃   Preload Options, Exports, Zap Installer    ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 local -a core_files=(
@@ -22,7 +22,7 @@ for file in $core_files; do
 done
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#          Editing zap.zsh Documentation         ┃
+# ┃        Editing zap.zsh Documentation         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Inside zap.zsh replace: _try_source && { ZAP_INSTALLED_PLUGINS+="$plugin_name" && return 0 } || echo " $plugin_name not activated" && return 1
@@ -41,7 +41,7 @@ done
 # }
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#          Load Essential Workflow Plugins       ┃
+# ┃       Load Essential Workflow Plugins        ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 # Enable install-only mode
@@ -61,7 +61,6 @@ plug "hlissner/zsh-autopair"                     # Slow but essential for experi
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"         # Heavy syntax highlighting last
 plug "zsh-users/zsh-history-substring-search"    # Relatively light, improves navigation?
-plug "MichaelAquilina/zsh-autoswitch-virtualenv" 
 
 # Defer ONLY sourcing - execution (explicit entrypoints, minimal delays)
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -69,7 +68,6 @@ source $ZAP_PLUGIN_DIR/vim/vim.plugin.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/zsh-autopair/autopair.zsh
 zsh-defer source $ZAP_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
-zsh-defer source $ZAP_PLUGIN_DIR/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh
 
 # Bind autosuggest widgets ONCE, after everything exists
 zsh-defer _zsh_autosuggest_bind_widgets
@@ -79,7 +77,7 @@ zsh-defer source $ZAP_PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting
 zsh-defer source $ZDOTDIR/core/syntaxtheme.zsh
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#    Postload Compinit & Personal Configurations ┃
+# ┃      Postload Compinit & Configurations      ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 zsh-defer source "$ZDOTDIR/plus/fzfconfig.zsh"   # fzf helpers/bindings/plugin
@@ -88,7 +86,7 @@ zsh-defer source "$ZDOTDIR/plus/functions.zsh"   # user-defined shell functions
 zsh-defer -c "fpath=($ZDOTDIR/func \$fpath); autoload -Uz $ZDOTDIR/func/*(.:t)" # user-defined shell functions
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-#     Initialize and Cache Deterministic Tools   ┃
+# ┃   Initialize and Cache Deterministic Tools   ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 function cache_init() {
@@ -116,10 +114,10 @@ function cache_init() {
     # Handle completions if third argument provided
     if [[ -n $3 ]]; then
         local completion_cmd=$3
-        local completion_file="$ZDOTDIR/completions/_${tool}"
+        local completion_file="$XDG_DATA_HOME/zsh/completions/_${tool}"
 
         if [[ ! -f "$completion_file" ]] || [[ "$commands[$tool]" -nt "$completion_file" ]]; then
-            mkdir -p "$ZDOTDIR/completions"
+            mkdir -p "$XDG_DATA_HOME/zsh/completions"
             eval "$completion_cmd" > "$completion_file" 2>/dev/null
         fi
     fi
@@ -131,8 +129,8 @@ zsh-defer cache_init "zoxide" "zoxide init zsh --hook pwd"
 zsh-defer cache_init "tv" "tv init zsh" "tv completion zsh"
 zsh-defer cache_init "uv" ":" "uv generate-shell-completion zsh"
 zsh-defer cache_init "atuin" "atuin init zsh" "atuin gen-completions --shell zsh"
-cache_init "starship" "starship init zsh" # ~2–2.3× extra first prompt/command time, i.e., ~230% overhead.
 zsh-defer cache_init "fnm" "fnm env --shell zsh --use-on-cd" "fnm completions --shell zsh"
+cache_init "starship" "starship init zsh" # ~2–2.3× extra first prompt/command time, i.e., ~230% overhead.
 
 # Load bindings settings after initializing tools
 zsh-defer source "$ZDOTDIR/plus/keybinds.zsh"
@@ -145,12 +143,12 @@ zsh-defer source "$ZDOTDIR/plus/keybinds.zsh"
 generate_completion() {
     local tool=$1
     local cmd=$2
-    local completion_file="$ZDOTDIR/completions/_${tool}"
+    local completion_file="$XDG_DATA_HOME/zsh/completions/_${tool}"
 
     (( $+commands[$tool] )) || return 0
 
     if [[ ! -f "$completion_file" ]] || [[ "$commands[$tool]" -nt "$completion_file" ]]; then
-        mkdir -p "$ZDOTDIR/completions"
+        mkdir -p "$XDG_DATA_HOME/zsh/completions"
         eval "$cmd" > "$completion_file" 2>/dev/null
     fi
 }
@@ -158,8 +156,6 @@ generate_completion() {
 # Generate completions for installed tools (deferred, runs after prompt)
 zsh-defer generate_completion "docker" "docker completion zsh"
 zsh-defer generate_completion "colima" "colima completion zsh"
-zsh-defer generate_completion "rustup" "rustup completions zsh"
-zsh-defer generate_completion "cargo" "rustup completions zsh cargo"
 
 # Starship Newline; has to be last
 source "$ZDOTDIR/plus/starship.zsh"
