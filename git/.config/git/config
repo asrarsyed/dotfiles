@@ -12,6 +12,9 @@
   path = ~/.config/git/secret
   path = ~/.config/delta/themes.gitconfig
 
+[includeIf "gitdir:~/Developer/codepath/"]
+  path = ~/.config/git/codepath
+
 # Paths
 [core]
   excludesfile = ~/.config/git/ignore # Path to global .gitignore file

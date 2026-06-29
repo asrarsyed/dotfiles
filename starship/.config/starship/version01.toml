@@ -9,7 +9,7 @@
 scan_timeout = 200
 
 # Timeout for commands executed by starship (in milliseconds).
-command_timeout = 3600
+command_timeout = 1000
 
 # Inserts blank line between shell prompts.
 add_newline = false
@@ -50,7 +50,7 @@ right_format = """$git_state$status$jobs"""
   disabled = false
   min_time = 200
   show_milliseconds = false
-  show_notifications = true
+  show_notifications = false
   min_time_to_notify = 45000
   style = 'fg:#282c34 bg:#a9a1e1'
   format = '[](fg:#9088c8 bg:none)[ ](fg:#282c34 bg:#9088c8)[ ](fg:#9088c8 bg:#a9a1e1)[$duration]($style)[](fg:#a9a1e1 bg:none) '

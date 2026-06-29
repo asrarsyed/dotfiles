@@ -35,7 +35,7 @@ hash -d lib=~/Library
 
 # nvim
 if command -v nvim &> /dev/null; then
-	alias lv='NVIM_APPNAME=LazyVim nvim'
+  alias lv='NVIM_APPNAME=LazyVim nvim'
   alias lvim='NVIM_APPNAME=LazyVim nvim'
 fi
 

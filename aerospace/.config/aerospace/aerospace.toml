@@ -286,7 +286,7 @@ persistent-workspaces = [
   run = "layout floating"
 
 [[on-window-detected]]
-  if.app-id = "com.utmapp.UTM"
+  if.app-id = "com.microsoft.rdc.macos"
   run = "layout floating"
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

@@ -1,5 +1,5 @@
 # Dotfiles
-This repository contains my personal dotfiles — configuration files for  the various programs and tools I use daily.
+This repository contains my personal dotfiles with configuration files for the various programs and tools I use daily.
 
 The repo is organized using GNU Stow, a symlink farm manager, with a per-package layout, and is designed to work across environments and branches, with a long-term goal of migrating to **nix-darwin** and
 **home-manager**.
@@ -55,13 +55,15 @@ Homebrew is managed **declaratively**:
 - If something is **not in the brewfile**, it should **not be installed**
 - Installing / uninstalling / cleaning is done via aliases that enforce this rule
 
+<!---
+
 ## Git Worktree Workflow
 
 This repo is designed to be used with **Git worktrees**:
 
-- **`maindot`** — stable, daily-use configuration
-- **`workdot`** — stripped-down essentials for work
-- **`sandbox`** — experimental changes and testing
+- **`maindot`** - stable, daily-use configuration
+- **`workdot`** - stripped-down essentials for work
+- **`sandbox`** - experimental changes and testing
 
 ### Typical flow
 
@@ -71,6 +73,8 @@ This repo is designed to be used with **Git worktrees**:
 4. `workdot` selectively cherry-picks from `maindot`
 
 This avoids copy-pasting dotfiles while keeping environments clean and intentional.
+
+-->
 
 ## Future Plans: Nix Manager
 

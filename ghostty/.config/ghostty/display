@@ -8,10 +8,16 @@ font-size = 15
 theme = mellow
 
 # Transparency
-background = #000000
-background-blur = false
+# background = #000000
+background = #040404
 background-opacity = 0.75
-unfocused-split-opacity = 0.75
+background-opacity-cells = false
+
+# Blur (macOS only)
+background-blur = 5
+
+# Optional: dim inactive splits
+unfocused-split-opacity = 1
 
 # Cursor
 cursor-style = block
