@@ -7,13 +7,21 @@
 [init]
   defaultBranch = main # Default branch name when initializing a new repository
 
-# Paths
+# Delta
 [include]
-  path = ~/.config/git/secret
   path = ~/.config/delta/themes.gitconfig
 
+# Default
+[include]
+  path = ~/.config/git/accounts/github
+
+# Gitlab
+[includeIf "gitdir:~/Desktop/writing/"]
+  path = ~/.config/git/accounts/gitlab
+
+# Codepath
 [includeIf "gitdir:~/Developer/codepath/"]
-  path = ~/.config/git/codepath
+  path = ~/.config/git/accounts/codepath
 
 # Paths
 [core]

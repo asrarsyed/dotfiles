@@ -28,5 +28,8 @@
 # Added Syntax Mappings
 --map-syntax ".brewfile:Ruby"
 --map-syntax "config:TOML"
---map-syntax "ignore:Git Config"
---map-syntax "secret:Git Config"
+
+--map-syntax "template:Git Config"
+--map-syntax "github:Git Config"
+--map-syntax "gitlab:Git Config"
+--map-syntax "codepath:Git Config"

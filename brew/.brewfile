@@ -1,11 +1,10 @@
 #<- Active Taps ->
 tap "buo/cask-upgrade", trusted: true            # Best for manually updating GUI apps (casks) with more control
 tap "TheBoredTeam/boring-notch", trusted: true   # required for boring-notch
-tap "felixkratz/formulae", trusted: true         # required for borders
 tap "stefanlogue/tools", trusted: true           # required for meteor
 tap "nikitabobko/tap", trusted: true             # required for aerospace
 tap "lhvy/tap", trusted: true                    # required for pipes-rs
-
+# tap "felixkratz/formulae", trusted: true         # required for borders
 
 # <- Essential Binaries ->
 brew "git"                        # Distributed revision control system
@@ -20,12 +19,14 @@ brew "pass"                       # The standard unix password manager
 brew "colima"                     # Container runtimes on MacOS (and Linux) with minimal setup
 brew "docker"                     # Pack, ship and run any application as a lightweight container
 brew "direnv"                     # Load/unload environment variables based on $PWD
-cask "postman"                    # Collaboration platform for API development
-cask "miniforge"                  # Minimal installer for conda specific to conda-forge
 brew "pinentry-mac"               # Pinentry for GPG on Mac
 brew "docker-compose"             # Isolated development environments using Docker
 
 # <- Inactive Programming Relevant ->
+# brew "go"                         # Open source programming language to build simple/reliable/efficient software
+# cask "postman"                    # Collaboration platform for API development
+# cask "miniforge"                  # Minimal installer for conda specific to conda-forge
+# cask "tableau-public"             # Explore, create and publicly share data visualisations online
 # cask "dbeaver-community"          # Universal database tool and SQL client
 
 # <- Active "Everyday" Binaries ->
@@ -54,17 +55,16 @@ brew "glow"                       # render markdown on the cli
 brew "pipes-rs"                   # over-engineered rewrite of pipes.sh in Rust
 brew "macchina"                   # system information fetcher, with an emphasis on performance & minimalism
 brew "cmatrix"                    # terminal screensaver based of "the matrix" like implementation
-brew "borders"                    # lightweight tool designed to add colored borders to user windows
-brew "cava"                       # console-based Audio Visualizer for ALSA
 
 # <- Inactive Binaries ->
-# brew "jolt"                       # terminal-based battery and energy monitor for macOS/Linux
+# brew "cava"                       # console-based Audio Visualizer for ALSA
 # brew "yazi"                       # blazing fast terminal file manager written in rust, based on async I/O
 # brew "herdr"                      # agent multiplexer that lives in your terminal
 # brew "tokei"                      # fast and accurate code counter
 # brew "gitui"                      # blazing fast terminal-ui for git written in rust
 # brew "vivid"                      # generator for ls_colors; supports multiple color themes
 # brew "rmlint"                     # fast tool to remove dupes and other lint from your filesystem
+# brew "borders"                    # lightweight tool designed to add colored borders to user windows
 # brew "scooter"                    # interactive find-and-replace terminal UI app
 # brew "hyperfine"                  # command-line benchmarking tool
 
@@ -72,8 +72,6 @@ brew "cava"                       # console-based Audio Visualizer for ALSA
 # <- Active Apps ->
 cask "visual-studio-code"         # fake open-source code editor
 cask "helium-browser"             # ya baby! - ungoogled chromium without the shitty google
-cask "boring-notch"               # free and open-source macbook notch
-cask "appcleaner"                 # application uninstaller
 cask "aerospace"                  # i3-like tiling window manager for macos
 cask "localsend"                  # open-source cross-platform alternative to airdrop
 cask "rectangle"                  # move and resize windows using keyboard shortcutsa
@@ -81,29 +79,34 @@ cask "obsidian"                   # private and flexible writing app stored loca
 cask "ghostty"                    # terminal emulator that uses platform-native ui and gpu acceleration
 cask "vesktop"                    # custom discord wrapper app
 cask "alfred"                     # application launcher and productivity software
-cask "meteor"                     # customisable CLI tool to write formatted conventional git commits
 cask "maccy"                      # clipboard manager for macos
-cask "thaw"                       # hide menu bar items to give your mac a cleaner look
 cask "trex"                       # easy to use text extraction tool
-cask "zoom"                       # video communication and virtual meeting platform
+cask "thaw"                       # hide menu bar items to give your mac a cleaner look
 cask "zed"                        # multiplayer code editor
 cask "zen"                        # firefox alternative browser
 
 # <- Inactive Apps ->
 # cask "pika"                       # colour picker for colours onscreen
+# cask "zoom"                       # video communication and virtual meeting platform
 # cask "loom"                       # screen and video recording software
+# cask "meteor"                     # customisable CLI tool to write formatted conventional git commits
 # cask "hyperkey"                   # convert your caps lock key or any of your modifier keys to the hyper key
+# cask "appcleaner"                 # application uninstaller
+# cask "boring-notch"               # free and open-source macbook notch
 # cask "reminders-menubar"          # simple menu bar app to view and interact with reminders
+
 
 # <- Active Fonts ->
 cask "font-maple-mono-nf"
 cask "font-jetbrains-maple-mono-nf"
-# cask "font-jetbrains-mono-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
 
 
 # <- Active Mac Apps ->
 mas "CmdList", id: 6747479815, purchase: true
 mas "BarNotes", id: 6744329261, purchase: true
-mas "SnippetsLab", id: 1006087419, purchase: true
 mas "Microsoft Word", id: 462054704, purchase: true
 mas "Microsoft Excel", id: 462058435, purchase: true
+
+# <- Inctive Mac Apps ->
+# mas "SnippetsLab", id: 1006087419, purchase: true

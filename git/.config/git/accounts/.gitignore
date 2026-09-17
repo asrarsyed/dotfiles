@@ -1,3 +1,8 @@
 # Ignore private git identity
-secret
+
+# main
+github
+gitlab
+
+# side
 codepath

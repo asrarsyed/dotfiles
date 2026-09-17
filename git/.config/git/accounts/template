@@ -1,0 +1,18 @@
+# This is my default configuration for .gitconfig
+# This is my seperate work configuration for .gitconfig
+
+[user]
+  name =
+  email = 
+  # signingkey = ...
+
+[commit]
+  gpgsign = false # all commits should be GPG signed
+
+[credential]
+  helper = osxkeychain # external helper for when a username/password credential is needed
+
+# URL rewriting
+[url "git@<ssh-host-alias>:<account-or-org>/"]     # target: your SSH config alias + account namespace
+  insteadOf = git@github.com:<account-or-org>/     # source: normal SSH-style URL for that account
+  insteadOf = https://github.com/<account-or-org>/ # source: normal HTTPS-style URL for that account
