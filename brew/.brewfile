@@ -1,10 +1,7 @@
 #<- Active Taps ->
 tap "buo/cask-upgrade", trusted: true            # Best for manually updating GUI apps (casks) with more control
-tap "TheBoredTeam/boring-notch", trusted: true   # required for boring-notch
-tap "stefanlogue/tools", trusted: true           # required for meteor
 tap "nikitabobko/tap", trusted: true             # required for aerospace
 tap "lhvy/tap", trusted: true                    # required for pipes-rs
-# tap "felixkratz/formulae", trusted: true         # required for borders
 
 # <- Essential Binaries ->
 brew "git"                        # Distributed revision control system
@@ -20,12 +17,12 @@ brew "colima"                     # Container runtimes on MacOS (and Linux) with
 brew "docker"                     # Pack, ship and run any application as a lightweight container
 brew "direnv"                     # Load/unload environment variables based on $PWD
 brew "pinentry-mac"               # Pinentry for GPG on Mac
-brew "docker-compose"             # Isolated development environments using Docker
 
 # <- Inactive Programming Relevant ->
 # brew "go"                         # Open source programming language to build simple/reliable/efficient software
 # cask "postman"                    # Collaboration platform for API development
 # cask "miniforge"                  # Minimal installer for conda specific to conda-forge
+# brew "docker-compose"             # Isolated development environments using Docker
 # cask "tableau-public"             # Explore, create and publicly share data visualisations online
 # cask "dbeaver-community"          # Universal database tool and SQL client
 
@@ -46,26 +43,21 @@ brew "fzf"                        # command-line fuzzy finder written in go
 brew "fd"                         # simple, fast and user-friendly alternative to find
 
 # <- Active "Occasional" Binaries ->
-brew "superfile"                  # modern and pretty fancy file manager for the terminal
 brew "btop"                       # resource monitor c++ version (Choose 1: btop/neohtop)
 brew "ncdu"                       # (Local) detailed disk usage analysis and cleanup
 brew "glow"                       # render markdown on the cli
 
 # <- Active "Fun" Binaries ->
+brew "superfile"                  # modern and pretty fancy file manager for the terminal
 brew "pipes-rs"                   # over-engineered rewrite of pipes.sh in Rust
 brew "macchina"                   # system information fetcher, with an emphasis on performance & minimalism
 brew "cmatrix"                    # terminal screensaver based of "the matrix" like implementation
 
 # <- Inactive Binaries ->
-# brew "cava"                       # console-based Audio Visualizer for ALSA
-# brew "yazi"                       # blazing fast terminal file manager written in rust, based on async I/O
-# brew "herdr"                      # agent multiplexer that lives in your terminal
 # brew "tokei"                      # fast and accurate code counter
 # brew "gitui"                      # blazing fast terminal-ui for git written in rust
 # brew "vivid"                      # generator for ls_colors; supports multiple color themes
 # brew "rmlint"                     # fast tool to remove dupes and other lint from your filesystem
-# brew "borders"                    # lightweight tool designed to add colored borders to user windows
-# brew "scooter"                    # interactive find-and-replace terminal UI app
 # brew "hyperfine"                  # command-line benchmarking tool
 
 
@@ -89,11 +81,7 @@ cask "zen"                        # firefox alternative browser
 # cask "pika"                       # colour picker for colours onscreen
 # cask "zoom"                       # video communication and virtual meeting platform
 # cask "loom"                       # screen and video recording software
-# cask "meteor"                     # customisable CLI tool to write formatted conventional git commits
-# cask "hyperkey"                   # convert your caps lock key or any of your modifier keys to the hyper key
 # cask "appcleaner"                 # application uninstaller
-# cask "boring-notch"               # free and open-source macbook notch
-# cask "reminders-menubar"          # simple menu bar app to view and interact with reminders
 
 
 # <- Active Fonts ->
