@@ -108,18 +108,6 @@ bindkey -M vicmd 'k' history-substring-search-up   # 'k' (vi command mode): Sear
 bindkey -M vicmd 'j' history-substring-search-down # 'j' (vi command mode): Search downwards in history
 
 # History substring search (global arrows)
-# Up Arrow: Search upwards in history
-bindkey -M viins  '^[[A' history-substring-search-up
-bindkey -M viins  '^[OA'  history-substring-search-up
-bindkey -M vicmd  '^[[A' history-substring-search-up
-bindkey -M vicmd  '^[OA'  history-substring-search-up
-# bindkey "${key_info[Down]}" history-substring-search-down 
-bindkey -M viins  '^[[B' history-substring-search-down
-bindkey -M viins  '^[OB'  history-substring-search-down
-bindkey -M vicmd  '^[[B' history-substring-search-down
-bindkey -M vicmd  '^[OB'  history-substring-search-down
-
-# Run after Atuin cache_init (deferred)
 bindkey -M viins  '^[[A' history-substring-search-up
 bindkey -M viins  '^[OA'  history-substring-search-up
 bindkey -M viins  '^[[B' history-substring-search-down

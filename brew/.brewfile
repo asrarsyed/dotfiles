@@ -37,6 +37,7 @@ brew "zoxide"                     # shell extension to navigate your filesystem 
 brew "trash"                      # command-line tool that moves files or folder to the trash
 brew "atuin"                      # improved shell history for zsh, bash, fish and nushell
 brew "tmux"                       # terminal multiplexer
+brew "pure"                       # pretty, minimal and fast ZSH prompt
 brew "bat"                        # syntax highlighting with git integration
 brew "eza"                        # modern replacement for ls
 brew "fzf"                        # command-line fuzzy finder written in go
@@ -73,7 +74,6 @@ cask "vesktop"                    # custom discord wrapper app
 cask "alfred"                     # application launcher and productivity software
 cask "maccy"                      # clipboard manager for macos
 cask "trex"                       # easy to use text extraction tool
-cask "thaw"                       # hide menu bar items to give your mac a cleaner look
 cask "zed"                        # multiplayer code editor
 cask "zen"                        # firefox alternative browser
 
@@ -93,8 +93,8 @@ cask "font-jetbrains-mono-nerd-font"
 # <- Active Mac Apps ->
 mas "CmdList", id: 6747479815, purchase: true
 mas "BarNotes", id: 6744329261, purchase: true
-mas "Microsoft Word", id: 462054704, purchase: true
-mas "Microsoft Excel", id: 462058435, purchase: true
 
 # <- Inctive Mac Apps ->
 # mas "SnippetsLab", id: 1006087419, purchase: true
+# mas "Microsoft Word", id: 462054704, purchase: true
+# mas "Microsoft Excel", id: 462058435, purchase: true

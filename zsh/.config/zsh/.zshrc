@@ -159,5 +159,9 @@ generate_completion() {
 zsh-defer generate_completion "docker" "docker completion zsh"
 zsh-defer generate_completion "colima" "colima completion zsh"
 
-# Starship Newline; has to be last
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃                Prompt Newline                ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+# source "$ZDOTDIR/plus/pure.zsh"
 source "$ZDOTDIR/plus/starship.zsh"
